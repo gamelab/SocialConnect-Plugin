@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>SocialConnect - Share</title>
+
+ 	<script src="../../lib/kiwi.js"></script>
+  	<script src="../../build/socialconnect-0.1.0.js"></script>
+
+</head>
+<body>
+
+	<div id="game-container"></div>
+
+	<script type="text/javascript">
+
+		var State = new Kiwi.State("myState");
+			
+		State.init = function() {
+
+			//Starts up the social media SDKS that are wanted.
+			this.game.social.facebook.init({
+				appId: '1726287530930783'
+			});
+
+		};
+
+		State.preload = function() {
+			this.addSpriteSheet('share', '../assets/social-buttons.png', 227, 55);
+		};
+
+		State.create = function() {	
+
+			this.facebookShare = new Kiwi.GameObjects.Sprite(this, this.textures.share, 100, this.game.stage.height * 0.5 - 30);
+			this.twitterShare = new Kiwi.GameObjects.Sprite(this, this.textures.share, 100, this.game.stage.height * 0.5 - 30);
+
+			this.twitterShare.x = this.game.stage.width - this.twitterShare.width;
+			this.twitterShare.cellIndex = 1;
+
+			this.addChild(this.facebookShare);
+			this.addChild(this.twitterShare);
+
+			this.facebookShare.input.onUp.add(function() {
+				this.game.social.facebook.share();
+			}, this);
+
+			this.twitterShare.input.onUp.add(function() {
+				
+			}, this);
+			
+		};
+
+
+		var game = new Kiwi.Game("game-container", "SocialConnect", State, { plugins: ["SocialConnect"] });
+
+	</script>
+
+</body>
+
+</html>
