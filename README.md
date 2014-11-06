@@ -10,7 +10,7 @@ The SocialConnect plugin makes integrating and using social media in Kiwi a lot 
 
 If a platform you want to use is not supported then get contact with us. 
 
-If you have any problems then feel free to contact us via (our website)[http://www.kiwijs.org/help] OR leave an issue!
+If you have any problems then feel free to contact us via [our website](http://www.kiwijs.org/help) OR [leave an issue!](https://github.com/gamelab/SocialConnect-Plugin/issues/new)
 
 
 Versions
@@ -45,7 +45,7 @@ Below is a outline of the steps to follow when using the Plugin and adding socia
 ###Decided then Configure
 To use this plugin you must first choose which social media solutions you would like to use and then preform any configurations needed for them.
 
-For example. If you wanting to use the 'facebook' plugin then you will need to create an App for your game on (developers.facebook.com)[http://developers.facebook.com] first. 
+For example. If you wanting to use the 'facebook' plugin then you will need to create an App for your game on [developers.facebook.com](http://developers.facebook.com) first. 
 
 ###Initialise 
 Next you will need to initialise the social media you have choosen to use. It may require information from the configuration step above.
@@ -72,7 +72,9 @@ To pop-up a basic share dialog you can use the `share` method.
 
 By default (in browsers) this will use the current windows location but can be changed.
 
-    this.game.social.facebook.share( {link: 'http://www.kiwijs.org' } );
+    this.game.social.facebook.share( { 
+            link: 'http://www.kiwijs.org' 
+        } );
 
 ###Login
 
@@ -84,7 +86,7 @@ By default (in browsers) this will use the current windows location but can be c
             }
         } );
 
-See the (facebook documentation)[https://developers.facebook.com/docs/facebook-login/permissions/v2.1] for a list of valid permissions.
+See the [facebook documentation](https://developers.facebook.com/docs/facebook-login/permissions/v2.1) for a list of valid permissions.
 
 ###Logout
 
@@ -100,7 +102,7 @@ Just be careful as this will log them out of Facebook entirely.
             'fields': 'picture, id, first_name'
         } );
 
-See the (facebook documentation)[https://developers.facebook.com/docs/graph-api/reference/v2.2/user] for a full list of valid fields.
+See the [facebook documentation](https://developers.facebook.com/docs/graph-api/reference/v2.2/user) for a full list of valid fields.
 
 ###The Facebook SDK
 
@@ -113,5 +115,8 @@ If there is a piece of functionality not listed above that you specifically need
 More Info
 ---------
 
-Check out the example found in the "examples" folder of this repository.
+For more infomation and tutorials visit the [kiwijs website.](http://www.kiwijs.org/documentation/social-connect-plugin/) 
+
+Check out a few of the examples found in the "examples" folder of this repository.
+
 Read the API docs found in the "docs" folder of this repository.

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.0</em>
+            <em>API Docs for: 0.8.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -174,14 +174,14 @@ If the SDK is not found, one is loaded for you when the &#39;init&#39; method is
                             </li>
                         
                             <li class="index-item method public">
-                                <a href="#method_init">init</a>
+                                <a href="#method_hasPermissions">hasPermissions</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method public">
-                                <a href="#method_loadSDK">loadSDK</a>
+                                <a href="#method_init">init</a>
 
                                 
                                 
@@ -353,7 +353,7 @@ If the SDK is not found, one is loaded for you when the &#39;init&#39; method is
             
         
         
-        <a href="../files/src_social-plugins_facebook.js.html#l168"><code>src\social-plugins\facebook.js:168</code></a>
+        <a href="../files/src_social-plugins_facebook.js.html#l142"><code>src\social-plugins\facebook.js:142</code></a>
         
         </p>
 
@@ -468,7 +468,7 @@ If the SDK is not found, one is loaded for you when the &#39;init&#39; method is
             
         
         
-        <a href="../files/src_social-plugins_facebook.js.html#l520"><code>src\social-plugins\facebook.js:520</code></a>
+        <a href="../files/src_social-plugins_facebook.js.html#l587"><code>src\social-plugins\facebook.js:587</code></a>
         
         </p>
 
@@ -479,7 +479,7 @@ If the SDK is not found, one is loaded for you when the &#39;init&#39; method is
     </div>
 
     <div class="description">
-        <p>Uses the Kiwi.JS core file loader to load a URL into the fileStore. 
+        <p>Uses the Kiwi.JS core file loader to load a Image URL into the fileStore. 
 Executes the callback/context passed with the callbackParams as the first parameter of the callback</p>
 
     </div>
@@ -620,7 +620,7 @@ Executes the callback/context passed with the callbackParams as the first parame
             
         
         
-        <a href="../files/src_social-plugins_facebook.js.html#l147"><code>src\social-plugins\facebook.js:147</code></a>
+        <a href="../files/src_social-plugins_facebook.js.html#l121"><code>src\social-plugins\facebook.js:121</code></a>
         
         </p>
 
@@ -646,6 +646,178 @@ Not applicable if targetting CocoonJS.</p>
                 
                     
                     <p>boolean</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_hasPermissions" class="method item public">
+    <h3 class="name"><code>hasPermissions</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>params</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>param.permissions</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_social-plugins_facebook.js.html#l390"><code>src\social-plugins\facebook.js:390</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Checks to see if the user has accepted the permissions that you pass to this method.</p>
+<p>Callbacks fired from this method have the following parameters in this order.</p>
+<ul>
+<li>PermissionsGranted:Boolean - All user has accepted all the permissions you passed.</li>
+<li>PermissionsAccepted: Array - An array of strings, each one being a permission the user has accepted.</li>
+<li>Response: Any - The raw response recieved from Facebook.</li>
+</ul>
+<p>To Do: params.attemptToResolve - If when detected that the user doesn&#39;t have the persmissions required,
+        a login dialog with the permissions should automatically be called.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">params</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Parameters object which should hold the information you need to pass.</p>
+
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">callback</code>
+                                    <span class="type">Function</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Function to be executed after we get the result.</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[context]</code>
+                                    <span class="type">Any</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>The context that the callback should run in.</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">param.permissions</code>
+                        <span class="type">Array</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>An array of strings, each one being a permission you currently need. No duplicates.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                    <p>If the request to the Graph API was made or not.</p>
 
                 
             </div>
@@ -704,7 +876,7 @@ Not applicable if targetting CocoonJS.</p>
             
         
         
-        <a href="../files/src_social-plugins_facebook.js.html#l216"><code>src\social-plugins\facebook.js:216</code></a>
+        <a href="../files/src_social-plugins_facebook.js.html#l194"><code>src\social-plugins\facebook.js:194</code></a>
         
         </p>
 
@@ -815,65 +987,6 @@ The only required parameter is the &#39;appId&#39;, which you will find on the F
 </div>
 
                 
-                    <div id="method_loadSDK" class="method item public">
-    <h3 class="name"><code>loadSDK</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag public">public</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_social-plugins_facebook.js.html#l121"><code>src\social-plugins\facebook.js:121</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Loads the Facebook SDK into the DOM. 
-Doesn&#39;t check to see if the SDK is already there!
-Should not be used with CocoonJS.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="method_login" class="method item public">
     <h3 class="name"><code>login</code></h3>
 
@@ -918,7 +1031,7 @@ Should not be used with CocoonJS.</p>
             
         
         
-        <a href="../files/src_social-plugins_facebook.js.html#l273"><code>src\social-plugins\facebook.js:273</code></a>
+        <a href="../files/src_social-plugins_facebook.js.html#l255"><code>src\social-plugins\facebook.js:255</code></a>
         
         </p>
 
@@ -1068,7 +1181,7 @@ Note: For CocoonJS this will just be -1 as we will not have the userID.</p>
             
         
         
-        <a href="../files/src_social-plugins_facebook.js.html#l355"><code>src\social-plugins\facebook.js:355</code></a>
+        <a href="../files/src_social-plugins_facebook.js.html#l337"><code>src\social-plugins\facebook.js:337</code></a>
         
         </p>
 
@@ -1084,7 +1197,7 @@ The callback will be passed THREE parameters.
 One: Boolean - If the user is logged in, and has accepted the terms of use. &#39;Accessable&#39;
 Two: Boolean - If the user is logged in or not.
 Three: Object - Raw information passed by the Facebook &#39;loginApproved&#39; call.</p>
-<p>Note: Does NOT work with CocoonJS. Use the &#39;loggedIn&#39; and &#39;login&#39; methods for CocoonJS.</p>
+<p>Note: Does NOT work with CocoonJS. Use the &#39;loggedIn&#39; and &#39;login&#39; methods instead.</p>
 
     </div>
 
@@ -1196,7 +1309,7 @@ Three: Object - Raw information passed by the Facebook &#39;loginApproved&#39; c
             
         
         
-        <a href="../files/src_social-plugins_facebook.js.html#l410"><code>src\social-plugins\facebook.js:410</code></a>
+        <a href="../files/src_social-plugins_facebook.js.html#l477"><code>src\social-plugins\facebook.js:477</code></a>
         
         </p>
 
@@ -1323,7 +1436,7 @@ Three: Object - Raw information passed by the Facebook &#39;loginApproved&#39; c
             
         
         
-        <a href="../files/src_social-plugins_facebook.js.html#l440"><code>src\social-plugins\facebook.js:440</code></a>
+        <a href="../files/src_social-plugins_facebook.js.html#l507"><code>src\social-plugins\facebook.js:507</code></a>
         
         </p>
 
@@ -1506,6 +1619,10 @@ This can be turned off by setting &#39;autoLoadPicture&#39; to false.</p>
     
 
     
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
 
     
 
@@ -1532,7 +1649,7 @@ This can be turned off by setting &#39;autoLoadPicture&#39; to false.</p>
             
         
         
-        <a href="../files/src_social-plugins_facebook.js.html#l552"><code>src\social-plugins\facebook.js:552</code></a>
+        <a href="../files/src_social-plugins_facebook.js.html#l634"><code>src\social-plugins\facebook.js:634</code></a>
         
         </p>
 
@@ -1543,8 +1660,8 @@ This can be turned off by setting &#39;autoLoadPicture&#39; to false.</p>
     </div>
 
     <div class="description">
-        <p>Loads in the current users facebook picture. 
-See the @me method for more information as that is used for this functionality.</p>
+        <p>Loads in the current logged-in users facebook picture. </p>
+<p>Note: This may not always work in WebGL due to CORS and tainted images allowed to be used.</p>
 
     </div>
 
@@ -1572,13 +1689,14 @@ See the @me method for more information as that is used for this functionality.<
                             
                             <li class="param">
                                 
-                                    <code class="param-name optional">[fields]</code>
-                                    <span class="type">String</span>
+                                    <code class="param-name optional">[width]</code>
+                                    <span class="type">Number</span>
                                     <span class="flag optional" title="This parameter is optional.">optional</span>
                                 
 
                                 <div class="param-description">
-                                    
+                                    <p>The width of the image to be used.</p>
+
                                 </div>
 
                                 
@@ -1586,13 +1704,60 @@ See the @me method for more information as that is used for this functionality.<
                             
                             <li class="param">
                                 
-                                    <code class="param-name optional">[saveData]</code>
-                                    <span class="type">Boolean</span>
+                                    <code class="param-name optional">[height]</code>
+                                    <span class="type">Number</span>
                                     <span class="flag optional" title="This parameter is optional.">optional</span>
                                 
 
                                 <div class="param-description">
-                                    
+                                    <p>The height of the image to be used.</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[pictureKey=&#x27;fb-current-user&#x27;]</code>
+                                    <span class="type">String</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Key that the picture should have in the kiwi library.</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[callback]</code>
+                                    <span class="type">Function</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Method to be executed when the information is recieved. 
+                                       Will have the Facebook resp data passed as the first parameter.</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[context]</code>
+                                    <span class="type">Any</span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>The context the callback should be executed in.</p>
+
                                 </div>
 
                                 
@@ -1606,6 +1771,20 @@ See the @me method for more information as that is used for this functionality.<
         </div>
     
 
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                    <p>If the api call was made.</p>
+
+                
+            </div>
+        </div>
     
 
     
@@ -1656,7 +1835,7 @@ See the @me method for more information as that is used for this functionality.<
             
         
         
-        <a href="../files/src_social-plugins_facebook.js.html#l575"><code>src\social-plugins\facebook.js:575</code></a>
+        <a href="../files/src_social-plugins_facebook.js.html#l696"><code>src\social-plugins\facebook.js:696</code></a>
         
         </p>
 
@@ -1932,7 +2111,7 @@ Accessing this property will allow you to do advanced queries.</p>
             
         
         
-        <a href="../files/src_social-plugins_facebook.js.html#l330"><code>src\social-plugins\facebook.js:330</code></a>
+        <a href="../files/src_social-plugins_facebook.js.html#l312"><code>src\social-plugins\facebook.js:312</code></a>
         
         </p>
 
@@ -1982,7 +2161,7 @@ This is READ ONLY.</p>
             
         
         
-        <a href="../files/src_social-plugins_facebook.js.html#l193"><code>src\social-plugins\facebook.js:193</code></a>
+        <a href="../files/src_social-plugins_facebook.js.html#l171"><code>src\social-plugins\facebook.js:171</code></a>
         
         </p>
 

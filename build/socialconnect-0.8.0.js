@@ -24,7 +24,7 @@ Kiwi.Plugins.SocialConnect = {
   * @type String
   * @public
   */
-  version:'0.1.0',
+  version:'0.8.0',
 
   /**
   * The minimum version of Kiwi that the plugin requires.
@@ -93,7 +93,12 @@ Kiwi.Plugins.SocialConnect.Manager = function( game ) {
 };
 
 
-//A way is needed to add different solutions
+//Add another 'external' social media SDK.
+Kiwi.Plugins.SocialConnect.Manager.prototype.add = function(  ) {
+
+
+
+};
 
 
 /**
@@ -531,32 +536,6 @@ Kiwi.extend( Kiwi.Plugins.SocialConnect.Facebook, Kiwi.Plugins.SocialConnect.Bas
 
 
 /**
-* Loads the Facebook SDK into the DOM. 
-* Doesn't check to see if the SDK is already there!
-* Should not be used with CocoonJS.
-* 
-* @method loadSDK
-* @public
-*/
-Kiwi.Plugins.SocialConnect.Facebook.prototype.loadSDK = function( ) {
-
-  var that = this;
-
-  //Include the script.
-  that._include( function() { 
-    
-    //Finished loading, check FB 
-    if( typeof window.FB !== "undefined" ) {
-      that.fb = window.FB;
-      that._ready = true;
-    }
-
-  } );
-
-};
-
-
-/**
 * Returns a flag indicating whether or not the SDK has already been loaded or not.
 * Not applicable if targetting CocoonJS.
 * 
@@ -593,7 +572,11 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype._include = function( onloadCallbac
   var js, fjs = document.getElementsByTagName("script")[0];
   
   js = document.createElement("script"); 
-  js.onload = onloadCallback;
+
+  if( typeof onloadCallback !== "undefined" ) {
+    js.onload = onloadCallback;
+  }
+
   js.id = 'facebook-jssdk';
   js.src = this.sdkUrl;
   
@@ -665,11 +648,15 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype._init = function( params ) {
   if( this.game.deviceTargetOption !== Kiwi.TARGET_COCOON && !this._SDKLoaded() ) { //Check again for support
 
     this.log( 'SDK not detected. Loading one in, and initializing after.', 2 );
+
+    var that = this;
+
     window.fbAsyncInit = function() {
       FB.init( params );
+      that._SDKLoaded();
     };
 
-    this.loadSDK( );
+    this._include( );
     return true;
 
   } else {
@@ -771,7 +758,7 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Facebook.prototype, "loggedIn"
 * Two: Boolean - If the user is logged in or not.
 * Three: Object - Raw information passed by the Facebook 'loginApproved' call.
 *
-* Note: Does NOT work with CocoonJS. Use the 'loggedIn' and 'login' methods for CocoonJS.
+* Note: Does NOT work with CocoonJS. Use the 'loggedIn' and 'login' methods instead.
 * 
 * @method loginApproved
 * @param params {Object}
@@ -783,7 +770,7 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Facebook.prototype, "loggedIn"
 Kiwi.Plugins.SocialConnect.Facebook.prototype.loginApproved = function( params ) {
 
   if( !params || !params.callback ) {
-    this.log( ' a callback needs to be passed in-order to function correctly.', 2 );
+    this.log( 'a callback needs to be passed in-order to function correctly.', 2 );
     return;
   }
 
@@ -810,13 +797,98 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype.loginApproved = function( params )
         break;
     }
 
-    if( typeof params.callback !== "undefined" ) {
-      params.callback.call( params.context, accessable, loggedIn, resp );
-    }
+    params.callback.call( params.context, accessable, loggedIn, resp );
 
   } );
 
 };
+
+
+/**
+* Checks to see if the user has accepted the permissions that you pass to this method.
+*
+* Callbacks fired from this method have the following parameters in this order.
+* - PermissionsGranted:Boolean - All user has accepted all the permissions you passed.
+* - PermissionsAccepted: Array - An array of strings, each one being a permission the user has accepted.
+* - Response: Any - The raw response recieved from Facebook.
+*
+* To Do: params.attemptToResolve - If when detected that the user doesn't have the persmissions required,
+*         a login dialog with the permissions should automatically be called.
+* 
+* @method hasPermissions
+* @param params {Object} Parameters object which should hold the information you need to pass.
+*   @param param.permissions {Array} An array of strings, each one being a permission you currently need. No duplicates.
+*   @param params.callback {Function} Function to be executed after we get the result.
+*   @param [params.context] {Any} The context that the callback should run in. 
+* @return {Boolean} If the request to the Graph API was made or not.
+* @public
+* 
+*/
+Kiwi.Plugins.SocialConnect.Facebook.prototype.hasPermissions = function( params ) {
+  
+  if( !params || !params.permissions ) {
+    this.log( 'you need to pass an array of permissions.', 2 );
+    return false;
+  }
+
+  if(!params.callback ) {
+    this.log( 'a callback needs to be passed in-order to function correctly.', 2 );
+    return false;
+  }
+
+  if( !this.loggedIn ) {
+    this.log( 'we could not detected if the user is currently logged in.', 2 );
+    params.callback.call( params.context, false, [], resp );
+    return false;
+  }
+
+  //Make the request
+  this.fb.api( this.userID + '/permissions', function( resp ) { 
+    
+    var i, cRespPerm, cPassPerm, permLength, 
+      numPermsMatch = 0,
+      acceptedPerms = [];
+
+    //Loop through the permissions recieved by facebook.
+    for (var i = 0, len = resp.data.length; i < len; i++) {
+
+      cRespPerm = resp.data[i];
+
+      //If the permission was granted
+      if( cRespPerm.status == 'granted') {
+
+        acceptedPerms.push( cPassPerm );
+        permLength = params.permissions.length;
+
+
+        //Loop through the permissions the dev passed.
+        while(permLength--){
+          cPassPerm = params.permissions[permLength];
+
+          //If it matches one that 
+          if( cRespPerm.permission == cPassPerm ) {
+            numPermsMatch++;
+          }
+        }
+
+      }
+    }
+
+    //If the number of permissions that matched is greater than the number passed, then success.
+    if( numPermsMatch >= params.permissions.length ) {
+      params.callback.call( params.context, true, acceptedPerms, resp );
+
+    } else {
+      params.callback.call( params.context, false, acceptedPerms, resp );
+
+    }
+
+
+  } );
+
+  return true;
+};
+
 
 
 /**
@@ -835,7 +907,7 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype.logout = function( params ) {
 
   var that = this;
 
-  this.fb.logout( function() {
+  this.fb.logout( function( resp ) {
 
     that.userID = null;
     that.userInfo = null;
@@ -930,7 +1002,7 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype.me = function( params ) {
 
 
 /**
-* Uses the Kiwi.JS core file loader to load a URL into the fileStore. 
+* Uses the Kiwi.JS core file loader to load a Image URL into the fileStore. 
 * Executes the callback/context passed with the callbackParams as the first parameter of the callback 
 *
 * @method _loadImage
@@ -945,8 +1017,23 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype._loadImage = function( key, url, c
 
   callbackParams = callbackParams || null;
 
+  var that = this;
+
   //Load complete methods
   this.game.loader.init( null, function() {
+
+
+    //Get the new file from the file store
+    var file = that.game.fileStore.getFile( key );
+
+    //Check to see if the file is a texture
+    if( file.isTexture ) {
+
+      //Add the new image to the texture library
+      that.game.states.current.textureLibrary.addFromFile( file );
+
+    }
+
 
     if( typeof callback !== "undefined" ) {
       callback.call( context, callbackParams );
@@ -962,24 +1049,63 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype._loadImage = function( key, url, c
 
 
 /**
-* Loads in the current users facebook picture. 
-* See the @me method for more information as that is used for this functionality. 
+* Loads in the current logged-in users facebook picture. 
+*
+* Note: This may not always work in WebGL due to CORS and tainted images allowed to be used. 
 * 
 * @method myImage
 * @param [params] {Object}
-* @param [params.fields] {String}
-* @param [params.saveData] {Boolean}
+*   @param [params.width] {Number} The width of the image to be used.
+*   @param [params.height] {Number} The height of the image to be used.
+*   @param [params.pictureKey='fb-current-user'] {String} Key that the picture should have in the kiwi library. 
+*   @param [params.callback] {Function} Method to be executed when the information is recieved. 
+                                        Will have the Facebook resp data passed as the first parameter.
+*   @param [params.context] {Any} The context the callback should be executed in.
+* @return {Boolean} If the api call was made.
 * @public
 * 
 */
 Kiwi.Plugins.SocialConnect.Facebook.prototype.myImage = function( params ) {
 
-  params = params || {};
-  params.fields = 'picture';
-  params.saveData = false;
-  params.autoLoadPicture = true;
+  if( !this._init || !this._ready ) {
+    this.log( 'has not been initialized, or isn\'t ready.', 2 );
+    return false;
+  }
 
-  this.me( params );
+  if( !this.loginApproved ) {
+    this.log( 'user is not logged in', 3 );
+    return false;
+  }
+
+  params = params || {};
+  if( !params.pictureKey ) {
+    params.pictureKey = 'fb-current-user';
+  }
+
+  if( !this.loggedIn ) {
+    this.log( 'we could not detected if the user is currently logged in.', 2 );
+    params.callback.call( params.context, false, [], resp );
+    return false;
+  }
+
+  var that = this;
+  var url = this.userID + '/picture?';
+
+  if( params.width ) url += 'width=' + params.width + '&';
+  if( params.height ) url += 'height=' + params.height + '&'; 
+
+
+  this.fb.api( url, function( resp ) {
+
+    if( resp.data && resp.data.url ) {
+      that._loadImage( params.pictureKey, resp.data.url, params.callback, params.context, resp );
+
+    } else {
+      params.callback.call( params.context, resp );
+
+    }
+
+  });
 
 };
 
@@ -1077,7 +1203,7 @@ Kiwi.Plugins.SocialConnect.Twitter.prototype.loadSDK = function() {
 
 
 Kiwi.Plugins.SocialConnect.Twitter.prototype._include = function( onloadCallback ) {
-
+  //Include the SDK if it is not visible
 };
 
 
@@ -1098,6 +1224,10 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Twitter.prototype, "ready", {
 //Avaiable params are the same as the ones on the 'https://developers.facebook.com/docs/javascript/reference/FB.init/v2.1' website 
 Kiwi.Plugins.SocialConnect.Twitter.prototype._init = function( params ) {
 
+  //Check to see if the SDK has been loaded 
+
+  //If not, load the SDK in.
+
 };
 
 
@@ -1111,6 +1241,8 @@ Kiwi.Plugins.SocialConnect.Twitter.prototype._init = function( params ) {
 
 //Login 
 Kiwi.Plugins.SocialConnect.Twitter.prototype._login = function( params ) {
+
+  //Attempt to login.
 
 };
 
@@ -1134,11 +1266,15 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Twitter.prototype, "loggedIn",
 //Logout
 Kiwi.Plugins.SocialConnect.Twitter.prototype.logout = function( callback, context ) {
 
+  //Attempt to logout
+
 };
 
 
 //Default URL is the current location of this document
 Kiwi.Plugins.SocialConnect.Twitter.prototype._share = function( params ) {
+
+  //Attempt to share
 
 };
 

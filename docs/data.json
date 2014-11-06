@@ -1,8 +1,8 @@
 {
     "project": {
         "name": "SocialConnect",
-        "description": "The Kiwi.JS SocialConnect plugin makes using the many common social media solutions avaliable one-step easier. ",
-        "version": "0.1.0",
+        "description": "The Kiwi.JS SocialConnect plugin makes using the many common social media solutions one-step easier.",
+        "version": "0.8.0",
         "url": "http://kiwijs.org/"
     },
     "files": {
@@ -281,19 +281,6 @@
         {
             "file": "src\\social-plugins\\facebook.js",
             "line": 121,
-            "description": "Loads the Facebook SDK into the DOM. \nDoesn't check to see if the SDK is already there!\nShould not be used with CocoonJS.",
-            "itemtype": "method",
-            "name": "loadSDK",
-            "access": "public",
-            "tagname": "",
-            "class": "Kiwi.Plugins.SocialConnect.Facebook",
-            "module": "Plugins",
-            "submodule": "SocialConnect",
-            "namespace": "Kiwi.Plugins.SocialConnect"
-        },
-        {
-            "file": "src\\social-plugins\\facebook.js",
-            "line": 147,
             "description": "Returns a flag indicating whether or not the SDK has already been loaded or not.\nNot applicable if targetting CocoonJS.",
             "itemtype": "method",
             "name": "_SDKLoaded",
@@ -309,7 +296,7 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 168,
+            "line": 142,
             "description": "Loads in the Facebook SDK. Doesn't check to see if it already exists or not.",
             "itemtype": "method",
             "name": "_include",
@@ -329,7 +316,7 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 193,
+            "line": 171,
             "description": "Indicates if the Facebook SDK is ready to used or not. \nThis will be 'false' if the SDK did not exist before hand and we are loading it in.\nThis is READ ONLY.",
             "itemtype": "property",
             "name": "ready",
@@ -344,7 +331,7 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 216,
+            "line": 194,
             "description": "Initialises the Facebook SDK with the details you pass. \n\nYou pass parameters through a 'parameters' object.\nThe only required parameter is the 'appId', which you will find on the Facebook Developers Dashboard.\n\nMore paramters can be found at 'https://developers.facebook.com/docs/javascript/reference/FB.init/v2.1'.",
             "itemtype": "method",
             "name": "init",
@@ -389,7 +376,7 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 273,
+            "line": 255,
             "description": "Login the user with Facebook. \nThe permissions dialog will appear if the user has not accepted it before \nOR the information being requested has changed.\n\nSee the Facebook Docs for more information. \n'https://developers.facebook.com/docs/facebook-login/login-flow-for-web/v2.2'\n\nIf the user is successfully logged in, then the property 'userID' will be set.\nNote: For CocoonJS this will just be -1 as we will not have the userID.\n\nThe Callback attached will have three properties:\n1 - Accessable:Boolean - If the user is logged in and accepted the terms of use.\n2 - Response: Object - The response returned by Facebook (or cocoon)\n3 - LoggedIn: Boolean - (Not visible in Cocoon) If the user is logged in or not, regardless of accepting the conditions.",
             "itemtype": "method",
             "name": "login",
@@ -429,7 +416,7 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 330,
+            "line": 312,
             "description": "Used to quickly see if a user was logged in or not last time the 'login' or 'loginApproved' methods were called.\nThis is READ ONLY.",
             "itemtype": "property",
             "name": "loggedIn",
@@ -445,8 +432,8 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 355,
-            "description": "Returns a boolean to a callback which is passed, which is used to see if the user is logged in or not.\nThe callback will be passed THREE parameters.\nOne: Boolean - If the user is logged in, and has accepted the terms of use. 'Accessable'\nTwo: Boolean - If the user is logged in or not.\nThree: Object - Raw information passed by the Facebook 'loginApproved' call.\n\nNote: Does NOT work with CocoonJS. Use the 'loggedIn' and 'login' methods for CocoonJS.",
+            "line": 337,
+            "description": "Returns a boolean to a callback which is passed, which is used to see if the user is logged in or not.\nThe callback will be passed THREE parameters.\nOne: Boolean - If the user is logged in, and has accepted the terms of use. 'Accessable'\nTwo: Boolean - If the user is logged in or not.\nThree: Object - Raw information passed by the Facebook 'loginApproved' call.\n\nNote: Does NOT work with CocoonJS. Use the 'loggedIn' and 'login' methods instead.",
             "itemtype": "method",
             "name": "loginApproved",
             "params": [
@@ -478,7 +465,49 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 410,
+            "line": 390,
+            "description": "Checks to see if the user has accepted the permissions that you pass to this method.\n\nCallbacks fired from this method have the following parameters in this order.\n- PermissionsGranted:Boolean - All user has accepted all the permissions you passed.\n- PermissionsAccepted: Array - An array of strings, each one being a permission the user has accepted.\n- Response: Any - The raw response recieved from Facebook.\n\nTo Do: params.attemptToResolve - If when detected that the user doesn't have the persmissions required,\n        a login dialog with the permissions should automatically be called.",
+            "itemtype": "method",
+            "name": "hasPermissions",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "Parameters object which should hold the information you need to pass.",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "callback",
+                            "description": "Function to be executed after we get the result.",
+                            "type": "Function"
+                        },
+                        {
+                            "name": "context",
+                            "description": "The context that the callback should run in.",
+                            "type": "Any",
+                            "optional": true
+                        }
+                    ]
+                },
+                {
+                    "name": "param.permissions",
+                    "description": "An array of strings, each one being a permission you currently need. No duplicates.",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "If the request to the Graph API was made or not.",
+                "type": "Boolean"
+            },
+            "access": "public",
+            "tagname": "",
+            "class": "Kiwi.Plugins.SocialConnect.Facebook",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\facebook.js",
+            "line": 477,
             "description": "Logs the user out of Facebook.",
             "itemtype": "method",
             "name": "logout",
@@ -513,7 +542,7 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 440,
+            "line": 507,
             "description": "Will attempt to get the currently logged in users information. \n\nYou can get the information recieved either by attaching a callback, whos first parameter will be facebooks response.\nOR you can get the infomation via the 'userInfo' property (if the 'saveData' parameter is set to true).\n\nAdvanced Functionality: If you enable 'autoLoadPicture' if the plugin detects a picture URL has been passed,\nthen it will be loaded into Kiwi.\nThe picture will use the 'pictureKey's param value as the key.\nYou may need to rebuild the texture library to use it. \nThis can be turned off by setting 'autoLoadPicture' to false.\n\nWatch Out! Be careful not to use this functionality during the preload phase of the State! Otherwise it will break the loop functionality.",
             "itemtype": "method",
             "name": "me",
@@ -579,8 +608,8 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 520,
-            "description": "Uses the Kiwi.JS core file loader to load a URL into the fileStore. \nExecutes the callback/context passed with the callbackParams as the first parameter of the callback",
+            "line": 587,
+            "description": "Uses the Kiwi.JS core file loader to load a Image URL into the fileStore. \nExecutes the callback/context passed with the callbackParams as the first parameter of the callback",
             "itemtype": "method",
             "name": "_loadImage",
             "params": [
@@ -622,8 +651,8 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 552,
-            "description": "Loads in the current users facebook picture. \nSee the @me method for more information as that is used for this functionality.",
+            "line": 634,
+            "description": "Loads in the current logged-in users facebook picture. \n\nNote: This may not always work in WebGL due to CORS and tainted images allowed to be used.",
             "itemtype": "method",
             "name": "myImage",
             "params": [
@@ -634,20 +663,43 @@
                     "optional": true,
                     "props": [
                         {
-                            "name": "fields",
-                            "description": "",
-                            "type": "String",
+                            "name": "width",
+                            "description": "The width of the image to be used.",
+                            "type": "Number",
                             "optional": true
                         },
                         {
-                            "name": "saveData",
-                            "description": "",
-                            "type": "Boolean",
+                            "name": "height",
+                            "description": "The height of the image to be used.",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "pictureKey",
+                            "description": "Key that the picture should have in the kiwi library.",
+                            "type": "String",
+                            "optional": true,
+                            "optdefault": "'fb-current-user'"
+                        },
+                        {
+                            "name": "callback",
+                            "description": "Method to be executed when the information is recieved. \n                                       Will have the Facebook resp data passed as the first parameter.",
+                            "type": "Function",
+                            "optional": true
+                        },
+                        {
+                            "name": "context",
+                            "description": "The context the callback should be executed in.",
+                            "type": "Any",
                             "optional": true
                         }
                     ]
                 }
             ],
+            "return": {
+                "description": "If the api call was made.",
+                "type": "Boolean"
+            },
             "access": "public",
             "tagname": "",
             "class": "Kiwi.Plugins.SocialConnect.Facebook",
@@ -657,7 +709,7 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 575,
+            "line": 696,
             "description": "Opens up the facebook share popup window.\nDefault link is the current location of the browser (Not for CocoonJS).\nThis link can be changed via setting the 'link' property on the param object. \n\nNote: Since this opens a 'pop-up' window, you should make sure to call this method\ninside callbacks attached to the 'input' manager on core Kiwi game objects.",
             "itemtype": "method",
             "name": "share",
@@ -698,7 +750,7 @@
         },
         {
             "file": "src\\social-plugins\\twitter.js",
-            "line": 63,
+            "line": 67,
             "description": "--------------\nLogin Section\n--------------",
             "class": "Kiwi.Plugins.SocialConnect.Manager",
             "module": "Plugins",
@@ -797,7 +849,7 @@
         },
         {
             "file": "src\\manager.js",
-            "line": 42,
+            "line": 47,
             "description": "A useful method that allows you to initialise multiple social media SDKS at the same time. \n\nTo use this method you must pass it an Object,\nwhich contains the configuration settings for each SDK you want to use.\n\nE.g. To initialise Facebook you would pass { facebook: { appId: '1726287530930783' } } \nNote: appId used for example purposes only.",
             "itemtype": "method",
             "name": "init",
@@ -1022,7 +1074,7 @@
         },
         {
             "message": "Missing item type\n--------------\nLogin Section\n--------------",
-            "line": " src\\social-plugins\\twitter.js:63"
+            "line": " src\\social-plugins\\twitter.js:67"
         }
     ]
 }

@@ -34,7 +34,7 @@ Kiwi.Plugins.SocialConnect.Twitter.prototype.loadSDK = function() {
 
 
 Kiwi.Plugins.SocialConnect.Twitter.prototype._include = function( onloadCallback ) {
-
+  //Include the SDK if it is not visible
 };
 
 
@@ -55,6 +55,10 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Twitter.prototype, "ready", {
 //Avaiable params are the same as the ones on the 'https://developers.facebook.com/docs/javascript/reference/FB.init/v2.1' website 
 Kiwi.Plugins.SocialConnect.Twitter.prototype._init = function( params ) {
 
+  //Check to see if the SDK has been loaded 
+
+  //If not, load the SDK in.
+
 };
 
 
@@ -68,6 +72,8 @@ Kiwi.Plugins.SocialConnect.Twitter.prototype._init = function( params ) {
 
 //Login 
 Kiwi.Plugins.SocialConnect.Twitter.prototype._login = function( params ) {
+
+  //Attempt to login.
 
 };
 
@@ -91,11 +97,15 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Twitter.prototype, "loggedIn",
 //Logout
 Kiwi.Plugins.SocialConnect.Twitter.prototype.logout = function( callback, context ) {
 
+  //Attempt to logout
+
 };
 
 
 //Default URL is the current location of this document
 Kiwi.Plugins.SocialConnect.Twitter.prototype._share = function( params ) {
+
+  //Attempt to share
 
 };
 

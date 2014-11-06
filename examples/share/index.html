@@ -4,8 +4,9 @@
 	<meta charset="utf-8" />
 	<title>SocialConnect - Share</title>
 
+	<link rel="stylesheet" type='text/css' href="../assets/style.css" />
  	<script src="../../lib/kiwi.js"></script>
-  	<script src="../../build/socialconnect-0.1.0.js"></script>
+  	<script src="../../build/socialconnect-0.8.0.js"></script>
 
 </head>
 <body>
@@ -14,44 +15,80 @@
 
 	<script type="text/javascript">
 
+		//Create the state that we are going to use for this game.
 		var State = new Kiwi.State("myState");
 			
+		//On the States initialisiation (first time the state is switched to).
 		State.init = function() {
 
-			//Starts up the social media SDKS that are wanted.
+			//Initalise the facebook SDK
 			this.game.social.facebook.init({
-				appId: '1726287530930783'
+
+				//You should use your own appId here...
+				appId: 'XXXXXXXXXXXXXXXXXXXXX'
+			
 			});
 
 		};
 
+
+		//Preload any assets that we are going to use...
 		State.preload = function() {
+
+			//Only a few share buttons for now.
 			this.addSpriteSheet('share', '../assets/social-buttons.png', 227, 55);
+		
 		};
 
+
+		//Once asset loading has completed
 		State.create = function() {	
 
-			this.facebookShare = new Kiwi.GameObjects.Sprite(this, this.textures.share, 100, this.game.stage.height * 0.5 - 30);
-			this.twitterShare = new Kiwi.GameObjects.Sprite(this, this.textures.share, 100, this.game.stage.height * 0.5 - 30);
+			//Nice Text to display at the top.
+			this.titleText = new Kiwi.GameObjects.Textfield(this, 'Click to share this page!');
+			this.titleText.x = this.game.stage.width * 0.5;
+			this.titleText.y = 10;
+			this.titleText.textAlign = 'center';
+			this.titleText.fontSize = 12;
 
-			this.twitterShare.x = this.game.stage.width - this.twitterShare.width;
-			this.twitterShare.cellIndex = 1;
+			this.addChild( this.titleText );
 
-			this.addChild(this.facebookShare);
-			this.addChild(this.twitterShare);
+			//Create the facebook share button
+			this.facebookShareButton = new Kiwi.GameObjects.Sprite(this, this.textures.share);
+			this.facebookShareButton.x = (this.game.stage.width - this.facebookShareButton.width) * 0.5;
+			this.facebookShareButton.y = this.game.stage.height * 0.5 - 30;
+			
 
-			this.facebookShare.input.onUp.add(function() {
-				this.game.social.facebook.share();
-			}, this);
+			//Add the share button to the state. 
+			this.addChild( this.facebookShareButton );
+			
 
-			this.twitterShare.input.onUp.add(function() {
-				
-			}, this);
+			//When this canvas has been clicked, add
+			this.game.input.onUp.add(this.checkShareHit, this);
 			
 		};
 
 
-		var game = new Kiwi.Game("game-container", "SocialConnect", State, { plugins: ["SocialConnect"] });
+		//When the user clicks on screen,
+		State.checkShareHit = function(x,y) {
+
+			//And the users mouse was within the facebook share buttons bounding box.
+			if( this.facebookShareButton.box.bounds.contains(x,y) ) {
+					
+				//Then pop-up the facebook share dialog.
+				this.game.social.facebook.share();
+
+			};
+
+		};
+
+
+		//Create the Kiwi Game, and use the Social Connect plugin.
+		var game = new Kiwi.Game( "game-container", "SocialConnect", State, { 
+			plugins: [ "SocialConnect" ],
+			width: 400,
+			height: 200
+		} );
 
 	</script>
 
