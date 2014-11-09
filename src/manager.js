@@ -36,14 +36,6 @@ Kiwi.Plugins.SocialConnect.Manager = function( game ) {
 };
 
 
-//Add another 'external' social media SDK.
-Kiwi.Plugins.SocialConnect.Manager.prototype.add = function(  ) {
-
-
-
-};
-
-
 /**
 * A useful method that allows you to initialise multiple social media SDKS at the same time. 
 * 
@@ -68,14 +60,12 @@ Kiwi.Plugins.SocialConnect.Manager.prototype.init = function( config ) {
   }
 
   if( config.twitter ) {
-    //Twitter Implementation
+    console.error('SocialConnect: Twitter has not been implemented just yet.');
   }
 
   if( config.google ) {
-    //Google Implementation
+    console.error('SocialConnect: Google Plus has not been implemented just yet.');
   }
-
-  //Plus Others...
 
 };
 

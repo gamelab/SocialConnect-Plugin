@@ -49,6 +49,8 @@
             
                 <li><a href="../classes/Kiwi.Plugins.SocialConnect.Manager.html">Kiwi.Plugins.SocialConnect.Manager</a></li>
             
+                <li><a href="../classes/Kiwi.Plugins.SocialConnect.Twitter.html">Kiwi.Plugins.SocialConnect.Twitter</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -136,14 +138,6 @@ Kiwi.Plugins.SocialConnect.Manager = function( game ) {
 };
 
 
-//Add another &#x27;external&#x27; social media SDK.
-Kiwi.Plugins.SocialConnect.Manager.prototype.add = function(  ) {
-
-
-
-};
-
-
 /**
 * A useful method that allows you to initialise multiple social media SDKS at the same time. 
 * 
@@ -168,14 +162,12 @@ Kiwi.Plugins.SocialConnect.Manager.prototype.init = function( config ) {
   }
 
   if( config.twitter ) {
-    //Twitter Implementation
+    console.error(&#x27;SocialConnect: Twitter has not been implemented just yet.&#x27;);
   }
 
   if( config.google ) {
-    //Google Implementation
+    console.error(&#x27;SocialConnect: Google Plus has not been implemented just yet.&#x27;);
   }
-
-  //Plus Others...
 
 };
 

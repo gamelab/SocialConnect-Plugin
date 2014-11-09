@@ -93,14 +93,6 @@ Kiwi.Plugins.SocialConnect.Manager = function( game ) {
 };
 
 
-//Add another 'external' social media SDK.
-Kiwi.Plugins.SocialConnect.Manager.prototype.add = function(  ) {
-
-
-
-};
-
-
 /**
 * A useful method that allows you to initialise multiple social media SDKS at the same time. 
 * 
@@ -125,14 +117,12 @@ Kiwi.Plugins.SocialConnect.Manager.prototype.init = function( config ) {
   }
 
   if( config.twitter ) {
-    //Twitter Implementation
+    console.error('SocialConnect: Twitter has not been implemented just yet.');
   }
 
   if( config.google ) {
-    //Google Implementation
+    console.error('SocialConnect: Google Plus has not been implemented just yet.');
   }
-
-  //Plus Others...
 
 };
 
@@ -428,6 +418,7 @@ Kiwi.Plugins.SocialConnect.Base.prototype.log = function( string, type ) {
 * @submodule SocialConnect
 * @namespace Kiwi.Plugins.SocialConnect
 * @class Facebook
+* @extends Kiwi.Plugins.SocialConnect.Base
 * @constructor
 * @params game {Kiwi.Game} The Kiwi game, that this plugin is attached to.
 * 
@@ -1169,21 +1160,22 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype._share = function( params ) {
  
 
 /**
-* The Manager is a wrapper which contains useful methods for accessing common facebook functionality,
-* whilst also providing lower level access if needed. 
-* A single Manager is always created, and used regardless of the number of games used.
+* Class that will soon contain the functionality for Twitter. 
+* This has not been implemented just yet, but is instead a placeholder for where it will be in the future.
 *
 * @module Plugins
 * @submodule SocialConnect
 * @namespace Kiwi.Plugins.SocialConnect
-* @class Manager
+* @class Twitter
+* @extends Kiwi.Plugins.SocialConnect.Base
 * 
 */
 Kiwi.Plugins.SocialConnect.Twitter = function() {
 
   Kiwi.Plugins.SocialConnect.Base.call(this, 'Twitter', {
-    'login': true,
-    'share': true
+    'login': false,
+    'share': false,
+    'init': false
   });
 
   this._ready = false;
@@ -1194,12 +1186,6 @@ Kiwi.Plugins.SocialConnect.Twitter = function() {
 };
 
 Kiwi.extend( Kiwi.Plugins.SocialConnect.Twitter, Kiwi.Plugins.SocialConnect.Base );
-
-
-Kiwi.Plugins.SocialConnect.Twitter.prototype.loadSDK = function() {
-
-
-};
 
 
 Kiwi.Plugins.SocialConnect.Twitter.prototype._include = function( onloadCallback ) {
@@ -1221,7 +1207,13 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Twitter.prototype, "ready", {
 });
 
 
-//Avaiable params are the same as the ones on the 'https://developers.facebook.com/docs/javascript/reference/FB.init/v2.1' website 
+/**
+* Will contain any functionality for initialising.
+* 
+* @method init
+* @param params {Object}
+* @public
+*/
 Kiwi.Plugins.SocialConnect.Twitter.prototype._init = function( params ) {
 
   //Check to see if the SDK has been loaded 
@@ -1231,15 +1223,13 @@ Kiwi.Plugins.SocialConnect.Twitter.prototype._init = function( params ) {
 };
 
 
-
-
 /**
-* --------------
-* Login Section
-* --------------
-*/
-
-//Login 
+* Will contain any functionality to login a user.
+* 
+* @method login
+* @param params {Object}
+* @public
+*/ 
 Kiwi.Plugins.SocialConnect.Twitter.prototype._login = function( params ) {
 
   //Attempt to login.
@@ -1247,31 +1237,27 @@ Kiwi.Plugins.SocialConnect.Twitter.prototype._login = function( params ) {
 };
 
 
-//Logged In
-
-//Quick Check. Used to quickly check to see if the last time we asked facebook that someone was logged in.
-Object.defineProperty( Kiwi.Plugins.SocialConnect.Twitter.prototype, "loggedIn", {
-    
-    get: function () {
-      return false;
-    },
-    
-    enumerable: true,
-    
-    configurable: true
-
-});
-
-
-//Logout
-Kiwi.Plugins.SocialConnect.Twitter.prototype.logout = function( callback, context ) {
+/**
+* Functionality to logout a user from twitter
+* 
+* @method logout
+* @param params {Object}
+* @public
+*/
+Kiwi.Plugins.SocialConnect.Twitter.prototype.logout = function( params ) {
 
   //Attempt to logout
 
 };
 
 
-//Default URL is the current location of this document
+/**
+* Functionality to share a piece of information on twitter.
+* 
+* @method share
+* @param params {Object}
+* @public
+*/
 Kiwi.Plugins.SocialConnect.Twitter.prototype._share = function( params ) {
 
   //Attempt to share

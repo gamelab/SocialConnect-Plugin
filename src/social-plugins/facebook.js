@@ -11,6 +11,7 @@
 * @submodule SocialConnect
 * @namespace Kiwi.Plugins.SocialConnect
 * @class Facebook
+* @extends Kiwi.Plugins.SocialConnect.Base
 * @constructor
 * @params game {Kiwi.Game} The Kiwi game, that this plugin is attached to.
 * 
