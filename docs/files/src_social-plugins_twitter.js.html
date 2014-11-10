@@ -47,6 +47,8 @@
             
                 <li><a href="../classes/Kiwi.Plugins.SocialConnect.Facebook.html">Kiwi.Plugins.SocialConnect.Facebook</a></li>
             
+                <li><a href="../classes/Kiwi.Plugins.SocialConnect.Gamefroot.html">Kiwi.Plugins.SocialConnect.Gamefroot</a></li>
+            
                 <li><a href="../classes/Kiwi.Plugins.SocialConnect.Manager.html">Kiwi.Plugins.SocialConnect.Manager</a></li>
             
                 <li><a href="../classes/Kiwi.Plugins.SocialConnect.Twitter.html">Kiwi.Plugins.SocialConnect.Twitter</a></li>
@@ -112,9 +114,9 @@
 * @extends Kiwi.Plugins.SocialConnect.Base
 * 
 */
-Kiwi.Plugins.SocialConnect.Twitter = function() {
+Kiwi.Plugins.SocialConnect.Twitter = function( game ) {
 
-  Kiwi.Plugins.SocialConnect.Base.call(this, &#x27;Twitter&#x27;, {
+  Kiwi.Plugins.SocialConnect.Base.call(this, game, &#x27;Twitter&#x27;, {
     &#x27;login&#x27;: false,
     &#x27;share&#x27;: false,
     &#x27;init&#x27;: false

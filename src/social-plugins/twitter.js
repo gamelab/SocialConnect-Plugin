@@ -10,9 +10,9 @@
 * @extends Kiwi.Plugins.SocialConnect.Base
 * 
 */
-Kiwi.Plugins.SocialConnect.Twitter = function() {
+Kiwi.Plugins.SocialConnect.Twitter = function( game ) {
 
-  Kiwi.Plugins.SocialConnect.Base.call(this, 'Twitter', {
+  Kiwi.Plugins.SocialConnect.Base.call(this, game, 'Twitter', {
     'login': false,
     'share': false,
     'init': false

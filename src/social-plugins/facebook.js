@@ -281,6 +281,12 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype._login = function( params ) {
 
   var that = this;
 
+  //If we are wanting to login with gamefroot, then call the 'loginWithFB' method on the GF class.
+  if( params.loginWithGF ) {
+    this.game.social.gamefroot.loginWithFB( params );
+    return true;
+  }
+
   //Attempt to login
   this.fb.login( function( resp ) {
 
@@ -349,13 +355,13 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Facebook.prototype, "loggedIn"
 *   @param params.callback {Function} Callback method which is called when information is recieved.
 *   @param [params.context] {Any} The context the callback should be executed with. 
 * @public
-* 
+* @return {Boolean} If the api call was made or not.
 */
 Kiwi.Plugins.SocialConnect.Facebook.prototype.loginApproved = function( params ) {
 
   if( !params || !params.callback ) {
     this.log( 'a callback needs to be passed in-order to function correctly.', 2 );
-    return;
+    return false;
   }
 
   var that = this;
@@ -384,6 +390,8 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype.loginApproved = function( params )
     params.callback.call( params.context, accessable, loggedIn, resp );
 
   } );
+
+  return true;
 
 };
 
@@ -415,7 +423,7 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype.hasPermissions = function( params 
     return false;
   }
 
-  if(!params.callback ) {
+  if( !params.callback ) {
     this.log( 'a callback needs to be passed in-order to function correctly.', 2 );
     return false;
   }
@@ -573,7 +581,7 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype.me = function( params ) {
 
     } else {
 
-      if( typeof callback !== "undefined" ) {
+      if( typeof params.callback !== "undefined" ) {
         params.callback.call( params.context, resp );
       }
 

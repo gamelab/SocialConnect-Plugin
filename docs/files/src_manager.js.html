@@ -47,6 +47,8 @@
             
                 <li><a href="../classes/Kiwi.Plugins.SocialConnect.Facebook.html">Kiwi.Plugins.SocialConnect.Facebook</a></li>
             
+                <li><a href="../classes/Kiwi.Plugins.SocialConnect.Gamefroot.html">Kiwi.Plugins.SocialConnect.Gamefroot</a></li>
+            
                 <li><a href="../classes/Kiwi.Plugins.SocialConnect.Manager.html">Kiwi.Plugins.SocialConnect.Manager</a></li>
             
                 <li><a href="../classes/Kiwi.Plugins.SocialConnect.Twitter.html">Kiwi.Plugins.SocialConnect.Twitter</a></li>
@@ -124,6 +126,15 @@ Kiwi.Plugins.SocialConnect.Manager = function( game ) {
   */
   this.game = game;
 
+
+  /**
+  * The Gamefroot account creation plugin.
+  * @property gamefroot
+  * @type Kiwi.Plugins.SocialConnect.Gamefroot
+  * @public
+  */
+  this.gamefroot = new Kiwi.Plugins.SocialConnect.Gamefroot( this.game );
+
   
   /**
   * The Facebook social plugin.   
@@ -157,8 +168,12 @@ Kiwi.Plugins.SocialConnect.Manager.prototype.init = function( config ) {
 
   config = config || {};
 
+  if( config.gamefroot ) {
+    console.warn(&#x27;SocialConnect: Gamefroot does not need initialising.&#x27;);
+  }
+
   if( config.facebook ) {
-    this.facebook.init( socialConfigs.facebook );
+    this.facebook.init( config.facebook );
   }
 
   if( config.twitter ) {

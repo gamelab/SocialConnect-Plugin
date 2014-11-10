@@ -4,6 +4,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Kiwi.Plugins.SocialConnect",
         "Kiwi.Plugins.SocialConnect.Base",
         "Kiwi.Plugins.SocialConnect.Facebook",
+        "Kiwi.Plugins.SocialConnect.Gamefroot",
         "Kiwi.Plugins.SocialConnect.Manager",
         "Kiwi.Plugins.SocialConnect.Twitter"
     ],

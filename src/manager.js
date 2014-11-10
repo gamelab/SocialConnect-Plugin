@@ -22,6 +22,15 @@ Kiwi.Plugins.SocialConnect.Manager = function( game ) {
   */
   this.game = game;
 
+
+  /**
+  * The Gamefroot account creation plugin.
+  * @property gamefroot
+  * @type Kiwi.Plugins.SocialConnect.Gamefroot
+  * @public
+  */
+  this.gamefroot = new Kiwi.Plugins.SocialConnect.Gamefroot( this.game );
+
   
   /**
   * The Facebook social plugin.   
@@ -55,8 +64,12 @@ Kiwi.Plugins.SocialConnect.Manager.prototype.init = function( config ) {
 
   config = config || {};
 
+  if( config.gamefroot ) {
+    console.warn('SocialConnect: Gamefroot does not need initialising.');
+  }
+
   if( config.facebook ) {
-    this.facebook.init( socialConfigs.facebook );
+    this.facebook.init( config.facebook );
   }
 
   if( config.twitter ) {

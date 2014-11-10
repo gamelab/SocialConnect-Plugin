@@ -19,6 +19,17 @@
                 "Kiwi.Plugins.SocialConnect": 1
             }
         },
+        "src\\social-plugins\\gamefroot.js": {
+            "name": "src\\social-plugins\\gamefroot.js",
+            "modules": {},
+            "classes": {
+                "Kiwi.Plugins.SocialConnect.Gamefroot": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Kiwi.Plugins.SocialConnect": 1
+            }
+        },
         "src\\social-plugins\\twitter.js": {
             "name": "src\\social-plugins\\twitter.js",
             "modules": {},
@@ -74,6 +85,7 @@
             },
             "classes": {
                 "Kiwi.Plugins.SocialConnect.Facebook": 1,
+                "Kiwi.Plugins.SocialConnect.Gamefroot": 1,
                 "Kiwi.Plugins.SocialConnect.Twitter": 1,
                 "Kiwi.Plugins.SocialConnect": 1,
                 "Kiwi.Plugins.SocialConnect.Manager": 1,
@@ -96,6 +108,7 @@
             "submodules": {},
             "classes": {
                 "Kiwi.Plugins.SocialConnect.Facebook": 1,
+                "Kiwi.Plugins.SocialConnect.Gamefroot": 1,
                 "Kiwi.Plugins.SocialConnect.Twitter": 1,
                 "Kiwi.Plugins.SocialConnect.Manager": 1,
                 "Kiwi.Plugins.SocialConnect.Base": 1
@@ -149,6 +162,21 @@
             "file": "src\\social-plugins\\facebook.js",
             "line": 2,
             "description": "Contains the functionality for handling/communicating with the Facebook SDK.\n\nThis Plugin will check to see the Facebook SDK already exists when it is created,\nand a second time when the init method is called. \nIf the SDK is not found, one is loaded for you when the 'init' method is called."
+        },
+        "Kiwi.Plugins.SocialConnect.Gamefroot": {
+            "name": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "shortname": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect",
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 2,
+            "description": "Contains the functionality for creating/logging into gamefroot accounts."
         },
         "Kiwi.Plugins.SocialConnect.Twitter": {
             "name": "Kiwi.Plugins.SocialConnect.Twitter",
@@ -436,7 +464,7 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 313,
+            "line": 319,
             "description": "Used to quickly see if a user was logged in or not last time the 'login' or 'loginApproved' methods were called.\nThis is READ ONLY.",
             "itemtype": "property",
             "name": "loggedIn",
@@ -452,7 +480,7 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 338,
+            "line": 344,
             "description": "Returns a boolean to a callback which is passed, which is used to see if the user is logged in or not.\nThe callback will be passed THREE parameters.\nOne: Boolean - If the user is logged in, and has accepted the terms of use. 'Accessable'\nTwo: Boolean - If the user is logged in or not.\nThree: Object - Raw information passed by the Facebook 'loginApproved' call.\n\nNote: Does NOT work with CocoonJS. Use the 'loggedIn' and 'login' methods instead.",
             "itemtype": "method",
             "name": "loginApproved",
@@ -478,6 +506,10 @@
             ],
             "access": "public",
             "tagname": "",
+            "return": {
+                "description": "If the api call was made or not.",
+                "type": "Boolean"
+            },
             "class": "Kiwi.Plugins.SocialConnect.Facebook",
             "module": "Plugins",
             "submodule": "SocialConnect",
@@ -485,7 +517,7 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 391,
+            "line": 399,
             "description": "Checks to see if the user has accepted the permissions that you pass to this method.\n\nCallbacks fired from this method have the following parameters in this order.\n- PermissionsGranted:Boolean - All user has accepted all the permissions you passed.\n- PermissionsAccepted: Array - An array of strings, each one being a permission the user has accepted.\n- Response: Any - The raw response recieved from Facebook.\n\nTo Do: params.attemptToResolve - If when detected that the user doesn't have the persmissions required,\n        a login dialog with the permissions should automatically be called.",
             "itemtype": "method",
             "name": "hasPermissions",
@@ -527,7 +559,7 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 478,
+            "line": 486,
             "description": "Logs the user out of Facebook.",
             "itemtype": "method",
             "name": "logout",
@@ -562,7 +594,7 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 508,
+            "line": 516,
             "description": "Will attempt to get the currently logged in users information. \n\nYou can get the information recieved either by attaching a callback, whos first parameter will be facebooks response.\nOR you can get the infomation via the 'userInfo' property (if the 'saveData' parameter is set to true).\n\nAdvanced Functionality: If you enable 'autoLoadPicture' if the plugin detects a picture URL has been passed,\nthen it will be loaded into Kiwi.\nThe picture will use the 'pictureKey's param value as the key.\nYou may need to rebuild the texture library to use it. \nThis can be turned off by setting 'autoLoadPicture' to false.\n\nWatch Out! Be careful not to use this functionality during the preload phase of the State! Otherwise it will break the loop functionality.",
             "itemtype": "method",
             "name": "me",
@@ -628,7 +660,7 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 588,
+            "line": 596,
             "description": "Uses the Kiwi.JS core file loader to load a Image URL into the fileStore. \nExecutes the callback/context passed with the callbackParams as the first parameter of the callback",
             "itemtype": "method",
             "name": "_loadImage",
@@ -671,7 +703,7 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 635,
+            "line": 643,
             "description": "Loads in the current logged-in users facebook picture. \n\nNote: This may not always work in WebGL due to CORS and tainted images allowed to be used.",
             "itemtype": "method",
             "name": "myImage",
@@ -729,7 +761,7 @@
         },
         {
             "file": "src\\social-plugins\\facebook.js",
-            "line": 697,
+            "line": 705,
             "description": "Opens up the facebook share popup window.\nDefault link is the current location of the browser (Not for CocoonJS).\nThis link can be changed via setting the 'link' property on the param object. \n\nNote: Since this opens a 'pop-up' window, you should make sure to call this method\ninside callbacks attached to the 'input' manager on core Kiwi game objects.",
             "itemtype": "method",
             "name": "share",
@@ -764,6 +796,433 @@
             "access": "public",
             "tagname": "",
             "class": "Kiwi.Plugins.SocialConnect.Facebook",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 21,
+            "description": "Indicates if the api is ready to make a request to the gamefroot servers or not.",
+            "itemtype": "property",
+            "name": "_ready",
+            "type": "Boolean",
+            "default": "true",
+            "access": "private",
+            "tagname": "",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 31,
+            "description": "Stores the users information from the last time he logged in.",
+            "itemtype": "property",
+            "name": "userInfo",
+            "type": "Object",
+            "default": "null",
+            "access": "public",
+            "tagname": "",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 41,
+            "description": "The amount of time (in milliseconds) to wait for a response before timing out.",
+            "itemtype": "property",
+            "name": "timeout",
+            "type": "number",
+            "default": "30000",
+            "access": "public",
+            "tagname": "",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 51,
+            "description": "The url of the gamefroot server to use. \nSee 'Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL' for options.",
+            "itemtype": "property",
+            "name": "serverURL",
+            "type": "string",
+            "default": "ServerURL.LIVE",
+            "access": "public",
+            "tagname": "",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 66,
+            "description": "Namespace which holds the URLs of gamefroot api servers.",
+            "itemtype": "property",
+            "name": "ServerURL",
+            "type": "Object",
+            "access": "public",
+            "tagname": "",
+            "static": 1,
+            "readonly": "",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 76,
+            "description": "Contains the url for the live version of gamefroot.",
+            "itemtype": "property",
+            "name": "ServerURL.LIVE",
+            "type": "string",
+            "access": "public",
+            "tagname": "",
+            "readonly": "",
+            "static": 1,
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 86,
+            "description": "Contains the url for the debug (also known as staging) version of gamefroot.",
+            "itemtype": "property",
+            "name": "ServerURL.DEBUG",
+            "type": "string",
+            "access": "public",
+            "tagname": "",
+            "readonly": "",
+            "static": 1,
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 99,
+            "description": "Indicates if the API is ready to make a request or not. \nThis would only ever be 'false' if we are midway through another API call.\nThis is READ ONLY.",
+            "itemtype": "property",
+            "name": "ready",
+            "type": "boolean",
+            "readonly": "",
+            "access": "public",
+            "tagname": "",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 122,
+            "description": "Indicates if the user is logged in or not.\nMaintains its values from the login and logout methods on this class, \nso it is not an accurate representation. \nREAD ONLY.",
+            "itemtype": "property",
+            "name": "loggedIn",
+            "type": "boolean",
+            "readonly": "",
+            "access": "public",
+            "tagname": "",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 146,
+            "description": "Registers a new gamefroot account. \nA callback is required to be passed and the first parameter will indicate success.",
+            "itemtype": "method",
+            "name": "register",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "The parameters required",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "username",
+                            "description": "The username that the user would like to use.",
+                            "type": "String"
+                        },
+                        {
+                            "name": "password",
+                            "description": "The password the user wants.",
+                            "type": "String"
+                        },
+                        {
+                            "name": "email",
+                            "description": "The email of the user.",
+                            "type": "String"
+                        },
+                        {
+                            "name": "passwordrepeat",
+                            "description": "Confirmation password.",
+                            "type": "String"
+                        },
+                        {
+                            "name": "callback",
+                            "description": "Function to be executed when complete.",
+                            "type": "Function"
+                        },
+                        {
+                            "name": "context",
+                            "description": "Context the callback should be executed in.",
+                            "type": "Any",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "If the API call was made or not.",
+                "type": "Boolean"
+            },
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 201,
+            "description": "Login using a gamefroot account. Does not include facebook login functionality. \nA callback is required to be passed and the first parameter will indicate success.",
+            "itemtype": "method",
+            "name": "login",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "The parameters required",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "username",
+                            "description": "The username that the user would like to use.",
+                            "type": "String"
+                        },
+                        {
+                            "name": "password",
+                            "description": "The password the user wants.",
+                            "type": "String"
+                        },
+                        {
+                            "name": "callback",
+                            "description": "Function to be executed when complete.",
+                            "type": "Function"
+                        },
+                        {
+                            "name": "context",
+                            "description": "Context the callback should be executed in.",
+                            "type": "Any",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "If the API call was made or not.",
+                "type": "Boolean"
+            },
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 259,
+            "description": "Login to gamefroot using facebook. \nA callback is required to be passed and the first parameter will indicate success.",
+            "itemtype": "method",
+            "name": "loginWithFB",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "The parameters required",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "callback",
+                            "description": "Function to be executed when complete.",
+                            "type": "Function"
+                        },
+                        {
+                            "name": "context",
+                            "description": "Context the callback should be executed in.",
+                            "type": "Any",
+                            "optional": true
+                        },
+                        {
+                            "name": "options.scope",
+                            "description": "CSV set of information that you app requests from facebook.",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "If the API call was made or not.",
+                "type": "Boolean"
+            },
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 318,
+            "description": "Contains the second steps code in logging into gamefroot using facebook. \nHandles getting the users information.",
+            "itemtype": "method",
+            "name": "_fbRetrieveUserData",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "Parameters from the first step.",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 346,
+            "description": "Final step in logging into gamefroot using facebook.\nContains the code communicating to gamefroot, which then creates its account.",
+            "itemtype": "method",
+            "name": "_fbLoginToGF",
+            "params": [
+                {
+                    "name": "resp",
+                    "description": "The users information as retrieved by facebook.",
+                    "type": "Object"
+                },
+                {
+                    "name": "params",
+                    "description": "Parameters from the first step.",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 392,
+            "description": "Logs a user out of gamefroot.",
+            "itemtype": "method",
+            "name": "logout",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "callback",
+                            "description": "Function to be executed when complete.",
+                            "type": "Function"
+                        },
+                        {
+                            "name": "context",
+                            "description": "Context the callback should be executed in.",
+                            "type": "Any",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "access": "public",
+            "tagname": "",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 427,
+            "description": "Makes a request to the gamefroot servers. \nBecause it is done using XHR requests, it is recommended that do not make multiple requests at once.",
+            "itemtype": "method",
+            "name": "_apiRequest",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "The URL of the request that is being made.",
+                    "type": "String"
+                },
+                {
+                    "name": "rawdata",
+                    "description": "The data to be sent to gf.",
+                    "type": "Object"
+                },
+                {
+                    "name": "callback",
+                    "description": "The callback to run when complete.",
+                    "type": "Function"
+                },
+                {
+                    "name": "post",
+                    "description": "If information sent should use POST. Majority of methods do anyway.",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "If the request was made or not.",
+                "type": "Boolean"
+            },
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 511,
+            "description": "Executed when a API call has failed.",
+            "itemtype": "method",
+            "name": "_error",
+            "params": [
+                {
+                    "name": "errorMsg",
+                    "description": "The error message to show.",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "The callback to execute.",
+                    "type": "Function"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
             "module": "Plugins",
             "submodule": "SocialConnect",
             "namespace": "Kiwi.Plugins.SocialConnect"
@@ -927,6 +1386,20 @@
         {
             "file": "src\\manager.js",
             "line": 26,
+            "description": "The Gamefroot account creation plugin.",
+            "itemtype": "property",
+            "name": "gamefroot",
+            "type": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "access": "public",
+            "tagname": "",
+            "class": "Kiwi.Plugins.SocialConnect.Manager",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\manager.js",
+            "line": 35,
             "description": "The Facebook social plugin.",
             "itemtype": "property",
             "name": "facebook",
@@ -940,7 +1413,7 @@
         },
         {
             "file": "src\\manager.js",
-            "line": 39,
+            "line": 48,
             "description": "A useful method that allows you to initialise multiple social media SDKS at the same time. \n\nTo use this method you must pass it an Object,\nwhich contains the configuration settings for each SDK you want to use.\n\nE.g. To initialise Facebook you would pass { facebook: { appId: '1726287530930783' } } \nNote: appId used for example purposes only.",
             "itemtype": "method",
             "name": "init",
