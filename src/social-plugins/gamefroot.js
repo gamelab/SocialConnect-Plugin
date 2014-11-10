@@ -106,7 +106,7 @@ Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL = {
 * @readOnly
 * @public
 */
-Object.defineProperty( Kiwi.Plugins.SocialConnect.Facebook.prototype, "ready", {
+Object.defineProperty( Kiwi.Plugins.SocialConnect.Gamefroot.prototype, "ready", {
     
     get: function () {
         return this._ready;
@@ -130,7 +130,7 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Facebook.prototype, "ready", {
 * @readOnly
 * @public
 */
-Object.defineProperty( Kiwi.Plugins.SocialConnect.Facebook.prototype, "loggedIn", {
+Object.defineProperty( Kiwi.Plugins.SocialConnect.Gamefroot.prototype, "loggedIn", {
     
     get: function () {
         return ( this.userInfo !== null );

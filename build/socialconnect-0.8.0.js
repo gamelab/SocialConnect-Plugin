@@ -850,7 +850,7 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype.hasPermissions = function( params 
 
   if( !this.loggedIn ) {
     this.log( 'we could not detected if the user is currently logged in.', 2 );
-    params.callback.call( params.context, false, [], resp );
+    params.callback.call( params.context, false, [] );
     return false;
   }
 
@@ -1287,7 +1287,7 @@ Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL = {
 * @readOnly
 * @public
 */
-Object.defineProperty( Kiwi.Plugins.SocialConnect.Facebook.prototype, "ready", {
+Object.defineProperty( Kiwi.Plugins.SocialConnect.Gamefroot.prototype, "ready", {
     
     get: function () {
         return this._ready;
@@ -1311,7 +1311,7 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Facebook.prototype, "ready", {
 * @readOnly
 * @public
 */
-Object.defineProperty( Kiwi.Plugins.SocialConnect.Facebook.prototype, "loggedIn", {
+Object.defineProperty( Kiwi.Plugins.SocialConnect.Gamefroot.prototype, "loggedIn", {
     
     get: function () {
         return ( this.userInfo !== null );

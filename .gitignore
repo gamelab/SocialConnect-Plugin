@@ -34,3 +34,4 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 !gruntfile.js
 /node_modules
+/tmp
