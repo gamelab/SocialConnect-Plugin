@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\manager.js - SocialConnect</title>
+    <title>src/manager.js - SocialConnect</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -98,7 +98,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\manager.js</h1>
+                        <h1 class="file-heading">File: src/manager.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -118,31 +118,31 @@
 Kiwi.Plugins.SocialConnect.Manager = function( game ) {
 
 
-  /**
-  * The game that this plugin is attached to.
-  * @property game
-  * @type Kiwi.Game
-  * @public
-  */
-  this.game = game;
+	/**
+	* The game that this plugin is attached to.
+	* @property game
+	* @type Kiwi.Game
+	* @public
+	*/
+	this.game = game;
 
 
-  /**
-  * The Gamefroot account creation plugin.
-  * @property gamefroot
-  * @type Kiwi.Plugins.SocialConnect.Gamefroot
-  * @public
-  */
-  this.gamefroot = new Kiwi.Plugins.SocialConnect.Gamefroot( this.game );
+	/**
+	* The Gamefroot account creation plugin.
+	* @property gamefroot
+	* @type Kiwi.Plugins.SocialConnect.Gamefroot
+	* @public
+	*/
+	this.gamefroot = new Kiwi.Plugins.SocialConnect.Gamefroot( this.game );
 
-  
-  /**
-  * The Facebook social plugin.   
-  * @property facebook
-  * @type Kiwi.Plugins.SocialConnect.Facebook
-  * @public
-  */
-  this.facebook = new Kiwi.Plugins.SocialConnect.Facebook( this.game );
+	
+	/**
+	* The Facebook social plugin.   
+	* @property facebook
+	* @type Kiwi.Plugins.SocialConnect.Facebook
+	* @public
+	*/
+	this.facebook = new Kiwi.Plugins.SocialConnect.Facebook( this.game );
 
 
 
@@ -155,43 +155,37 @@ Kiwi.Plugins.SocialConnect.Manager = function( game ) {
 * To use this method you must pass it an Object,
 * which contains the configuration settings for each SDK you want to use.
 *
-* E.g. To initialise Facebook you would pass { facebook: { appId: &#x27;1726287530930783&#x27; } } 
+* E.g. To initialise Facebook you would pass { facebook: { appId: &quot;1726287530930783&quot; } } 
 * Note: appId used for example purposes only. 
 *
 * @method init
 * @param config {Object}
-* @param [config.facebook] {Object} Params to init the Facebook SDK. See the &#x27;init&#x27; method Facebook for more details. 
+* @param [config.facebook] {Object} Params to init the Facebook SDK. See the &quot;init&quot; method Facebook for more details. 
 * @public 
 *
 */
 Kiwi.Plugins.SocialConnect.Manager.prototype.init = function( config ) {
 
-  config = config || {};
+	config = config || {};
 
-  if( config.gamefroot ) {
-    console.warn(&#x27;SocialConnect: Gamefroot does not need initialising.&#x27;);
-  }
+	if ( config.gamefroot ) {
+		console.warn(&quot;SocialConnect: Gamefroot does not need initialising.&quot;);
+	}
 
-  if( config.facebook ) {
-    this.facebook.init( config.facebook );
-  }
+	if ( config.facebook ) {
+		this.facebook.init( config.facebook );
+	}
 
-  if( config.twitter ) {
-    console.error(&#x27;SocialConnect: Twitter has not been implemented just yet.&#x27;);
-  }
+	if ( config.twitter ) {
+		console.error(&quot;SocialConnect: Twitter has not been implemented just yet.&quot;);
+	}
 
-  if( config.google ) {
-    console.error(&#x27;SocialConnect: Google Plus has not been implemented just yet.&#x27;);
-  }
+	if ( config.google ) {
+		console.error(&quot;SocialConnect: Google Plus has not been implemented just yet.&quot;);
+	}
 
 };
 
-
-
-
- 
-
- 
     </pre>
 </div>
 

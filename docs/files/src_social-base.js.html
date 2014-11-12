@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\social-base.js - SocialConnect</title>
+    <title>src/social-base.js - SocialConnect</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -98,7 +98,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\social-base.js</h1>
+                        <h1 class="file-heading">File: src/social-base.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -125,52 +125,67 @@
 Kiwi.Plugins.SocialConnect.Base = function( game, name, configParams ) {
 
 
-  /**
-  * The game that this is a part of.
-  * @property game
-  * @type Kiwi.Game
-  * @public
-  */
-  this.game = game;
+	/**
+	* The game that this is a part of.
+	* @property game
+	* @type Kiwi.Game
+	* @public
+	*/
+	this.game = game;
 
 
-  /**
-  * The name of the Social Media which this class contains the functionality for. 
-  * @property name
-  * @type String
-  * @public
-  */
-  this.name = name;
+	/**
+	* The name of the Social Media which this class contains the functionality for. 
+	* @property name
+	* @type String
+	* @public
+	*/
+	this.name = name;
 
 
-  /**
-  * If the SDK has been initialised yet.
-  * @property _initialized
-  * @type Boolean
-  * @default false
-  * @public
-  */
-  this._initialized = false;
+	/**
+	* If the SDK has been initialised yet.
+	* @property _initialized
+	* @type Boolean
+	* @default false
+	* @public
+	*/
+	this._initialized = false;
 
-  configParams = configParams || {};
+	configParams = configParams || {};
 
 
-  /**
-  * Contains the settings regarding the functionality this plugin contains. 
-  * @property settings
-  * @type Object
-  * @attribute init {Boolean} If it requires initailisation or not. 
-  * @attribute login {Boolean} If it supports login or not.
-  * @attribute share {Boolean} If it supports sharing or not. 
-  * @public
-  */
-  this.settings = {
-    &#x27;init&#x27;: true,   
-    &#x27;login&#x27;: false,
-    &#x27;share&#x27;: false
-  };
+	/**
+	* Contains the settings regarding the functionality this plugin contains. 
+	* @property settings
+	* @type Object
+	* @public
+	*/
+	this.settings = {
 
-  this._readConfig( configParams );
+		/**
+		* If it requires initialisation or not.
+		* @property settings.init
+		* @type Boolean
+		*/
+		&quot;init&quot;: true,
+
+		/**
+		* If it supports login or not.
+		* @property settings.login
+		* @type Boolean
+		*/
+		&quot;login&quot;: false,
+
+		/**
+		* If it supports sharing or not.
+		* @property settings.share
+		* @type Boolean
+		*/
+		&quot;share&quot;: false
+	};
+
+	this._readConfig( configParams );
 
 };
 
@@ -185,17 +200,17 @@ Kiwi.Plugins.SocialConnect.Base = function( game, name, configParams ) {
 */
 Kiwi.Plugins.SocialConnect.Base.prototype._readConfig = function( config ) {
 
-  if( typeof config.init !== &quot;undefined&quot; ) { 
-    this.settings.init = config.init;
-  }
+	if( typeof config.init !== &quot;undefined&quot; ) { 
+		this.settings.init = config.init;
+	}
 
-  if( typeof config.login !== &quot;undefined&quot; ) { 
-    this.settings.login = config.login;
-  }
+	if( typeof config.login !== &quot;undefined&quot; ) { 
+		this.settings.login = config.login;
+	}
 
-  if( typeof config.share !== &quot;undefined&quot; ) { 
-    this.settings.share = config.share;
-  }
+	if( typeof config.share !== &quot;undefined&quot; ) { 
+		this.settings.share = config.share;
+	}
 
 };
 
@@ -208,14 +223,14 @@ Kiwi.Plugins.SocialConnect.Base.prototype._readConfig = function( config ) {
 * @public
 */
 Object.defineProperty( Kiwi.Plugins.SocialConnect.Base.prototype, &quot;initialized&quot;, {
-    
-    get: function () {
-        return this._initialized;
-    },
-    
-    enumerable: true,
-    
-    configurable: true
+		
+		get: function () {
+				return this._initialized;
+		},
+		
+		enumerable: true,
+		
+		configurable: true
 
 });
 
@@ -223,41 +238,40 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Base.prototype, &quot;initiali
 /**
 * Handles the initialsation of the Social Media SDK (if necessary).
 * 
-* Extended classes should create a &#x27;_init&#x27; method instead of overriding this one
+* Extended classes should create a &quot;_init&quot; method instead of overriding this one
 * when creating their own.
-*   
 * 
 * @method init
-* @param params {Object} Any parameters required by the SDK. This will be passed to the &#x27;_init&#x27; method. 
+* @param params {Object} Any parameters required by the SDK. This will be passed to the &quot;_init&quot; method. 
 * @return {Boolean} If the init method was called or not.
 * @public
 */
 Kiwi.Plugins.SocialConnect.Base.prototype.init = function( params ) {
 
-  if( !this.settings.init ) {
-    this.log( &#x27;doesn\&#x27;t require initialization&#x27; );
-    return false;
-  }
+	if ( !this.settings.init ) {
+		this.log( &quot;doesn&#x27;t require initialization&quot; );
+		return false;
+	}
 
-  params = params || {};
+	params = params || {};
 
-  if( this._initialized ) {
-    this.log( &#x27;has already been initialized. Skipping re-initalization.&#x27;, 2 );
-    return false;
-  }
+	if ( this._initialized ) {
+		this.log( &quot;has already been initialized. Skipping re-initalization.&quot;, 2 );
+		return false;
+	}
 
 
-  //Call the init method if it exists. 
-  if( typeof this._init !== &quot;undefined&quot; ) {
-    
-    var success = this._init.call( this, params );
+	//Call the init method if it exists. 
+	if ( typeof this._init !== &quot;undefined&quot; ) {
+		
+		var success = this._init.call( this, params );
 
-    if( success ) {
-      this._initialized = true;
-    } 
+		if ( success ) {
+			this._initialized = true;
+		} 
 
-    return success;
-  }
+		return success;
+	}
 
 };
 
@@ -265,9 +279,8 @@ Kiwi.Plugins.SocialConnect.Base.prototype.init = function( params ) {
 /**
 * Handles the login functionality for this Social Media SDK (if necessary).
 * 
-* Extended classes should create a &#x27;_login&#x27; method instead of overriding this one
+* Extended classes should create a &quot;_login&quot; method instead of overriding this one
 * when creating their own.
-*   
 * 
 * @method login
 * @param params {Object} Any parameters required by the SDK. This will be passed to the &#x27;_login&#x27; method.
@@ -276,23 +289,23 @@ Kiwi.Plugins.SocialConnect.Base.prototype.init = function( params ) {
 */
 Kiwi.Plugins.SocialConnect.Base.prototype.login = function( params ) {
 
-  params = params || {};
+	params = params || {};
 
-  if( !this.settings.login ) {
-    this.log( &#x27;doesn\&#x27;t has login functionality.&#x27; );
-    return false;
-  }
+	if ( !this.settings.login ) {
+		this.log( &quot;doesn&#x27;t has login functionality.&quot; );
+		return false;
+	}
 
-  if( this.settings.init &amp;&amp; !this._initialized ) {
-    this.log( &#x27;has not been initialized.&#x27;, 2 );
-    return false;
-  }
+	if ( this.settings.init &amp;&amp; !this._initialized ) {
+		this.log( &quot;has not been initialized.&quot;, 2 );
+		return false;
+	}
 
-  //Call the init method if it exists. 
-  if( typeof this._login !== &quot;undefined&quot; ) {
-    
-    return this._login.call( this, params );
-  }
+	//Call the init method if it exists. 
+	if ( typeof this._login !== &quot;undefined&quot; ) {
+		
+		return this._login.call( this, params );
+	}
 
 };
 
@@ -300,34 +313,34 @@ Kiwi.Plugins.SocialConnect.Base.prototype.login = function( params ) {
 /**
 * Handles the share/post functionality for this Social Media SDK (if necessary).
 * 
-* Extended classes should create a &#x27;_share&#x27; method instead of overriding this one
+* Extended classes should create a &quot;_share&quot; method instead of overriding this one
 * when creating their own.
 *   
 * 
 * @method share
-* @param params {Object} Any parameters required by the SDK. This will be passed to the &#x27;_share&#x27; method.
+* @param params {Object} Any parameters required by the SDK. This will be passed to the &quot;_share&quot; method.
 * @return {Boolean} If the init method was called or not.
 * @public
 */
 Kiwi.Plugins.SocialConnect.Base.prototype.share = function( params ) {
 
-  params = params || {};
+	params = params || {};
 
-  if( !this.settings.share ) {
-    this.log( &#x27;doesn\&#x27;t has sharing functionality.&#x27; );
-    return false;
-  }
+	if ( !this.settings.share ) {
+		this.log( &quot;doesn&#x27;t has sharing functionality.&quot; );
+		return false;
+	}
 
-  if( this.settings.init &amp;&amp; !this._initialized ) {
-    this.log( &#x27;has not been initialized.&#x27;, 2 );
-    return false;
-  }
+	if ( this.settings.init &amp;&amp; !this._initialized ) {
+		this.log( &quot;has not been initialized.&quot;, 2 );
+		return false;
+	}
 
-  //Call the init method if it exists. 
-  if( typeof this._share !== &quot;undefined&quot; ) {
-    
-    return this._share.call( this, params );
-  }
+	//Call the init method if it exists. 
+	if ( typeof this._share !== &quot;undefined&quot; ) {
+		
+		return this._share.call( this, params );
+	}
 
 };
 
@@ -337,9 +350,9 @@ Kiwi.Plugins.SocialConnect.Base.prototype.share = function( params ) {
 * Used internally only.
 * 
 * There are three different types of methods which can be used.
-* 1 - Uses the &#x27;console.log&#x27; method.
-* 2 - Uses the &#x27;console.warn&#x27; method.
-* 3 - Uses the &#x27;console.error&#x27; method.
+* 1 - Uses the &quot;console.log&quot; method.
+* 2 - Uses the &quot;console.warn&quot; method.
+* 3 - Uses the &quot;console.error&quot; method.
 * 
 * @method log
 * @param string {String} The string that is to be logged out.
@@ -348,31 +361,30 @@ Kiwi.Plugins.SocialConnect.Base.prototype.share = function( params ) {
 */
 Kiwi.Plugins.SocialConnect.Base.prototype.log = function( string, type ) {
 
-  if( this.game.debug ) {
+	if ( this.game.debug ) {
 
-    string = &#x27;SocialConnect:&#x27; + this.name + &#x27; &#x27; + string;
+		string = &quot;SocialConnect:&quot; + this.name + &quot; &quot; + string;
 
-    switch( type ) {
+		switch( type ) {
 
-      default:
-      case 1:
-        console.log( string );
-        break;
+			default:
+			case 1:
+				console.log( string );
+				break;
 
-      case 2:
-        console.warn( string );
-        break;
+			case 2:
+				console.warn( string );
+				break;
 
-      case 3:
-        console.error( string );
-        break;
+			case 3:
+				console.error( string );
+				break;
 
-    }
+		}
 
-  }
+	}
 
 };
-
 
     </pre>
 </div>

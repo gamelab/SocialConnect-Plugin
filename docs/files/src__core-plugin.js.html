@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\_core-plugin.js - SocialConnect</title>
+    <title>src/_core-plugin.js - SocialConnect</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -98,13 +98,13 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\_core-plugin.js</h1>
+                        <h1 class="file-heading">File: src/_core-plugin.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 
 /**
-* The description of SocialConnect goes here
+* SocialConnect is a plugin that helps you connect to social media services.
 *
 * @module Kiwi
 * @submodule Plugins
@@ -113,30 +113,30 @@
 * @main
 */
 Kiwi.Plugins.SocialConnect = {
-  
-  /**
-  * The name of this plugin.
-  * @property name
-  * @type String
-  * @public
-  */
-  name:&#x27;SocialConnect&#x27;,
 
-  /**
-  * The version of this plugin.
-  * @property version
-  * @type String
-  * @public
-  */
-  version:&#x27;0.8.0&#x27;,
+	/**
+	* The name of this plugin.
+	* @property name
+	* @type String
+	* @public
+	*/
+	name:&quot;SocialConnect&quot;,
 
-  /**
-  * The minimum version of Kiwi that the plugin requires.
-  * @property minimumKiwiVersion
-  * @type String
-  * @public
-  */
-  minimumKiwiVersion:&#x27;1.0.0&#x27;
+	/**
+	* The version of this plugin.
+	* @property version
+	* @type String
+	* @public
+	*/
+	version:&quot;0.8.0&quot;,
+
+	/**
+	* The minimum version of Kiwi that the plugin requires.
+	* @property minimumKiwiVersion
+	* @type String
+	* @public
+	*/
+	minimumKiwiVersion:&quot;1.0.0&quot;
 
 };
 
@@ -154,7 +154,7 @@ Kiwi.PluginManager.register(Kiwi.Plugins.SocialConnect);
 */
 Kiwi.Plugins.SocialConnect.create = function( game ) {
 
-  game.social = new Kiwi.Plugins.SocialConnect.Manager( game );
+	game.social = new Kiwi.Plugins.SocialConnect.Manager( game );
 
 };
 

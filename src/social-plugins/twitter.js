@@ -12,15 +12,15 @@
 */
 Kiwi.Plugins.SocialConnect.Twitter = function( game ) {
 
-  Kiwi.Plugins.SocialConnect.Base.call(this, game, 'Twitter', {
-    'login': false,
-    'share': false,
-    'init': false
-  });
+	Kiwi.Plugins.SocialConnect.Base.call(this, game, "Twitter", {
+		"login": false,
+		"share": false,
+		"init": false
+	});
 
-  this._ready = false;
+	this._ready = false;
 
-  //Detect if Twitter Connect JavaScript file has been included.
+	//Detect if Twitter Connect JavaScript file has been included.
 
 
 };
@@ -29,20 +29,20 @@ Kiwi.extend( Kiwi.Plugins.SocialConnect.Twitter, Kiwi.Plugins.SocialConnect.Base
 
 
 Kiwi.Plugins.SocialConnect.Twitter.prototype._include = function( onloadCallback ) {
-  //Include the SDK if it is not visible
+	//Include the SDK if it is not visible
 };
 
 
 
 Object.defineProperty( Kiwi.Plugins.SocialConnect.Twitter.prototype, "ready", {
-    
-    get: function () {
-        return this._ready;
-    },
-    
-    enumerable: true,
-    
-    configurable: true
+
+		get: function () {
+				return this._ready;
+		},
+
+		enumerable: true,
+
+		configurable: true
 
 });
 
@@ -50,15 +50,15 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Twitter.prototype, "ready", {
 /**
 * Will contain any functionality for initialising.
 * 
-* @method init
+* @method _init
 * @param params {Object}
-* @public
+* @private
 */
 Kiwi.Plugins.SocialConnect.Twitter.prototype._init = function( params ) {
 
-  //Check to see if the SDK has been loaded 
+	//Check to see if the SDK has been loaded 
 
-  //If not, load the SDK in.
+	//If not, load the SDK in.
 
 };
 
@@ -66,13 +66,13 @@ Kiwi.Plugins.SocialConnect.Twitter.prototype._init = function( params ) {
 /**
 * Will contain any functionality to login a user.
 * 
-* @method login
+* @method _login
 * @param params {Object}
-* @public
-*/ 
+* @private
+*/
 Kiwi.Plugins.SocialConnect.Twitter.prototype._login = function( params ) {
 
-  //Attempt to login.
+	//Attempt to login.
 
 };
 
@@ -86,7 +86,7 @@ Kiwi.Plugins.SocialConnect.Twitter.prototype._login = function( params ) {
 */
 Kiwi.Plugins.SocialConnect.Twitter.prototype.logout = function( params ) {
 
-  //Attempt to logout
+	//Attempt to logout
 
 };
 
@@ -94,13 +94,13 @@ Kiwi.Plugins.SocialConnect.Twitter.prototype.logout = function( params ) {
 /**
 * Functionality to share a piece of information on twitter.
 * 
-* @method share
+* @method _share
 * @param params {Object}
-* @public
+* @private
 */
 Kiwi.Plugins.SocialConnect.Twitter.prototype._share = function( params ) {
 
-  //Attempt to share
+	//Attempt to share
 
 };
 
