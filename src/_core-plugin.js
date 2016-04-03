@@ -24,7 +24,7 @@ Kiwi.Plugins.SocialConnect = {
   * @type String
   * @public
   */
-  version:'0.8.0',
+  version:'0.9.0',
 
   /**
   * The minimum version of Kiwi that the plugin requires.

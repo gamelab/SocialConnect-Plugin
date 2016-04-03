@@ -1,4 +1,4 @@
-SocialConnect Plugin (0.8.0)
+SocialConnect Plugin (0.9.0)
 =======================================
 
 The SocialConnect plugin makes integrating and using social media in Kiwi a lot easier. Functionality commonly wanted in games, such as sharing and login, are easily accessable and configurable. Loading SDKs are done upon initialisation and only if it is not already there. It even works in CocoonJS.
@@ -15,6 +15,9 @@ If you have any problems then feel free to contact us via [our website](http://w
 
 Versions
 ---------
+
+0.9.0
+* Facebook support for CocoonJS updated
 
 0.8.0
 * Facebook support added.
