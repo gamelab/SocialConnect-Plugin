@@ -81,15 +81,18 @@ Kiwi.Plugins.SocialConnect.Facebook = function( game ) {
   //Detect if we are targetting CocoonJS or not.
   if( this.game.deviceTargetOption == Kiwi.TARGET_COCOON ) {
 
+    if( !Kiwi.Plugins.SocialConnect.deviceReady ) {
+      this.log("Device not yet ready. Please make sure you wait for the documents 'deviceready' event", 3);
+      return;
+    }
+
     this._cocoon = true;
 
     //Has the CocoonJS Plugin been added or not.
     if( !Cocoon || !Cocoon.Social.Facebook ) {
-
       this.log( 'CocoonJS intergration requires you to include the Cocoon JavaScript library.', 3 );
       this._ready = false;
       return;
-
     }
 
 
@@ -117,6 +120,8 @@ Kiwi.Plugins.SocialConnect.Facebook = function( game ) {
 };
 
 Kiwi.extend( Kiwi.Plugins.SocialConnect.Facebook, Kiwi.Plugins.SocialConnect.Base );
+
+
 
 
 /**

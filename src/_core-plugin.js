@@ -32,13 +32,28 @@ Kiwi.Plugins.SocialConnect = {
   * @type String
   * @public
   */
-  minimumKiwiVersion:'1.0.0'
+  minimumKiwiVersion:'1.0.0',
+
+  /**
+  * Whether the device ready event has fired or not. 
+  * Used for Cocoon/Cordova implementation
+  * 
+  * @property deviceReady
+  * @type Boolean
+  * @default false
+  * @private
+  */
+  deviceReady: false
 
 };
 
 
 // Registers this plugin with the Global Kiwi Plugins Manager.
 Kiwi.PluginManager.register(Kiwi.Plugins.SocialConnect);
+
+document.addEventListener('deviceready', function() {
+  Kiwi.Plugins.SocialConnect.deviceReady = true;
+}, false);
 
 
 
