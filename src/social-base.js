@@ -229,13 +229,13 @@ Kiwi.Plugins.SocialConnect.Base.prototype.share = function( params ) {
 
 
 /**
-* A method which handles logging out a message to the console. 
+* A method which handles logging out a message. 
 * Used internally only.
 * 
 * There are three different types of methods which can be used.
-* 1 - Uses the 'console.log' method.
-* 2 - Uses the 'console.warn' method.
-* 3 - Uses the 'console.error' method.
+* 1 - Uses the 'Kiwi.Log.log' method.
+* 2 - Uses the 'Kiwi.Log.warn' method.
+* 3 - Uses the 'Kiwi.Log.error' method.
 * 
 * @method log
 * @param string {String} The string that is to be logged out.
@@ -244,26 +244,20 @@ Kiwi.Plugins.SocialConnect.Base.prototype.share = function( params ) {
 */
 Kiwi.Plugins.SocialConnect.Base.prototype.log = function( string, type ) {
 
-  if( this.game.debug ) {
+  switch( type ) {
 
-    string = 'SocialConnect:' + this.name + ' ' + string;
+    default:
+    case 1:
+      Kiwi.Log.log( 'SocialConnect:', string, '#' + this.name, '#socialConnect' );
+      break;
 
-    switch( type ) {
+    case 2:
+      Kiwi.Log.warn( 'SocialConnect:', string, '#' + this.name, '#socialConnect' );
+      break;
 
-      default:
-      case 1:
-        console.log( string );
-        break;
-
-      case 2:
-        console.warn( string );
-        break;
-
-      case 3:
-        console.error( string );
-        break;
-
-    }
+    case 3:
+      Kiwi.Log.error( 'SocialConnect:', string, '#' + this.name, '#socialConnect' );
+      break;
 
   }
 
