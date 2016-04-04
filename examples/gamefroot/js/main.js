@@ -1,10 +1,17 @@
 
 var Gamefroot = new Kiwi.State('Gamefroot');
 
+Gamefroot.init = function() {
+
+	this.game.social.facebook.init({
+		'appId': '299344696856469'
+	});
+
+};
+
 Gamefroot.create = function() {
 
 	var regSubmit = document.querySelector('#reg-register');
-
 	regSubmit.addEventListener('click', function() {
 
 		var user = document.querySelector('#reg-username'),
@@ -25,7 +32,6 @@ Gamefroot.create = function() {
 
 
 	var loginSubmit = document.querySelector('#log-login');
-
 	loginSubmit.addEventListener('click', function() {
 
 		var user = document.querySelector('#log-username'),
@@ -43,13 +49,24 @@ Gamefroot.create = function() {
 	}.bind(this) );
 
 	var loggedInSubmit = document.querySelector('#isloggedin');
-
 	loggedInSubmit.addEventListener('click', function() {
 
 		this.game.social.gamefroot.isLoggedIn({
 			callback: function(resp, resp2) {
-				console.log('IS LOGGED IN:', resp, resp2);
+				console.log( 'IS LOGGED IN:', resp, resp2 );
 			}, 
+			context: this
+		});
+
+	}.bind(this) );
+
+	var facebookLogin = document.querySelector('#loginWithFacebook');
+	facebookLogin.addEventListener('click', function() {
+
+		this.game.social.gamefroot.loginWithFB({
+			callback: function(resp, resp2) {
+				console.log( 'FB:', resp, resp2 );
+			},
 			context: this
 		})
 

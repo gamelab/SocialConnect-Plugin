@@ -300,6 +300,10 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.loginWithFB = function( params ) 
 		return false;
 	}
 
+	this.log("Currently not working");
+	params.callback.call( params.context, false, "Currently doesn't work.");
+	return false;
+
 	return this.game.social.facebook.loginApproved( { 
 
 		context: this,
@@ -422,8 +426,8 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.logout = function( params ) {
 		if( type == 2 ) {
 			if( params.callback ) {
 				params.callback.call( params.context, false, data );
+				return;
 			}
-
 		} 
 
 		if( params.callback ) { 
@@ -498,7 +502,7 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequest = function( url, rawD
 		callbackExecuted = true;
 
 		if( file.success ) {
-			callback.call( this, 1, (file.data && file.data.data) ? file.data.data : file.data );
+			callback.call( this, 1, ( file.data && file.data.data ) ? file.data.data : file.data );
 		} else {
 			callback.call( this, 2, msg );
 		}
