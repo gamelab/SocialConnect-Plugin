@@ -275,7 +275,7 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.isLoggedIn = function( params ) {
 
 		}
 
-	}, true);
+	});
 
 };
 
@@ -460,16 +460,18 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequest = function( url, rawD
 	file.parse = true;
 	file.maxLoadAttempts = 1;
 
-	var callbackExecuted = false;
+	var callbackExecuted = false,
+		that = this;
 
-	var that = this;
-	file.xhrLoader = function(method, requestType, timeout) {
-		if( typeof requestType == 'undefined' ) {
-			requestType = 'text';
-		}
+	if( post ) {
+		file.xhrLoader = function(method, requestType, timeout) {
+			if( typeof requestType == 'undefined' ) {
+				requestType = 'text';
+			}
 
-		that._postXhrLoader.call(file, requestType, rawData);
-	};
+			that._postXhrLoader.call(file, requestType, rawData);
+		};
+	}
 
 	file.onComplete.add(function() {
 
