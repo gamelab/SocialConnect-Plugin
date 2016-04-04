@@ -168,6 +168,12 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.register = function( params ) {
 		return false;
 	}
 
+	if( !params.username || !params.password || !params.email) {
+		this.log( 'not all of the needed parameters have been passed.', 2 );
+		params.callback.call( params.context, false, 'Missing required parameters');
+		return false;
+	};
+
 	var data = {
 		'username': params.username || '',
 		'password': params.password || '',
@@ -210,6 +216,7 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._login = function( params ) {
 
 	if( !params.username || !params.password ) {
 		this.log( 'not all of the needed parameters have been passed.', 2 );
+		params.callback.call( params.context, false, 'Missing required parameters');
 		return false;
 	};
 
@@ -227,6 +234,7 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._login = function( params ) {
 			params.callback.call( params.context, false, data );
 		} else {
 			that.userInfo = data;		
+			params.callback.call( params.context, true, data );
 		} 
 
 	}, true);
