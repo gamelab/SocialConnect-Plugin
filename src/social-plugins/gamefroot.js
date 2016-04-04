@@ -179,14 +179,9 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.register = function( params ) {
 		//If there was an error.
 		if( type == 2 ) {
 			params.callback.call( params.context, false, data );
-
-		} else if( data.result == "success" ) {
-			params.callback.call( params.context, true, data );
-		
 		} else {
-			params.callback.call( params.context, false, data );
-		
-		}
+			params.callback.call( params.context, true, data );
+		} 
 
 	}, true);
 ;
@@ -230,26 +225,51 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._login = function( params ) {
 		//If there was an error.
 		if( type == 2 ) {
 			params.callback.call( params.context, false, data );
-
-		} else if( data.result) {
-			if( data.result == 'fail' ) {
-				params.callback.call( params.context, false, data );
-
-			} else {
-				that.userInfo = data;
-				params.callback.call( params.context, true, data);
-			}
-	 
-
 		} else {
-			params.callback.call( params.context, false, data );
-		
-		}
+			that.userInfo = data;		
+		} 
 
 	}, true);
 
 };
 
+
+/**
+* Makes a request to the API asking if the user is currently logged in or not. 
+* The callback passed will contain two arguments. 
+* 1 - Boolean whether the user is logged in or not
+* 2 - Response information passed from the request 
+* 
+* @method isLoggedIn
+* @param params {Object} The parameters required
+*   @param params.callback {Function} Function to be executed when complete.
+*   @param [params.context] {Any} Context the callback should be executed in.
+* @public
+* @return {Boolean} If the API call was made or not.
+*/
+Kiwi.Plugins.SocialConnect.Gamefroot.prototype.isLoggedIn = function( params ) {
+
+	if( !params.callback ) {
+		this.log( 'a callback needs to be passed in-order to function correctly.', 2 );
+		return false;
+	}
+
+	var that = this;
+
+	return this._apiRequest( 'users/me', {}, function( type, data ) {
+
+		//If there was an error.
+		if( type == 2 ) {
+			params.callback.call( params.context, false, data );
+		} else {
+			that.userInfo = data;
+			params.callback.call( params.context, true, data);
+
+		}
+
+	}, true);
+
+};
 
 /**
 * Login to gamefroot using facebook. 
@@ -362,21 +382,9 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._fbLoginToGF = function( resp, pa
 		//If there was an error.
 		if( type == 2 ) {
 			params.callback.call( params.context, false, data );
-
-		} else if( data.result) {
-			if( data.result == 'fail' ) {
-				params.callback.call( params.context, false, data );
-
-			} else {
-				that.userInfo = data;
-				params.callback.call( params.context, true, data);
-
-			}
-	 
-
 		} else {
-			params.callback.call( params.context, false, data );
-		
+			that.userInfo = data;
+			params.callback.call( params.context, true, data);
 		}
 
 	}, true);
