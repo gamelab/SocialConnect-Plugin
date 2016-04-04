@@ -32,7 +32,7 @@ Kiwi.Plugins.SocialConnect = {
 	* @type String
 	* @public
 	*/
-  minimumKiwiVersion:'1.0.0',
+  minimumKiwiVersion:'1.3.0',
 
   /**
   * Whether the device ready event has fired or not. 
