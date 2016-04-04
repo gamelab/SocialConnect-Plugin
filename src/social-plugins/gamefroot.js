@@ -98,7 +98,7 @@ Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL = {
 
 /**
 * Indicates if the API is ready to make a request or not. 
-* This would only ever be 'false' if we are midway through another API call.
+* This would only ever be "false" if we are midway through another API call.
 * This is READ ONLY.
 * 
 * @property ready
@@ -433,7 +433,7 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.logout = function( params ) {
 * @param rawdata {Object} The data to be sent to gf.
 * @param callback {Function} The callback to run when complete.
 * @param post {Boolean} If information sent should use POST. Majority of methods do anyway.
-* @public
+* @private
 * @return {Boolean} If the request was made or not.
 */
 Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequest = function( url, rawdata, callback, post ) {

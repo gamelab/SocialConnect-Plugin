@@ -1,6 +1,6 @@
 
 /**
-* The description of SocialConnect goes here
+* SocialConnect is a plugin that helps you connect to social media services.
 *
 * @module Kiwi
 * @submodule Plugins
@@ -9,29 +9,29 @@
 * @main
 */
 Kiwi.Plugins.SocialConnect = {
-  
-  /**
-  * The name of this plugin.
-  * @property name
-  * @type String
-  * @public
-  */
-  name:'SocialConnect',
 
-  /**
-  * The version of this plugin.
-  * @property version
-  * @type String
-  * @public
-  */
+	/**
+	* The name of this plugin.
+	* @property name
+	* @type String
+	* @public
+	*/
+	name:"SocialConnect",
+
+	/**
+	* The version of this plugin.
+	* @property version
+	* @type String
+	* @public
+	*/
   version:'0.9.0',
 
-  /**
-  * The minimum version of Kiwi that the plugin requires.
-  * @property minimumKiwiVersion
-  * @type String
-  * @public
-  */
+	/**
+	* The minimum version of Kiwi that the plugin requires.
+	* @property minimumKiwiVersion
+	* @type String
+	* @public
+	*/
   minimumKiwiVersion:'1.0.0',
 
   /**
@@ -65,7 +65,7 @@ document.addEventListener('deviceready', function() {
 */
 Kiwi.Plugins.SocialConnect.create = function( game ) {
 
-  game.social = new Kiwi.Plugins.SocialConnect.Manager( game );
+	game.social = new Kiwi.Plugins.SocialConnect.Manager( game );
 
 };
 

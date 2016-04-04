@@ -1,6 +1,6 @@
 
 /**
-* The description of SocialConnect goes here
+* SocialConnect is a plugin that helps you connect to social media services.
 *
 * @module Kiwi
 * @submodule Plugins
@@ -9,30 +9,30 @@
 * @main
 */
 Kiwi.Plugins.SocialConnect = {
-  
-  /**
-  * The name of this plugin.
-  * @property name
-  * @type String
-  * @public
-  */
-  name:'SocialConnect',
 
-  /**
-  * The version of this plugin.
-  * @property version
-  * @type String
-  * @public
-  */
-  version:'0.8.0',
+	/**
+	* The name of this plugin.
+	* @property name
+	* @type String
+	* @public
+	*/
+	name:"SocialConnect",
 
-  /**
-  * The minimum version of Kiwi that the plugin requires.
-  * @property minimumKiwiVersion
-  * @type String
-  * @public
-  */
-  minimumKiwiVersion:'1.0.0'
+	/**
+	* The version of this plugin.
+	* @property version
+	* @type String
+	* @public
+	*/
+	version:"0.8.0",
+
+	/**
+	* The minimum version of Kiwi that the plugin requires.
+	* @property minimumKiwiVersion
+	* @type String
+	* @public
+	*/
+	minimumKiwiVersion:"1.0.0"
 
 };
 
@@ -50,7 +50,7 @@ Kiwi.PluginManager.register(Kiwi.Plugins.SocialConnect);
 */
 Kiwi.Plugins.SocialConnect.create = function( game ) {
 
-  game.social = new Kiwi.Plugins.SocialConnect.Manager( game );
+	game.social = new Kiwi.Plugins.SocialConnect.Manager( game );
 
 };
 
@@ -71,31 +71,31 @@ Kiwi.Plugins.SocialConnect.create = function( game ) {
 Kiwi.Plugins.SocialConnect.Manager = function( game ) {
 
 
-  /**
-  * The game that this plugin is attached to.
-  * @property game
-  * @type Kiwi.Game
-  * @public
-  */
-  this.game = game;
+	/**
+	* The game that this plugin is attached to.
+	* @property game
+	* @type Kiwi.Game
+	* @public
+	*/
+	this.game = game;
 
 
-  /**
-  * The Gamefroot account creation plugin.
-  * @property gamefroot
-  * @type Kiwi.Plugins.SocialConnect.Gamefroot
-  * @public
-  */
-  this.gamefroot = new Kiwi.Plugins.SocialConnect.Gamefroot( this.game );
+	/**
+	* The Gamefroot account creation plugin.
+	* @property gamefroot
+	* @type Kiwi.Plugins.SocialConnect.Gamefroot
+	* @public
+	*/
+	this.gamefroot = new Kiwi.Plugins.SocialConnect.Gamefroot( this.game );
 
-  
-  /**
-  * The Facebook social plugin.   
-  * @property facebook
-  * @type Kiwi.Plugins.SocialConnect.Facebook
-  * @public
-  */
-  this.facebook = new Kiwi.Plugins.SocialConnect.Facebook( this.game );
+	
+	/**
+	* The Facebook social plugin.   
+	* @property facebook
+	* @type Kiwi.Plugins.SocialConnect.Facebook
+	* @public
+	*/
+	this.facebook = new Kiwi.Plugins.SocialConnect.Facebook( this.game );
 
 
 
@@ -108,43 +108,37 @@ Kiwi.Plugins.SocialConnect.Manager = function( game ) {
 * To use this method you must pass it an Object,
 * which contains the configuration settings for each SDK you want to use.
 *
-* E.g. To initialise Facebook you would pass { facebook: { appId: '1726287530930783' } } 
+* E.g. To initialise Facebook you would pass { facebook: { appId: "1726287530930783" } } 
 * Note: appId used for example purposes only. 
 *
 * @method init
 * @param config {Object}
-* @param [config.facebook] {Object} Params to init the Facebook SDK. See the 'init' method Facebook for more details. 
+* @param [config.facebook] {Object} Params to init the Facebook SDK. See the "init" method Facebook for more details. 
 * @public 
 *
 */
 Kiwi.Plugins.SocialConnect.Manager.prototype.init = function( config ) {
 
-  config = config || {};
+	config = config || {};
 
-  if( config.gamefroot ) {
-    console.warn('SocialConnect: Gamefroot does not need initialising.');
-  }
+	if ( config.gamefroot ) {
+		console.warn("SocialConnect: Gamefroot does not need initialising.");
+	}
 
-  if( config.facebook ) {
-    this.facebook.init( config.facebook );
-  }
+	if ( config.facebook ) {
+		this.facebook.init( config.facebook );
+	}
 
-  if( config.twitter ) {
-    console.error('SocialConnect: Twitter has not been implemented just yet.');
-  }
+	if ( config.twitter ) {
+		console.error("SocialConnect: Twitter has not been implemented just yet.");
+	}
 
-  if( config.google ) {
-    console.error('SocialConnect: Google Plus has not been implemented just yet.');
-  }
+	if ( config.google ) {
+		console.error("SocialConnect: Google Plus has not been implemented just yet.");
+	}
 
 };
 
-
-
-
- 
-
- 
 
 /**
 * The Base class used to outline the core functionality that most SocialMedia sites have.
@@ -168,52 +162,67 @@ Kiwi.Plugins.SocialConnect.Manager.prototype.init = function( config ) {
 Kiwi.Plugins.SocialConnect.Base = function( game, name, configParams ) {
 
 
-  /**
-  * The game that this is a part of.
-  * @property game
-  * @type Kiwi.Game
-  * @public
-  */
-  this.game = game;
+	/**
+	* The game that this is a part of.
+	* @property game
+	* @type Kiwi.Game
+	* @public
+	*/
+	this.game = game;
 
 
-  /**
-  * The name of the Social Media which this class contains the functionality for. 
-  * @property name
-  * @type String
-  * @public
-  */
-  this.name = name;
+	/**
+	* The name of the Social Media which this class contains the functionality for. 
+	* @property name
+	* @type String
+	* @public
+	*/
+	this.name = name;
 
 
-  /**
-  * If the SDK has been initialised yet.
-  * @property _initialized
-  * @type Boolean
-  * @default false
-  * @public
-  */
-  this._initialized = false;
+	/**
+	* If the SDK has been initialised yet.
+	* @property _initialized
+	* @type Boolean
+	* @default false
+	* @public
+	*/
+	this._initialized = false;
 
-  configParams = configParams || {};
+	configParams = configParams || {};
 
 
-  /**
-  * Contains the settings regarding the functionality this plugin contains. 
-  * @property settings
-  * @type Object
-  * @attribute init {Boolean} If it requires initailisation or not. 
-  * @attribute login {Boolean} If it supports login or not.
-  * @attribute share {Boolean} If it supports sharing or not. 
-  * @public
-  */
-  this.settings = {
-    'init': true,   
-    'login': false,
-    'share': false
-  };
+	/**
+	* Contains the settings regarding the functionality this plugin contains. 
+	* @property settings
+	* @type Object
+	* @public
+	*/
+	this.settings = {
 
-  this._readConfig( configParams );
+		/**
+		* If it requires initialisation or not.
+		* @property settings.init
+		* @type Boolean
+		*/
+		"init": true,
+
+		/**
+		* If it supports login or not.
+		* @property settings.login
+		* @type Boolean
+		*/
+		"login": false,
+
+		/**
+		* If it supports sharing or not.
+		* @property settings.share
+		* @type Boolean
+		*/
+		"share": false
+	};
+
+	this._readConfig( configParams );
 
 };
 
@@ -228,17 +237,17 @@ Kiwi.Plugins.SocialConnect.Base = function( game, name, configParams ) {
 */
 Kiwi.Plugins.SocialConnect.Base.prototype._readConfig = function( config ) {
 
-  if( typeof config.init !== "undefined" ) { 
-    this.settings.init = config.init;
-  }
+	if( typeof config.init !== "undefined" ) { 
+		this.settings.init = config.init;
+	}
 
-  if( typeof config.login !== "undefined" ) { 
-    this.settings.login = config.login;
-  }
+	if( typeof config.login !== "undefined" ) { 
+		this.settings.login = config.login;
+	}
 
-  if( typeof config.share !== "undefined" ) { 
-    this.settings.share = config.share;
-  }
+	if( typeof config.share !== "undefined" ) { 
+		this.settings.share = config.share;
+	}
 
 };
 
@@ -251,14 +260,14 @@ Kiwi.Plugins.SocialConnect.Base.prototype._readConfig = function( config ) {
 * @public
 */
 Object.defineProperty( Kiwi.Plugins.SocialConnect.Base.prototype, "initialized", {
-    
-    get: function () {
-        return this._initialized;
-    },
-    
-    enumerable: true,
-    
-    configurable: true
+		
+		get: function () {
+				return this._initialized;
+		},
+		
+		enumerable: true,
+		
+		configurable: true
 
 });
 
@@ -266,41 +275,40 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Base.prototype, "initialized",
 /**
 * Handles the initialsation of the Social Media SDK (if necessary).
 * 
-* Extended classes should create a '_init' method instead of overriding this one
+* Extended classes should create a "_init" method instead of overriding this one
 * when creating their own.
-*   
 * 
 * @method init
-* @param params {Object} Any parameters required by the SDK. This will be passed to the '_init' method. 
+* @param params {Object} Any parameters required by the SDK. This will be passed to the "_init" method. 
 * @return {Boolean} If the init method was called or not.
 * @public
 */
 Kiwi.Plugins.SocialConnect.Base.prototype.init = function( params ) {
 
-  if( !this.settings.init ) {
-    this.log( 'doesn\'t require initialization' );
-    return false;
-  }
+	if ( !this.settings.init ) {
+		this.log( "doesn't require initialization" );
+		return false;
+	}
 
-  params = params || {};
+	params = params || {};
 
-  if( this._initialized ) {
-    this.log( 'has already been initialized. Skipping re-initalization.', 2 );
-    return false;
-  }
+	if ( this._initialized ) {
+		this.log( "has already been initialized. Skipping re-initalization.", 2 );
+		return false;
+	}
 
 
-  //Call the init method if it exists. 
-  if( typeof this._init !== "undefined" ) {
-    
-    var success = this._init.call( this, params );
+	//Call the init method if it exists. 
+	if ( typeof this._init !== "undefined" ) {
+		
+		var success = this._init.call( this, params );
 
-    if( success ) {
-      this._initialized = true;
-    } 
+		if ( success ) {
+			this._initialized = true;
+		} 
 
-    return success;
-  }
+		return success;
+	}
 
 };
 
@@ -308,9 +316,8 @@ Kiwi.Plugins.SocialConnect.Base.prototype.init = function( params ) {
 /**
 * Handles the login functionality for this Social Media SDK (if necessary).
 * 
-* Extended classes should create a '_login' method instead of overriding this one
+* Extended classes should create a "_login" method instead of overriding this one
 * when creating their own.
-*   
 * 
 * @method login
 * @param params {Object} Any parameters required by the SDK. This will be passed to the '_login' method.
@@ -319,23 +326,23 @@ Kiwi.Plugins.SocialConnect.Base.prototype.init = function( params ) {
 */
 Kiwi.Plugins.SocialConnect.Base.prototype.login = function( params ) {
 
-  params = params || {};
+	params = params || {};
 
-  if( !this.settings.login ) {
-    this.log( 'doesn\'t has login functionality.' );
-    return false;
-  }
+	if ( !this.settings.login ) {
+		this.log( "doesn't has login functionality." );
+		return false;
+	}
 
-  if( this.settings.init && !this._initialized ) {
-    this.log( 'has not been initialized.', 2 );
-    return false;
-  }
+	if ( this.settings.init && !this._initialized ) {
+		this.log( "has not been initialized.", 2 );
+		return false;
+	}
 
-  //Call the init method if it exists. 
-  if( typeof this._login !== "undefined" ) {
-    
-    return this._login.call( this, params );
-  }
+	//Call the init method if it exists. 
+	if ( typeof this._login !== "undefined" ) {
+		
+		return this._login.call( this, params );
+	}
 
 };
 
@@ -343,34 +350,34 @@ Kiwi.Plugins.SocialConnect.Base.prototype.login = function( params ) {
 /**
 * Handles the share/post functionality for this Social Media SDK (if necessary).
 * 
-* Extended classes should create a '_share' method instead of overriding this one
+* Extended classes should create a "_share" method instead of overriding this one
 * when creating their own.
 *   
 * 
 * @method share
-* @param params {Object} Any parameters required by the SDK. This will be passed to the '_share' method.
+* @param params {Object} Any parameters required by the SDK. This will be passed to the "_share" method.
 * @return {Boolean} If the init method was called or not.
 * @public
 */
 Kiwi.Plugins.SocialConnect.Base.prototype.share = function( params ) {
 
-  params = params || {};
+	params = params || {};
 
-  if( !this.settings.share ) {
-    this.log( 'doesn\'t has sharing functionality.' );
-    return false;
-  }
+	if ( !this.settings.share ) {
+		this.log( "doesn't has sharing functionality." );
+		return false;
+	}
 
-  if( this.settings.init && !this._initialized ) {
-    this.log( 'has not been initialized.', 2 );
-    return false;
-  }
+	if ( this.settings.init && !this._initialized ) {
+		this.log( "has not been initialized.", 2 );
+		return false;
+	}
 
-  //Call the init method if it exists. 
-  if( typeof this._share !== "undefined" ) {
-    
-    return this._share.call( this, params );
-  }
+	//Call the init method if it exists. 
+	if ( typeof this._share !== "undefined" ) {
+		
+		return this._share.call( this, params );
+	}
 
 };
 
@@ -380,9 +387,9 @@ Kiwi.Plugins.SocialConnect.Base.prototype.share = function( params ) {
 * Used internally only.
 * 
 * There are three different types of methods which can be used.
-* 1 - Uses the 'console.log' method.
-* 2 - Uses the 'console.warn' method.
-* 3 - Uses the 'console.error' method.
+* 1 - Uses the "console.log" method.
+* 2 - Uses the "console.warn" method.
+* 3 - Uses the "console.error" method.
 * 
 * @method log
 * @param string {String} The string that is to be logged out.
@@ -391,31 +398,30 @@ Kiwi.Plugins.SocialConnect.Base.prototype.share = function( params ) {
 */
 Kiwi.Plugins.SocialConnect.Base.prototype.log = function( string, type ) {
 
-  if( this.game.debug ) {
+	if ( this.game.debug ) {
 
-    string = 'SocialConnect:' + this.name + ' ' + string;
+		string = "SocialConnect:" + this.name + " " + string;
 
-    switch( type ) {
+		switch( type ) {
 
-      default:
-      case 1:
-        console.log( string );
-        break;
+			default:
+			case 1:
+				console.log( string );
+				break;
 
-      case 2:
-        console.warn( string );
-        break;
+			case 2:
+				console.warn( string );
+				break;
 
-      case 3:
-        console.error( string );
-        break;
+			case 3:
+				console.error( string );
+				break;
 
-    }
+		}
 
-  }
+	}
 
 };
-
 
 
 
@@ -424,7 +430,7 @@ Kiwi.Plugins.SocialConnect.Base.prototype.log = function( string, type ) {
 *
 * This Plugin will check to see the Facebook SDK already exists when it is created,
 * and a second time when the init method is called. 
-* If the SDK is not found, one is loaded for you when the 'init' method is called. 
+* If the SDK is not found, one is loaded for you when the "init" method is called. 
 *  
 *
 * @module Plugins
@@ -439,100 +445,100 @@ Kiwi.Plugins.SocialConnect.Base.prototype.log = function( string, type ) {
 Kiwi.Plugins.SocialConnect.Facebook = function( game ) {
 
 
-  Kiwi.Plugins.SocialConnect.Base.call( this, game, 'Facebook', {
-    'login': true,
-    'share': true
-  } );
+	Kiwi.Plugins.SocialConnect.Base.call( this, game, "Facebook", {
+		"login": true,
+		"share": true
+	} );
 
 
-  /**
-  * Contains the facebook 'userID' of a user currently logged into facebook. 
-  * This is set when you use the 'login/loginApproved' methods and is used in the 'loggedIn'
-  * getter.
-  * @property userID
-  * @type any
-  * @default null
-  * @public
-  */
-  this.userID = null;
+	/**
+	* Contains the facebook "userID" of a user currently logged into facebook. 
+	* This is set when you use the "login/loginApproved" methods and is used in the "loggedIn"
+	* getter.
+	* @property userID
+	* @type any
+	* @default null
+	* @public
+	*/
+	this.userID = null;
 
 
-  /**
-  * The same as the raw information returned from the 'me' method.
-  * @property userInfo
-  * @type Object
-  * @public
-  */
-  this.userInfo = {};
+	/**
+	* The same as the raw information returned from the "me" method.
+	* @property userInfo
+	* @type Object
+	* @public
+	*/
+	this.userInfo = {};
 
 
-  /**
-  * Indicates if the Facebook SDK is ready to used or not. 
-  * This will be 'false' if the SDK did not exist before hand and we are loading it in.
-  * @property _ready
-  * @type boolean
-  * @public
-  */
-  this._ready = false;
+	/**
+	* Indicates if the Facebook SDK is ready to used or not. 
+	* This will be "false" if the SDK did not exist before hand and we are loading it in.
+	* @property _ready
+	* @type boolean
+	* @private
+	*/
+	this._ready = false;
 
 
 
-  /**
-  * The URL of the Facebook SDK that should be loaded in if needed.
-  * In the case of CocoonJS, this is the channelUrl.
-  * @property sdkUrl
-  * @type String
-  * @default http://connect.facebook.net/en_US/sdk.js
-  * @public
-  */
-  //Note: CocoonJS doesn't like it when you miss out the protocol at the start.
-  this.sdkUrl = 'http://connect.facebook.net/en_US/sdk.js';
+	/**
+	* The URL of the Facebook SDK that should be loaded in if needed.
+	* In the case of CocoonJS, this is the channelUrl.
+	* @property sdkUrl
+	* @type String
+	* @default http://connect.facebook.net/en_US/sdk.js
+	* @public
+	*/
+	//Note: CocoonJS doesn't like it when you miss out the protocol at the start.
+	this.sdkUrl = "http://connect.facebook.net/en_US/sdk.js";
 
 
-  /**
-  * Indicates if the Plugin is configured to be used with cocoon or not.
-  * @property _cocoon
-  * @type boolean
-  * @private
-  */
-  this._cocoon = false;
+	/**
+	* Indicates if the Plugin is configured to be used with cocoon or not.
+	* @property _cocoon
+	* @type boolean
+	* @private
+	*/
+	this._cocoon = false;
 
 
-  //Detect if we are targetting CocoonJS or not.
-  if( this.game.deviceTargetOption == Kiwi.TARGET_COCOON ) {
+	//Detect if we are targetting CocoonJS or not.
+	if ( this.game.deviceTargetOption == Kiwi.TARGET_COCOON ) {
 
-    this._cocoon = true;
+		this._cocoon = true;
 
-    //Has the CocoonJS Plugin been added or not.
-    if( !Cocoon || !Cocoon.Social.Facebook ) {
+		//Has the CocoonJS Plugin been added or not.
+		if ( !Cocoon || !Cocoon.Social.Facebook ) {
 
-      this.log( 'CocoonJS intergration requires you to include the Cocoon JavaScript library.', 3 );
-      this._ready = false;
-      return;
+			this.log( "CocoonJS intergration requires you to include the Cocoon JavaScript library.", 3 );
+			this._ready = false;
+			return;
 
-    }
-
-
-    /**
-    * The Facebook SDK Object we are using to query facebook.
-    * Accessing this property will allow you to do advanced queries.
-    * 
-    * @property fb
-    * @type Object
-    * @public
-    */
-    this.fb = Cocoon.Social.Facebook;
-
-    this._ready = true;
-
-  } else {
+		}
 
 
-    //Detect if Facebook Connect JavaScript file has been included.
-    this._SDKLoaded();
+		/**
+		* The Facebook SDK Object we are using to query facebook.
+		* Accessing this property will allow you to do advanced queries.
+		* 
+		* @property fb
+		* @type Object
+		* @public
+		*/
+		this.fb = Cocoon.Social.Facebook;
+
+		this._ready = true;
+
+	} else {
 
 
-  }
+		//Detect if Facebook Connect JavaScript file has been included.
+		this._SDKLoaded();
+
+
+	}
 
 };
 
@@ -549,14 +555,14 @@ Kiwi.extend( Kiwi.Plugins.SocialConnect.Facebook, Kiwi.Plugins.SocialConnect.Bas
 */
 Kiwi.Plugins.SocialConnect.Facebook.prototype._SDKLoaded = function() {
 
-  var loaded = ( typeof window.FB !== "undefined" );
+	var loaded = ( typeof window.FB !== "undefined" );
 
-  if( loaded ) {
-      this.fb = window.FB;
-      this._ready = true;
-  }
+	if ( loaded ) {
+		this.fb = window.FB;
+		this._ready = true;
+	}
 
-  return;
+	return;
 };
 
 
@@ -569,29 +575,29 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype._SDKLoaded = function() {
 */
 Kiwi.Plugins.SocialConnect.Facebook.prototype._include = function( onloadCallback ) {
 
-  if( typeof region == "undefined" ) {
-    region = 'en_US';
-  } 
+	if ( typeof region == "undefined" ) {
+		region = "en_US";
+	} 
 
-  var js, fjs = document.getElementsByTagName("script")[0];
-  
-  js = document.createElement("script"); 
+	var js, fjs = document.getElementsByTagName("script")[0];
+	
+	js = document.createElement("script"); 
 
-  if( typeof onloadCallback !== "undefined" ) {
-    js.onload = onloadCallback;
-  }
+	if ( typeof onloadCallback !== "undefined" ) {
+		js.onload = onloadCallback;
+	}
 
-  js.id = 'facebook-jssdk';
-  js.src = this.sdkUrl;
-  
-  fjs.parentNode.insertBefore(js, fjs);
+	js.id = "facebook-jssdk";
+	js.src = this.sdkUrl;
+	
+	fjs.parentNode.insertBefore( js, fjs );
 
 };
 
 
 /**
 * Indicates if the Facebook SDK is ready to used or not. 
-* This will be 'false' if the SDK did not exist before hand and we are loading it in.
+* This will be "false" if the SDK did not exist before hand and we are loading it in.
 * This is READ ONLY.
 * 
 * @property ready
@@ -600,14 +606,14 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype._include = function( onloadCallbac
 * @public
 */
 Object.defineProperty( Kiwi.Plugins.SocialConnect.Facebook.prototype, "ready", {
-    
-    get: function () {
-        return this._ready;
-    },
-    
-    enumerable: true,
-    
-    configurable: true
+		
+		get: function() {
+			return this._ready;
+		},
+		
+		enumerable: true,
+		
+		configurable: true
 
 });
 
@@ -615,60 +621,60 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Facebook.prototype, "ready", {
 /**
 * Initialises the Facebook SDK with the details you pass. 
 *
-* You pass parameters through a 'parameters' object.
-* The only required parameter is the 'appId', which you will find on the Facebook Developers Dashboard.
+* You pass parameters through a "parameters" object.
+* The only required parameter is the "appId", which you will find on the Facebook Developers Dashboard.
 * 
-* More paramters can be found at 'https://developers.facebook.com/docs/javascript/reference/FB.init/v2.1'. 
+* More paramters can be found at "https://developers.facebook.com/docs/javascript/reference/FB.init/v2.1". 
 * 
 * @method init
 * @param params {Object} 
 * @param params.appId {String} The id of the App this is for. 
-* @param [params.version='v2.2'] {String} The version of the SDK to use.
+* @param [params.version="v2.2"] {String} The version of the SDK to use.
 * @param [params.status=true] {Boolean} https://developers.facebook.com/docs/javascript/quickstart/v2.2#status
-* @return {Boolean} Indicates if enough information was passed to attempt to call the 'init' method or not.
+* @return {Boolean} Indicates if enough information was passed to attempt to call the "init" method or not.
 * @public
 */
 Kiwi.Plugins.SocialConnect.Facebook.prototype._init = function( params ) {
 
-  //Preform init..
-  if( !params.appId ) {
-    this.log( 'AppId is undefined.', 3 );
-    return false;
-  }
+	//Preform init..
+	if ( !params.appId ) {
+		this.log( "AppId is undefined.", 3 );
+		return false;
+	}
 
-  //Preset optional params
-  params.version = params.version || 'v2.2';
-  
-  if( typeof params.status == "undefined" ) {
-    params.status = true;
-  } 
-
-
-  if(this.game.deviceTargetOption == Kiwi.TARGET_COCOON && !params.channelUrl) {
-    params.channelUrl = this.sdkUrl;
-  }
+	//Preset optional params
+	params.version = params.version || "v2.2";
+	
+	if ( typeof params.status == "undefined" ) {
+		params.status = true;
+	} 
 
 
-  if( this.game.deviceTargetOption !== Kiwi.TARGET_COCOON && !this._SDKLoaded() ) { //Check again for support
+	if ( this.game.deviceTargetOption == Kiwi.TARGET_COCOON && !params.channelUrl ) {
+		params.channelUrl = this.sdkUrl;
+	}
 
-    this.log( 'SDK not detected. Loading one in, and initializing after.', 2 );
+	//Check again for support
+	if( this.game.deviceTargetOption !== Kiwi.TARGET_COCOON && !this._SDKLoaded() ) {
 
-    var that = this;
+		this.log( "SDK not detected. Loading one in, and initializing after.", 2 );
 
-    window.fbAsyncInit = function() {
-      FB.init( params );
-      that._SDKLoaded();
-    };
+		var that = this;
 
-    this._include( );
-    return true;
+		window.fbAsyncInit = function() {
+			FB.init( params );
+			that._SDKLoaded();
+		};
 
-  } else {
+		this._include( );
+		return true;
 
-    this.fb.init( params );
-    return true;
+	} else {
 
-  }
+		this.fb.init( params );
+		return true;
+
+	}
 
 };
 
@@ -679,9 +685,9 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype._init = function( params ) {
 * OR the information being requested has changed.
 * 
 * See the Facebook Docs for more information. 
-* 'https://developers.facebook.com/docs/facebook-login/login-flow-for-web/v2.2'
+* "https://developers.facebook.com/docs/facebook-login/login-flow-for-web/v2.2"
 *
-* If the user is successfully logged in, then the property 'userID' will be set.
+* If the user is successfully logged in, then the property "userID" will be set.
 * Note: For CocoonJS this will just be -1 as we will not have the userID.
 *
 * The Callback attached will have three properties:
@@ -699,45 +705,45 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype._init = function( params ) {
 */
 Kiwi.Plugins.SocialConnect.Facebook.prototype._login = function( params ) {
 
-  var that = this;
+	var that = this;
 
-  //If we are wanting to login with gamefroot, then call the 'loginWithFB' method on the GF class.
-  if( params.loginWithGF ) {
-    this.game.social.gamefroot.loginWithFB( params );
-    return true;
-  }
+	// If we are wanting to login with gamefroot, then call the "loginWithFB" method on the GF class.
+	if ( params.loginWithGF ) {
+		this.game.social.gamefroot.loginWithFB( params );
+		return true;
+	}
 
-  //Attempt to login
-  this.fb.login( function( resp ) {
+	// Attempt to login
+	this.fb.login( function( resp ) {
 
-    var accessable = false;
-    var loggedIn = false;
+		var accessable = false;
+		var loggedIn = false;
 
-    //If we have the 'connected' status, then we have logged in
-    if( resp.status == "connected" ) {
-      loggedIn = true;
-      accessable = true;
-      that.userID = resp.authResponse.userID;
+		// If we have the "connected" status, then we have logged in
+		if ( resp.status == "connected" ) {
+			loggedIn = true;
+			accessable = true;
+			that.userID = resp.authResponse.userID;
 
-    } else if( resp.status == 'not_authorized' ) {
-      loggedIn = true;
-      accessable = false;
+		} else if( resp.status == "not_authorized" ) {
+			loggedIn = true;
+			accessable = false;
 
-    }
+		}
 
-    //Execute the login callback, if it exists.
-    if( typeof params.callback !== "undefined" ) {
-      params.callback.call( params.context, accessable, resp, loggedIn );
-    }
+		// Execute the login callback, if it exists.
+		if ( typeof params.callback !== "undefined" ) {
+			params.callback.call( params.context, accessable, resp, loggedIn );
+		}
 
-  }, params.options );
+	}, params.options );
 
-  return true;
+	return true;
 };
 
 
 /**
-* Used to quickly see if a user was logged in or not last time the 'login' or 'loginApproved' methods were called.
+* Used to quickly see if a user was logged in or not last time the "login" or "loginApproved" methods were called.
 * This is READ ONLY.
 *
 * @property loggedIn
@@ -747,28 +753,27 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype._login = function( params ) {
 * @public
 */
 Object.defineProperty( Kiwi.Plugins.SocialConnect.Facebook.prototype, "loggedIn", {
-    
-    get: function () {
 
-      return (this.userID !== null);
+	get: function () {
 
-    },
-    
-    enumerable: true,
-    
-    configurable: true
+		return (this.userID !== null);
 
+	},
+	
+	enumerable: true,
+	
+	configurable: true
 });
 
 
 /**
 * Returns a boolean to a callback which is passed, which is used to see if the user is logged in or not.
 * The callback will be passed THREE parameters.
-* One: Boolean - If the user is logged in, and has accepted the terms of use. 'Accessable'
+* One: Boolean - If the user is logged in, and has accepted the terms of use. "Accessible"
 * Two: Boolean - If the user is logged in or not.
-* Three: Object - Raw information passed by the Facebook 'loginApproved' call.
+* Three: Object - Raw information passed by the Facebook "loginApproved" call.
 *
-* Note: Does NOT work with CocoonJS. Use the 'loggedIn' and 'login' methods instead.
+* Note: Does NOT work with CocoonJS. Use the "loggedIn" and "login" methods instead.
 * 
 * @method loginApproved
 * @param params {Object}
@@ -779,39 +784,39 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Facebook.prototype, "loggedIn"
 */
 Kiwi.Plugins.SocialConnect.Facebook.prototype.loginApproved = function( params ) {
 
-  if( !params || !params.callback ) {
-    this.log( 'a callback needs to be passed in-order to function correctly.', 2 );
-    return false;
-  }
+	if ( !params || !params.callback ) {
+		this.log( "a callback needs to be passed in-order to function correctly.", 2 );
+		return false;
+	}
 
-  var that = this;
+	var that = this;
 
-  this.fb.getLoginStatus( function( resp ) {
+	this.fb.getLoginStatus( function( resp ) {
 
-    var loggedIn = false;
-    var accessable = false;
+		var loggedIn = false;
+		var accessable = false;
 
-    switch( resp.status ) {
-      
-      case 'connected':
-        loggedIn = true;
-        accessable = true;
-        that.userID = resp.authResponse.userID;
-        break;
+		switch( resp.status ) {
+			
+			case "connected":
+				loggedIn = true;
+				accessable = true;
+				that.userID = resp.authResponse.userID;
+				break;
 
-      case 'not_authorized':
-        loggedIn = true;
+			case "not_authorized":
+				loggedIn = true;
 
-      default:
-        accessable = false;
-        break;
-    }
+			default:
+				accessable = false;
+				break;
+		}
 
-    params.callback.call( params.context, accessable, loggedIn, resp );
+		params.callback.call( params.context, accessable, loggedIn, resp );
 
-  } );
+	} );
 
-  return true;
+	return true;
 
 };
 
@@ -837,68 +842,68 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype.loginApproved = function( params )
 * 
 */
 Kiwi.Plugins.SocialConnect.Facebook.prototype.hasPermissions = function( params ) {
-  
-  if( !params || !params.permissions ) {
-    this.log( 'you need to pass an array of permissions.', 2 );
-    return false;
-  }
+	
+	if ( !params || !params.permissions ) {
+		this.log( "you need to pass an array of permissions.", 2 );
+		return false;
+	}
 
-  if( !params.callback ) {
-    this.log( 'a callback needs to be passed in-order to function correctly.', 2 );
-    return false;
-  }
+	if ( !params.callback ) {
+		this.log( "a callback needs to be passed in-order to function correctly.", 2 );
+		return false;
+	}
 
-  if( !this.loggedIn ) {
-    this.log( 'we could not detected if the user is currently logged in.', 2 );
-    params.callback.call( params.context, false, [] );
-    return false;
-  }
+	if ( !this.loggedIn ) {
+		this.log( "we could not detected if the user is currently logged in.", 2 );
+		params.callback.call( params.context, false, [] );
+		return false;
+	}
 
-  //Make the request
-  this.fb.api( this.userID + '/permissions', function( resp ) { 
-    
-    var i, cRespPerm, cPassPerm, permLength, 
-      numPermsMatch = 0,
-      acceptedPerms = [];
+	//Make the request
+	this.fb.api( this.userID + "/permissions", function( resp ) { 
+		
+		var i, cRespPerm, cPassPerm, permLength, 
+			numPermsMatch = 0,
+			acceptedPerms = [];
 
-    //Loop through the permissions recieved by facebook.
-    for (var i = 0, len = resp.data.length; i < len; i++) {
+		//Loop through the permissions recieved by facebook.
+		for ( var i = 0, len = resp.data.length; i < len; i++ ) {
 
-      cRespPerm = resp.data[i];
+			cRespPerm = resp.data[ i ];
 
-      //If the permission was granted
-      if( cRespPerm.status == 'granted') {
+			//If the permission was granted
+			if ( cRespPerm.status == "granted") {
 
-        acceptedPerms.push( cPassPerm );
-        permLength = params.permissions.length;
-
-
-        //Loop through the permissions the dev passed.
-        while(permLength--){
-          cPassPerm = params.permissions[permLength];
-
-          //If it matches one that 
-          if( cRespPerm.permission == cPassPerm ) {
-            numPermsMatch++;
-          }
-        }
-
-      }
-    }
-
-    //If the number of permissions that matched is greater than the number passed, then success.
-    if( numPermsMatch >= params.permissions.length ) {
-      params.callback.call( params.context, true, acceptedPerms, resp );
-
-    } else {
-      params.callback.call( params.context, false, acceptedPerms, resp );
-
-    }
+				acceptedPerms.push( cPassPerm );
+				permLength = params.permissions.length;
 
 
-  } );
+				//Loop through the permissions the dev passed.
+				while ( permLength-- ) {
+					cPassPerm = params.permissions[ permLength ];
 
-  return true;
+					//If it matches one that 
+					if ( cRespPerm.permission == cPassPerm ) {
+						numPermsMatch++;
+					}
+				}
+
+			}
+		}
+
+		//If the number of permissions that matched is greater than the number passed, then success.
+		if ( numPermsMatch >= params.permissions.length ) {
+			params.callback.call( params.context, true, acceptedPerms, resp );
+
+		} else {
+			params.callback.call( params.context, false, acceptedPerms, resp );
+
+		}
+
+
+	} );
+
+	return true;
 };
 
 
@@ -915,20 +920,20 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype.hasPermissions = function( params 
 */
 Kiwi.Plugins.SocialConnect.Facebook.prototype.logout = function( params ) {
 
-  params = params || {};
+	params = params || {};
 
-  var that = this;
+	var that = this;
 
-  this.fb.logout( function( resp ) {
+	this.fb.logout( function( resp ) {
 
-    that.userID = null;
-    that.userInfo = null;
+		that.userID = null;
+		that.userInfo = null;
 
-    if( typeof params.callback !== "undefined" ) {
-      params.callback.call( params.context, resp );
-    }
+		if ( typeof params.callback !== "undefined" ) {
+			params.callback.call( params.context, resp );
+		}
 
-  }.bind(this) );
+	}.bind( this ) );
 
 };
 
@@ -937,13 +942,13 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype.logout = function( params ) {
 * Will attempt to get the currently logged in users information. 
 *
 * You can get the information recieved either by attaching a callback, whos first parameter will be facebooks response.
-* OR you can get the infomation via the 'userInfo' property (if the 'saveData' parameter is set to true).
+* OR you can get the infomation via the "userInfo" property (if the "saveData" parameter is set to true).
 *
-* Advanced Functionality: If you enable 'autoLoadPicture' if the plugin detects a picture URL has been passed,
+* Advanced Functionality: If you enable "autoLoadPicture" if the plugin detects a picture URL has been passed,
 * then it will be loaded into Kiwi.
-* The picture will use the 'pictureKey's param value as the key.
+* The picture will use the pictureKey's param value as the key.
 * You may need to rebuild the texture library to use it. 
-* This can be turned off by setting 'autoLoadPicture' to false.
+* This can be turned off by setting "autoLoadPicture" to false.
 * 
 * Watch Out! Be careful not to use this functionality during the preload phase of the State! Otherwise it will break the loop functionality.
 *  
@@ -951,65 +956,65 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype.logout = function( params ) {
 * @method me
 * @param [params] {Object}
 *   @param [params.callback] {Function} Method to be executed when the information is recieved. 
-                                        Will have the Facebook resp data passed as the first parameter.
+																				Will have the Facebook resp data passed as the first parameter.
 *   @param [params.context] {Any} The context the callback should be executed in.
 *   @param [params.fields] {String} The fields that should be returned/received by Facebook. This is passed as a CSV.
-                                    See 'https://developers.facebook.com/docs/graph-api/reference/v2.2/user' for a full list of values.
+																		See "https://developers.facebook.com/docs/graph-api/reference/v2.2/user" for a full list of values.
 *   @param [params.autoLoadPicture=false] {Boolean} If any picture URL when detected should be loaded into Kiwi.
-*   @param [params.pictureKey='fb-current-user'] {String} The key for the picture URL should use, if detected.
-*   @param [params.saveData=true] {Boolean} If the information recieved should be saved in the 'userInfo' property or not.
+*   @param [params.pictureKey="fb-current-user"] {String} The key for the picture URL should use, if detected.
+*   @param [params.saveData=true] {Boolean} If the information recieved should be saved in the "userInfo" property or not.
 * @return {Boolean} If the request was made.
 * @public
 * 
 */
 Kiwi.Plugins.SocialConnect.Facebook.prototype.me = function( params ) {
 
-  if( !this._init || !this._ready ) {
-    this.log( 'has not been initialized, or isn\'t ready.', 2 );
-    return false;
-  }
+	if ( !this._init || !this._ready ) {
+		this.log( "has not been initialized, or isn't ready.", 2 );
+		return false;
+	}
 
-  if( !this.loginApproved ) {
-    this.log( 'user is not logged in', 3 );
-    return false;
-  }
+	if ( !this.loginApproved ) {
+		this.log( "user is not logged in", 3 );
+		return false;
+	}
 
-  params = params || {};
-  if( !params.pictureKey ) {
-    params.pictureKey = 'fb-current-user';
-  }
+	params = params || {};
+	if ( !params.pictureKey ) {
+		params.pictureKey = "fb-current-user";
+	}
 
-  if( !params.fields ) {
-    params.fields = '';
-  }  else {
-    params.fields = '?fields=' + params.fields;
-  }
+	if ( !params.fields ) {
+		params.fields = "";
+	}  else {
+		params.fields = "?fields=" + params.fields;
+	}
 
 
-  var that = this;
+	var that = this;
 
-  this.fb.api( '/me' + params.fields , function( resp ) {
+	this.fb.api( "/me" + params.fields , function( resp ) {
 
-    if( params.saveData || typeof params.saveData == "undefined" ) {
-      that.userInfo = resp;
-    }
+		if ( params.saveData || typeof params.saveData == "undefined" ) {
+			that.userInfo = resp;
+		}
 
-    //Detect if a picture is there. If there is then load it, if 'autoLoadPicture' is set to true.
-    if( params.autoLoadPicture && resp.picture && resp.picture.data && resp.picture.data.url ) {
-      
-      that._loadImage( params.pictureKey, resp.picture.data.url, params.callback, params.context, resp );
+		//Detect if a picture is there. If there is then load it, if "autoLoadPicture" is set to true.
+		if ( params.autoLoadPicture && resp.picture && resp.picture.data && resp.picture.data.url ) {
+			
+			that._loadImage( params.pictureKey, resp.picture.data.url, params.callback, params.context, resp );
 
-    } else {
+		} else {
 
-      if( typeof params.callback !== "undefined" ) {
-        params.callback.call( params.context, resp );
-      }
+			if ( typeof params.callback !== "undefined" ) {
+				params.callback.call( params.context, resp );
+			}
 
-    }
+		}
 
-  });
+	});
 
-  return true;
+	return true;
 };
 
 
@@ -1023,39 +1028,39 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype.me = function( params ) {
 * @param [callback] {Function} Callback to fire when the file has been loaded in.
 * @param [context] {Any} Context the callback should be executed in.
 * @param [callbackParams] {Any} 
-* @public
+* @private
 */
 Kiwi.Plugins.SocialConnect.Facebook.prototype._loadImage = function( key, url, callback, context, callbackParams ) {
 
-  callbackParams = callbackParams || null;
+	callbackParams = callbackParams || null;
 
-  var that = this;
+	var that = this;
 
-  //Load complete methods
-  this.game.loader.init( null, function() {
-
-
-    //Get the new file from the file store
-    var file = that.game.fileStore.getFile( key );
-
-    //Check to see if the file is a texture
-    if( file.isTexture ) {
-
-      //Add the new image to the texture library
-      that.game.states.current.textureLibrary.addFromFile( file );
-
-    }
+	//Load complete methods
+	this.game.loader.init( null, function() {
 
 
-    if( typeof callback !== "undefined" ) {
-      callback.call( context, callbackParams );
-    }
+		//Get the new file from the file store
+		var file = that.game.fileStore.getFile( key );
 
-  });
+		//Check to see if the file is a texture
+		if ( file.isTexture ) {
 
-  //Adds the image to the file loading queue.
-  this.game.loader.addImage( key, url );
-  this.game.loader.startLoad();
+			//Add the new image to the texture library
+			that.game.states.current.textureLibrary.addFromFile( file );
+
+		}
+
+
+		if ( typeof callback !== "undefined" ) {
+			callback.call( context, callbackParams );
+		}
+
+	});
+
+	//Adds the image to the file loading queue.
+	this.game.loader.addImage( key, url );
+	this.game.loader.startLoad();
 
 };
 
@@ -1069,9 +1074,9 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype._loadImage = function( key, url, c
 * @param [params] {Object}
 *   @param [params.width] {Number} The width of the image to be used.
 *   @param [params.height] {Number} The height of the image to be used.
-*   @param [params.pictureKey='fb-current-user'] {String} Key that the picture should have in the kiwi library. 
+*   @param [params.pictureKey="fb-current-user"] {String} Key that the picture should have in the kiwi library. 
 *   @param [params.callback] {Function} Method to be executed when the information is recieved. 
-                                        Will have the Facebook resp data passed as the first parameter.
+																				Will have the Facebook resp data passed as the first parameter.
 *   @param [params.context] {Any} The context the callback should be executed in.
 * @return {Boolean} If the api call was made.
 * @public
@@ -1079,45 +1084,49 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype._loadImage = function( key, url, c
 */
 Kiwi.Plugins.SocialConnect.Facebook.prototype.myImage = function( params ) {
 
-  if( !this._init || !this._ready ) {
-    this.log( 'has not been initialized, or isn\'t ready.', 2 );
-    return false;
-  }
+	if ( !this._init || !this._ready ) {
+		this.log( "has not been initialized, or isn't ready.", 2 );
+		return false;
+	}
 
-  if( !this.loginApproved ) {
-    this.log( 'user is not logged in', 3 );
-    return false;
-  }
+	if ( !this.loginApproved ) {
+		this.log( "user is not logged in", 3 );
+		return false;
+	}
 
-  params = params || {};
-  if( !params.pictureKey ) {
-    params.pictureKey = 'fb-current-user';
-  }
+	params = params || {};
+	if ( !params.pictureKey ) {
+		params.pictureKey = "fb-current-user";
+	}
 
-  if( !this.loggedIn ) {
-    this.log( 'we could not detected if the user is currently logged in.', 2 );
-    params.callback.call( params.context, false, [], resp );
-    return false;
-  }
+	if ( !this.loggedIn ) {
+		this.log( "we could not detected if the user is currently logged in.", 2 );
+		params.callback.call( params.context, false, [], resp );
+		return false;
+	}
 
-  var that = this;
-  var url = this.userID + '/picture?';
+	var that = this;
+	var url = this.userID + "/picture?";
 
-  if( params.width ) url += 'width=' + params.width + '&';
-  if( params.height ) url += 'height=' + params.height + '&'; 
+	if ( params.width ) {
+		url += "width=" + params.width + "&";
+	}
+	if ( params.height ) {
+		url += "height=" + params.height + "&";
+	}
 
 
-  this.fb.api( url, function( resp ) {
+	this.fb.api( url, function( resp ) {
 
-    if( resp.data && resp.data.url ) {
-      that._loadImage( params.pictureKey, resp.data.url, params.callback, params.context, resp );
+		if ( resp.data && resp.data.url ) {
+			that._loadImage( params.pictureKey, resp.data.url, params.callback, params.context, resp );
 
-    } else {
-      params.callback.call( params.context, resp );
+		} else {
+			params.callback.call( params.context, resp );
 
-    }
+		}
 
-  });
+	});
 
 };
 
@@ -1125,10 +1134,10 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype.myImage = function( params ) {
 /**
 * Opens up the facebook share popup window.
 * Default link is the current location of the browser (Not for CocoonJS).
-* This link can be changed via setting the 'link' property on the param object. 
+* This link can be changed via setting the "link" property on the param object. 
 *
-* Note: Since this opens a 'pop-up' window, you should make sure to call this method
-* inside callbacks attached to the 'input' manager on core Kiwi game objects. 
+* Note: Since this opens a "pop-up" window, you should make sure to call this method
+* inside callbacks attached to the "input" manager on core Kiwi game objects. 
 * 
 * @method share
 * @param [params] {Object}
@@ -1139,46 +1148,45 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype.myImage = function( params ) {
 */
 Kiwi.Plugins.SocialConnect.Facebook.prototype._share = function( params ) {
 
-  params = params || {};
+	params = params || {};
 
-  params.method = 'share';
+	params.method = "share";
 
-  if( typeof params.link == "undefined" && !this._cocoon ) {
-    params.link = window.location.href;
-  }
+	if ( typeof params.link == "undefined" && !this._cocoon ) {
+		params.link = window.location.href;
+	}
 
-  if( this._cocoon ) {
-    
-    this.fb.showShareDialog( params, function( resp ) {
+	if ( this._cocoon ) {
+		
+		this.fb.showShareDialog( params, function( resp ) {
 
-      //Execute the login callback, if it exists.
-      if( typeof params.callback !== "undefined" && typeof params.context !== "undefined" ) {
-        params.callback.call( params.context, resp );
-      }
+			//Execute the login callback, if it exists.
+			if( typeof params.callback !== "undefined" && typeof params.context !== "undefined" ) {
+				params.callback.call( params.context, resp );
+			}
 
-    } );
+		} );
 
-  } else {
+	} else {
 
-    if( typeof params.link !== "undefined" ) {
-      params.href = params.link;
-      delete params.link;
-    }
+		if ( typeof params.link !== "undefined" ) {
+			params.href = params.link;
+			delete params.link;
+		}
 
-    this.fb.ui( params, function( resp ) {
+		this.fb.ui( params, function( resp ) {
 
-      //Execute the login callback, if it exists.
-      if( typeof params.callback !== "undefined" && typeof params.context !== "undefined" ) {
-        params.callback.call( params.context, resp );
-      }
+			//Execute the login callback, if it exists.
+			if ( typeof params.callback !== "undefined" && typeof params.context !== "undefined" ) {
+				params.callback.call( params.context, resp );
+			}
 
-    });
+		});
 
-   }
+	 }
 
 };
 
- 
 
 /**
 * Contains the functionality for creating/logging into gamefroot accounts.  
@@ -1192,52 +1200,52 @@ Kiwi.Plugins.SocialConnect.Facebook.prototype._share = function( params ) {
 */
 Kiwi.Plugins.SocialConnect.Gamefroot = function( game ) {
 
-  Kiwi.Plugins.SocialConnect.Base.call(this, game, 'Gamefroot', {
-    'login': true,
-    'share': false,
-    'init': false
-  });
+	Kiwi.Plugins.SocialConnect.Base.call(this, game, "Gamefroot", {
+		"login": true,
+		"share": false,
+		"init": false
+	});
 
 
-  /**
-  * Indicates if the api is ready to make a request to the gamefroot servers or not.
-  * @property _ready
-  * @type Boolean
-  * @default true
-  * @private
-  */
-  this._ready = true;
+	/**
+	* Indicates if the api is ready to make a request to the gamefroot servers or not.
+	* @property _ready
+	* @type Boolean
+	* @default true
+	* @private
+	*/
+	this._ready = true;
 
 
-  /**
-  * Stores the users information from the last time he logged in. 
-  * @property userInfo
-  * @type Object
-  * @default null
-  * @public
-  */
-  this.userInfo = null; 
+	/**
+	* Stores the users information from the last time he logged in. 
+	* @property userInfo
+	* @type Object
+	* @default null
+	* @public
+	*/
+	this.userInfo = null;
 
 
-  /**
-  * The amount of time (in milliseconds) to wait for a response before timing out.
-  * @property timeout
-  * @type number
-  * @default 30000
-  * @public
-  */
-  this.timeout = 30000;
+	/**
+	* The amount of time (in milliseconds) to wait for a response before timing out.
+	* @property timeout
+	* @type number
+	* @default 30000
+	* @public
+	*/
+	this.timeout = 30000;
 
 
-  /**
-  * The url of the gamefroot server to use. 
-  * See 'Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL' for options. 
-  * @property serverURL
-  * @type string
-  * @default ServerURL.LIVE
-  * @public
-  */
-  this.serverURL = Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL.LIVE;
+	/**
+	* The url of the gamefroot server to use. 
+	* See "Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL" for options. 
+	* @property serverURL
+	* @type string
+	* @default ServerURL.LIVE
+	* @public
+	*/
+	this.serverURL = Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL.LIVE;
 
 };
 
@@ -1254,32 +1262,32 @@ Kiwi.extend( Kiwi.Plugins.SocialConnect.Gamefroot, Kiwi.Plugins.SocialConnect.Ba
 */
 Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL = {
 
-  /**
-  * Contains the url for the live version of gamefroot.
-  * @property ServerURL.LIVE
-  * @type string
-  * @public
-  * @readOnly
-  * @static
-  */
-  LIVE: 'http://198.206.133.200:8081/api/',
+	/**
+	* Contains the url for the live version of gamefroot.
+	* @property ServerURL.LIVE
+	* @type string
+	* @public
+	* @readOnly
+	* @static
+	*/
+	LIVE: "http://198.206.133.200:8081/api/",
 
-  /**
-  * Contains the url for the debug (also known as staging) version of gamefroot.
-  * @property ServerURL.DEBUG
-  * @type string
-  * @public
-  * @readOnly
-  * @static
-  */
-  DEBUG: 'http://staging.gamefroot.com:8081/api/'
+	/**
+	* Contains the url for the debug (also known as staging) version of gamefroot.
+	* @property ServerURL.DEBUG
+	* @type string
+	* @public
+	* @readOnly
+	* @static
+	*/
+	DEBUG: "http://staging.gamefroot.com:8081/api/"
 
 };
 
 
 /**
 * Indicates if the API is ready to make a request or not. 
-* This would only ever be 'false' if we are midway through another API call.
+* This would only ever be "false" if we are midway through another API call.
 * This is READ ONLY.
 * 
 * @property ready
@@ -1288,14 +1296,14 @@ Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL = {
 * @public
 */
 Object.defineProperty( Kiwi.Plugins.SocialConnect.Gamefroot.prototype, "ready", {
-    
-    get: function () {
-        return this._ready;
-    },
-    
-    enumerable: true,
-    
-    configurable: true
+
+		get: function () {
+				return this._ready;
+		},
+
+		enumerable: true,
+
+		configurable: true
 
 });
 
@@ -1312,14 +1320,14 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Gamefroot.prototype, "ready", 
 * @public
 */
 Object.defineProperty( Kiwi.Plugins.SocialConnect.Gamefroot.prototype, "loggedIn", {
-    
-    get: function () {
-        return ( this.userInfo !== null );
-    },
-    
-    enumerable: true,
-    
-    configurable: true
+
+		get: function () {
+				return ( this.userInfo !== null );
+		},
+
+		enumerable: true,
+
+		configurable: true
 
 });
 
@@ -1341,40 +1349,40 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Gamefroot.prototype, "loggedIn
 */
 Kiwi.Plugins.SocialConnect.Gamefroot.prototype.register = function( params ) {
 
-  params = params || {};
+	params = params || {};
 
-  if( !params.callback ) {
-    this.log( 'a callback needs to be passed in-order to function correctly.', 2 );
-    return false;
-  }
+	if ( !params.callback ) {
+		this.log( "a callback needs to be passed in-order to function correctly.", 2 );
+		return false;
+	}
 
-  if( !params.username || !params.password || !params.email || !params.passwordrepeat ) {
-    this.log( 'not all of the needed parameters have been passed.', 2 );
-    return false;
-  };
+	if ( !params.username || !params.password || !params.email || !params.passwordrepeat ) {
+		this.log( "not all of the needed parameters have been passed.", 2 );
+		return false;
+	};
 
-  var data = {
-    'usrn': params.username,
-    'psw': params.password,
-    'email': params.email,
-    'repsw': params.passwordrepeat
-  };
+	var data = {
+		"usrn": params.username,
+		"psw": params.password,
+		"email": params.email,
+		"repsw": params.passwordrepeat
+	};
 
-  return this._apiRequest( 'account/register', data, function( type, data ) {
+	return this._apiRequest( "account/register", data, function( type, data ) {
 
-    //If there was an error.
-    if( type == 2 ) {
-      params.callback.call( params.context, false, data );
+		//If there was an error.
+		if( type == 2 ) {
+			params.callback.call( params.context, false, data );
 
-    } else if( data.result == "success" ) {
-      params.callback.call( params.context, true, data );
-    
-    } else {
-      params.callback.call( params.context, false, data );
-    
-    }
+		} else if ( data.result == "success" ) {
+			params.callback.call( params.context, true, data );
+		
+		} else {
+			params.callback.call( params.context, false, data );
+		
+		}
 
-  }, true);
+	}, true);
 ;
 };
 
@@ -1394,45 +1402,45 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.register = function( params ) {
 */
 Kiwi.Plugins.SocialConnect.Gamefroot.prototype._login = function( params ) {
 
-  if( !params.callback ) {
-    this.log( 'a callback needs to be passed in-order to function correctly.', 2 );
-    return false;
-  }
+	if ( !params.callback ) {
+		this.log( "a callback needs to be passed in-order to function correctly.", 2 );
+		return false;
+	}
 
-  if( !params.username || !params.password ) {
-    this.log( 'not all of the needed parameters have been passed.', 2 );
-    return false;
-  };
+	if ( !params.username || !params.password ) {
+		this.log( "not all of the needed parameters have been passed.", 2 );
+		return false;
+	};
 
-  var data = {
-      'usrn': params.username,
-      'psw': params.password,
-      'ref': this.game.stage.name
-  };
-  var that = this;
+	var data = {
+			"usrn": params.username,
+			"psw": params.password,
+			"ref": this.game.stage.name
+	};
+	var that = this;
 
-  return this._apiRequest( 'account/login', data, function( type, data ) {
+	return this._apiRequest( "account/login", data, function( type, data ) {
 
-    //If there was an error.
-    if( type == 2 ) {
-      params.callback.call( params.context, false, data );
+		//If there was an error.
+		if ( type == 2 ) {
+			params.callback.call( params.context, false, data );
 
-    } else if( data.result) {
-      if( data.result == 'fail' ) {
-        params.callback.call( params.context, false, data );
+		} else if ( data.result) {
+			if ( data.result == "fail" ) {
+				params.callback.call( params.context, false, data );
 
-      } else {
-        that.userInfo = data;
-        params.callback.call( params.context, true, data);
-      }
-   
+			} else {
+				that.userInfo = data;
+				params.callback.call( params.context, true, data );
+			}
+	 
 
-    } else {
-      params.callback.call( params.context, false, data );
-    
-    }
+		} else {
+			params.callback.call( params.context, false, data );
+		
+		}
 
-  }, true);
+	}, true);
 
 };
 
@@ -1451,47 +1459,47 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._login = function( params ) {
 */
 Kiwi.Plugins.SocialConnect.Gamefroot.prototype.loginWithFB = function( params ) {
 
-  params = params || {};
+	params = params || {};
 
-  if( !params.callback ) {
-    this.log( 'a callback needs to be passed in-order to function correctly.', 2 );
-    return false;
-  }
+	if ( !params.callback ) {
+		this.log( "a callback needs to be passed in-order to function correctly.", 2 );
+		return false;
+	}
 
-  return this.game.social.facebook.loginApproved( { 
+	return this.game.social.facebook.loginApproved( { 
 
-    context: this,
+		context: this,
 
-    callback: function( approved ) {
+		callback: function( approved ) {
 
-      if( approved ) {
-        this._fbRetrieveUserData( params );
+			if ( approved ) {
+				this._fbRetrieveUserData( params );
 
-      } else {
+			} else {
 
-        this.game.social.facebook.login( { 
-          context: this, 
-          options: params.options,
-          
-          callback: function( success ) {
+				this.game.social.facebook.login( {
+					context: this,
+					options: params.options,
+					
+					callback: function( success ) {
 
-            if( !success ) {
-              params.callback.call( params.context, false, 'not logged into facebook.' );
-              return;
-            }
+						if ( !success ) {
+							params.callback.call( params.context, false, "not logged into facebook." );
+							return;
+						}
 
-            //Get the users information
-            this._fbRetrieveUserData( params );
+						//Get the users information
+						this._fbRetrieveUserData( params );
 
-          } 
+					}
 
-        } ); //login end.
+				} ); //login end.
 
-      } //endif.
+			} //endif.
 
-    } //loginApproved callback.
+		} //loginApproved callback.
 
-  } ); // loginApproved end.
+	} ); // loginApproved end.
 
 };
 
@@ -1506,20 +1514,20 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.loginWithFB = function( params ) 
 */
 Kiwi.Plugins.SocialConnect.Gamefroot.prototype._fbRetrieveUserData = function( params ) {
 
-  //Get the users information off facebook, and send that to gf
-  var success = this.game.social.facebook.me( { 
-    context: this,
-    callback: function( resp ) {
+	//Get the users information off facebook, and send that to gf
+	var success = this.game.social.facebook.me( { 
+		context: this,
+		callback: function( resp ) {
 
-      //Login to GF using that information..
-      this._fbLoginToGF( resp, params );
+			//Login to GF using that information..
+			this._fbLoginToGF( resp, params );
 
-    }
-  } );
+		}
+	} );
 
-  if( !success ) {
-    params.callback.call( params.context, false, 'error with getting information from facebook.');
-  }
+	if( !success ) {
+		params.callback.call( params.context, false, "error with getting information from facebook.");
+	}
 
 };
 
@@ -1535,37 +1543,37 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._fbRetrieveUserData = function( p
 */
 Kiwi.Plugins.SocialConnect.Gamefroot.prototype._fbLoginToGF = function( resp, params ) {
 
-  var data = {
-      "type": 'fb',
-      "id": resp.id,
-      "fullRes": JSON.stringify( resp ),
-      'ref': this.game.stage.name
-  };
-  var that = this;
+	var data = {
+			"type": "fb",
+			"id": resp.id,
+			"fullRes": JSON.stringify( resp ),
+			"ref": this.game.stage.name
+	};
+	var that = this;
 
-  return this._apiRequest( 'account/login', data, function( type, data ) {
+	return this._apiRequest( "account/login", data, function( type, data ) {
 
-    //If there was an error.
-    if( type == 2 ) {
-      params.callback.call( params.context, false, data );
+		//If there was an error.
+		if ( type === 2 ) {
+			params.callback.call( params.context, false, data );
 
-    } else if( data.result) {
-      if( data.result == 'fail' ) {
-        params.callback.call( params.context, false, data );
+		} else if ( data.result ) {
+			if ( data.result === "fail" ) {
+				params.callback.call( params.context, false, data );
 
-      } else {
-        that.userInfo = data;
-        params.callback.call( params.context, true, data);
+			} else {
+				that.userInfo = data;
+				params.callback.call( params.context, true, data);
 
-      }
-   
+			}
 
-    } else {
-      params.callback.call( params.context, false, data );
-    
-    }
 
-  }, true);
+		} else {
+			params.callback.call( params.context, false, data );
+
+		}
+
+	}, true);
 
 };
 
@@ -1581,26 +1589,26 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._fbLoginToGF = function( resp, pa
 */
 Kiwi.Plugins.SocialConnect.Gamefroot.prototype.logout = function( params ) {
 
-  params = params || {};
+	params = params || {};
 
-  //Attempt to logout
-  return this._apiRequest( 'account/logout', {}, function( type, data ) {
+	//Attempt to logout
+	return this._apiRequest( "account/logout", {}, function( type, data ) {
 
-    that.userInfo = null;
+		that.userInfo = null;
 
-    //If there was an error.
-    if( type == 2 ) {
-      if( params.callback ) {
-        params.callback.call( params.context, false, data );
-      }
+		//If there was an error.
+		if ( type === 2 ) {
+			if ( params.callback ) {
+				params.callback.call( params.context, false, data );
+			}
 
-    } 
+		}
 
-    if( params.callback ) { 
-      params.callback.call( params.context, true, data );
-    }
+		if ( params.callback ) { 
+			params.callback.call( params.context, true, data );
+		}
 
-  }, true);
+	}, true);
 
 };
 
@@ -1614,78 +1622,80 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.logout = function( params ) {
 * @param rawdata {Object} The data to be sent to gf.
 * @param callback {Function} The callback to run when complete.
 * @param post {Boolean} If information sent should use POST. Majority of methods do anyway.
-* @public
+* @private
 * @return {Boolean} If the request was made or not.
 */
 Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequest = function( url, rawdata, callback, post ) {
 
-  if( !this._ready ) {
-    this.log( 'not ready to make another request yet.', 2  );
-    return false;
-  }
+	if ( !this._ready ) {
+		this.log( "not ready to make another request yet.", 2 );
+		return false;
+	}
 
-  var method, data, xhr,
-    that = this;
+	var method, data, xhr,
+		that = this;
 
-  if( post ) {
-    method = 'POST';
-  } else {
-    method = 'GET'; 
-  }
+	if ( post ) {
+		method = "POST";
+	} else {
+		method = "GET"; 
+	}
 
-  //Stringify the data
-  data = null;
-  for( var index in rawdata ) {
-      if( data === null ) {
-          data  = index + '=' + encodeURIComponent( rawdata[index] );
-      } else {
-          data += '&' + index + '=' + encodeURIComponent( rawdata[index] );
-      }
-  }
+	//Stringify the data
+	data = null;
+	for ( var index in rawdata ) {
+			if ( data === null ) {
+					data  = index + "=" + encodeURIComponent( rawdata[ index ] );
+			} else {
+					data += "&" + index + "=" + encodeURIComponent( rawdata[ index ] );
+			}
+	}
 
-  //Create the XHR request
-  xhr = new XMLHttpRequest();
-  xhr.open( method, this.serverURL + url, true );
-  
-  //Create request
-  if( post ) {
-      xhr.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
-  } 
+	//Create the XHR request
+	xhr = new XMLHttpRequest();
+	xhr.open( method, this.serverURL + url, true );
+	
+	//Create request
+	if ( post ) {
+			xhr.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
+	}
 
-  xhr.timeout = this.timeout;
+	xhr.timeout = this.timeout;
 
-  //Events.
-  xhr.ontimeout = function() {
-    that._error( 'request has timed out.', callback );
-  };
+	//Events.
+	xhr.ontimeout = function() {
+		that._error( "request has timed out.", callback );
+	};
 
-  xhr.onabort = function() {
-    that._error( 'request was aborted.', callback );
-  };
-  
-  xhr.onerror = function() {
-    that._error( 'request encountered an error.', callback );
-  };
+	xhr.onabort = function() {
+		that._error( "request was aborted.", callback );
+	};
 
-  xhr.onreadystatechange =  function( event ) {
+	xhr.onerror = function() {
+		that._error( "request encountered an error.", callback );
+	};
 
-    if( event.target.readyState !== 4 ) return;
-   
-    if( xhr.response ) {
-      var data = JSON.parse( xhr.response );
-    } else {
-      var data = {};
-    }
+	xhr.onreadystatechange =  function( event ) {
 
-    that._ready = true;
-    callback.call( this, 1, data );
+		if ( event.target.readyState !== 4 ) {
+			return;
+		}
 
-  };
+		if ( xhr.response ) {
+			var data = JSON.parse( xhr.response );
+		} else {
+			var data = {};
+		}
 
-  //Start.
-  xhr.send( data );
-  this._ready = false;
-  return true;
+		that._ready = true;
+		callback.call( this, 1, data );
+
+	};
+
+	//Start.
+	xhr.send( data );
+	this._ready = false;
+	return true;
 };
 
 
@@ -1698,9 +1708,9 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequest = function( url, rawd
 */
 Kiwi.Plugins.SocialConnect.Gamefroot.prototype._error = function( errorMsg, callback ) {
 
-  this._ready = true;
-  this.log( errorMsg, 2 );
-  callback.call( this, 2, errorMsg );
+	this._ready = true;
+	this.log( errorMsg, 2 );
+	callback.call( this, 2, errorMsg );
 
 };
 
@@ -1718,15 +1728,15 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._error = function( errorMsg, call
 */
 Kiwi.Plugins.SocialConnect.Twitter = function( game ) {
 
-  Kiwi.Plugins.SocialConnect.Base.call(this, game, 'Twitter', {
-    'login': false,
-    'share': false,
-    'init': false
-  });
+	Kiwi.Plugins.SocialConnect.Base.call(this, game, "Twitter", {
+		"login": false,
+		"share": false,
+		"init": false
+	});
 
-  this._ready = false;
+	this._ready = false;
 
-  //Detect if Twitter Connect JavaScript file has been included.
+	//Detect if Twitter Connect JavaScript file has been included.
 
 
 };
@@ -1735,20 +1745,20 @@ Kiwi.extend( Kiwi.Plugins.SocialConnect.Twitter, Kiwi.Plugins.SocialConnect.Base
 
 
 Kiwi.Plugins.SocialConnect.Twitter.prototype._include = function( onloadCallback ) {
-  //Include the SDK if it is not visible
+	//Include the SDK if it is not visible
 };
 
 
 
 Object.defineProperty( Kiwi.Plugins.SocialConnect.Twitter.prototype, "ready", {
-    
-    get: function () {
-        return this._ready;
-    },
-    
-    enumerable: true,
-    
-    configurable: true
+
+		get: function () {
+				return this._ready;
+		},
+
+		enumerable: true,
+
+		configurable: true
 
 });
 
@@ -1756,15 +1766,15 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Twitter.prototype, "ready", {
 /**
 * Will contain any functionality for initialising.
 * 
-* @method init
+* @method _init
 * @param params {Object}
-* @public
+* @private
 */
 Kiwi.Plugins.SocialConnect.Twitter.prototype._init = function( params ) {
 
-  //Check to see if the SDK has been loaded 
+	//Check to see if the SDK has been loaded 
 
-  //If not, load the SDK in.
+	//If not, load the SDK in.
 
 };
 
@@ -1772,13 +1782,13 @@ Kiwi.Plugins.SocialConnect.Twitter.prototype._init = function( params ) {
 /**
 * Will contain any functionality to login a user.
 * 
-* @method login
+* @method _login
 * @param params {Object}
-* @public
-*/ 
+* @private
+*/
 Kiwi.Plugins.SocialConnect.Twitter.prototype._login = function( params ) {
 
-  //Attempt to login.
+	//Attempt to login.
 
 };
 
@@ -1792,7 +1802,7 @@ Kiwi.Plugins.SocialConnect.Twitter.prototype._login = function( params ) {
 */
 Kiwi.Plugins.SocialConnect.Twitter.prototype.logout = function( params ) {
 
-  //Attempt to logout
+	//Attempt to logout
 
 };
 
@@ -1800,13 +1810,13 @@ Kiwi.Plugins.SocialConnect.Twitter.prototype.logout = function( params ) {
 /**
 * Functionality to share a piece of information on twitter.
 * 
-* @method share
+* @method _share
 * @param params {Object}
-* @public
+* @private
 */
 Kiwi.Plugins.SocialConnect.Twitter.prototype._share = function( params ) {
 
-  //Attempt to share
+	//Attempt to share
 
 };
 

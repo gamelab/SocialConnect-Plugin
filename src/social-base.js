@@ -21,52 +21,67 @@
 Kiwi.Plugins.SocialConnect.Base = function( game, name, configParams ) {
 
 
-  /**
-  * The game that this is a part of.
-  * @property game
-  * @type Kiwi.Game
-  * @public
-  */
-  this.game = game;
+	/**
+	* The game that this is a part of.
+	* @property game
+	* @type Kiwi.Game
+	* @public
+	*/
+	this.game = game;
 
 
-  /**
-  * The name of the Social Media which this class contains the functionality for. 
-  * @property name
-  * @type String
-  * @public
-  */
-  this.name = name;
+	/**
+	* The name of the Social Media which this class contains the functionality for. 
+	* @property name
+	* @type String
+	* @public
+	*/
+	this.name = name;
 
 
-  /**
-  * If the SDK has been initialised yet.
-  * @property _initialized
-  * @type Boolean
-  * @default false
-  * @public
-  */
-  this._initialized = false;
+	/**
+	* If the SDK has been initialised yet.
+	* @property _initialized
+	* @type Boolean
+	* @default false
+	* @public
+	*/
+	this._initialized = false;
 
-  configParams = configParams || {};
+	configParams = configParams || {};
 
 
-  /**
-  * Contains the settings regarding the functionality this plugin contains. 
-  * @property settings
-  * @type Object
-  * @attribute init {Boolean} If it requires initailisation or not. 
-  * @attribute login {Boolean} If it supports login or not.
-  * @attribute share {Boolean} If it supports sharing or not. 
-  * @public
-  */
-  this.settings = {
-    'init': true,   
-    'login': false,
-    'share': false
-  };
+	/**
+	* Contains the settings regarding the functionality this plugin contains. 
+	* @property settings
+	* @type Object
+	* @public
+	*/
+	this.settings = {
 
-  this._readConfig( configParams );
+		/**
+		* If it requires initialisation or not.
+		* @property settings.init
+		* @type Boolean
+		*/
+		"init": true,
+
+		/**
+		* If it supports login or not.
+		* @property settings.login
+		* @type Boolean
+		*/
+		"login": false,
+
+		/**
+		* If it supports sharing or not.
+		* @property settings.share
+		* @type Boolean
+		*/
+		"share": false
+	};
+
+	this._readConfig( configParams );
 
 };
 
@@ -81,17 +96,17 @@ Kiwi.Plugins.SocialConnect.Base = function( game, name, configParams ) {
 */
 Kiwi.Plugins.SocialConnect.Base.prototype._readConfig = function( config ) {
 
-  if( typeof config.init !== "undefined" ) { 
-    this.settings.init = config.init;
-  }
+	if( typeof config.init !== "undefined" ) { 
+		this.settings.init = config.init;
+	}
 
-  if( typeof config.login !== "undefined" ) { 
-    this.settings.login = config.login;
-  }
+	if( typeof config.login !== "undefined" ) { 
+		this.settings.login = config.login;
+	}
 
-  if( typeof config.share !== "undefined" ) { 
-    this.settings.share = config.share;
-  }
+	if( typeof config.share !== "undefined" ) { 
+		this.settings.share = config.share;
+	}
 
 };
 
@@ -104,14 +119,14 @@ Kiwi.Plugins.SocialConnect.Base.prototype._readConfig = function( config ) {
 * @public
 */
 Object.defineProperty( Kiwi.Plugins.SocialConnect.Base.prototype, "initialized", {
-    
-    get: function () {
-        return this._initialized;
-    },
-    
-    enumerable: true,
-    
-    configurable: true
+		
+		get: function () {
+				return this._initialized;
+		},
+		
+		enumerable: true,
+		
+		configurable: true
 
 });
 
@@ -119,41 +134,40 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Base.prototype, "initialized",
 /**
 * Handles the initialsation of the Social Media SDK (if necessary).
 * 
-* Extended classes should create a '_init' method instead of overriding this one
+* Extended classes should create a "_init" method instead of overriding this one
 * when creating their own.
-*   
 * 
 * @method init
-* @param params {Object} Any parameters required by the SDK. This will be passed to the '_init' method. 
+* @param params {Object} Any parameters required by the SDK. This will be passed to the "_init" method. 
 * @return {Boolean} If the init method was called or not.
 * @public
 */
 Kiwi.Plugins.SocialConnect.Base.prototype.init = function( params ) {
 
-  if( !this.settings.init ) {
-    this.log( 'doesn\'t require initialization' );
-    return false;
-  }
+	if ( !this.settings.init ) {
+		this.log( "doesn't require initialization" );
+		return false;
+	}
 
-  params = params || {};
+	params = params || {};
 
-  if( this._initialized ) {
-    this.log( 'has already been initialized. Skipping re-initalization.', 2 );
-    return false;
-  }
+	if ( this._initialized ) {
+		this.log( "has already been initialized. Skipping re-initalization.", 2 );
+		return false;
+	}
 
 
-  //Call the init method if it exists. 
-  if( typeof this._init !== "undefined" ) {
-    
-    var success = this._init.call( this, params );
+	//Call the init method if it exists. 
+	if ( typeof this._init !== "undefined" ) {
+		
+		var success = this._init.call( this, params );
 
-    if( success ) {
-      this._initialized = true;
-    } 
+		if ( success ) {
+			this._initialized = true;
+		} 
 
-    return success;
-  }
+		return success;
+	}
 
 };
 
@@ -161,9 +175,8 @@ Kiwi.Plugins.SocialConnect.Base.prototype.init = function( params ) {
 /**
 * Handles the login functionality for this Social Media SDK (if necessary).
 * 
-* Extended classes should create a '_login' method instead of overriding this one
+* Extended classes should create a "_login" method instead of overriding this one
 * when creating their own.
-*   
 * 
 * @method login
 * @param params {Object} Any parameters required by the SDK. This will be passed to the '_login' method.
@@ -172,23 +185,23 @@ Kiwi.Plugins.SocialConnect.Base.prototype.init = function( params ) {
 */
 Kiwi.Plugins.SocialConnect.Base.prototype.login = function( params ) {
 
-  params = params || {};
+	params = params || {};
 
-  if( !this.settings.login ) {
-    this.log( 'doesn\'t has login functionality.' );
-    return false;
-  }
+	if ( !this.settings.login ) {
+		this.log( "doesn't has login functionality." );
+		return false;
+	}
 
-  if( this.settings.init && !this._initialized ) {
-    this.log( 'has not been initialized.', 2 );
-    return false;
-  }
+	if ( this.settings.init && !this._initialized ) {
+		this.log( "has not been initialized.", 2 );
+		return false;
+	}
 
-  //Call the init method if it exists. 
-  if( typeof this._login !== "undefined" ) {
-    
-    return this._login.call( this, params );
-  }
+	//Call the init method if it exists. 
+	if ( typeof this._login !== "undefined" ) {
+		
+		return this._login.call( this, params );
+	}
 
 };
 
@@ -196,34 +209,34 @@ Kiwi.Plugins.SocialConnect.Base.prototype.login = function( params ) {
 /**
 * Handles the share/post functionality for this Social Media SDK (if necessary).
 * 
-* Extended classes should create a '_share' method instead of overriding this one
+* Extended classes should create a "_share" method instead of overriding this one
 * when creating their own.
 *   
 * 
 * @method share
-* @param params {Object} Any parameters required by the SDK. This will be passed to the '_share' method.
+* @param params {Object} Any parameters required by the SDK. This will be passed to the "_share" method.
 * @return {Boolean} If the init method was called or not.
 * @public
 */
 Kiwi.Plugins.SocialConnect.Base.prototype.share = function( params ) {
 
-  params = params || {};
+	params = params || {};
 
-  if( !this.settings.share ) {
-    this.log( 'doesn\'t has sharing functionality.' );
-    return false;
-  }
+	if ( !this.settings.share ) {
+		this.log( "doesn't has sharing functionality." );
+		return false;
+	}
 
-  if( this.settings.init && !this._initialized ) {
-    this.log( 'has not been initialized.', 2 );
-    return false;
-  }
+	if ( this.settings.init && !this._initialized ) {
+		this.log( "has not been initialized.", 2 );
+		return false;
+	}
 
-  //Call the init method if it exists. 
-  if( typeof this._share !== "undefined" ) {
-    
-    return this._share.call( this, params );
-  }
+	//Call the init method if it exists. 
+	if ( typeof this._share !== "undefined" ) {
+		
+		return this._share.call( this, params );
+	}
 
 };
 
@@ -262,4 +275,3 @@ Kiwi.Plugins.SocialConnect.Base.prototype.log = function( string, type ) {
   }
 
 };
-

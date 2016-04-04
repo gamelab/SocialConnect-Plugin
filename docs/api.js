@@ -21,12 +21,12 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Plugins",
             "name": "Plugins",
-            "description": "The description of SocialConnect goes here"
+            "description": "SocialConnect is a plugin that helps you connect to social media services."
         },
         {
             "displayName": "SocialConnect",
             "name": "SocialConnect",
-            "description": "Contains the functionality for handling/communicating with the Facebook SDK.\n\nThis Plugin will check to see the Facebook SDK already exists when it is created,\nand a second time when the init method is called. \nIf the SDK is not found, one is loaded for you when the 'init' method is called."
+            "description": "Contains the functionality for handling/communicating with the Facebook SDK.\n\nThis Plugin will check to see the Facebook SDK already exists when it is created,\nand a second time when the init method is called. \nIf the SDK is not found, one is loaded for you when the \"init\" method is called."
         }
     ]
 } };
