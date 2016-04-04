@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/social-base.js - SocialConnect</title>
+    <title>src\social-base.js - SocialConnect</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.8.0</em>
+            <em>API Docs for: 0.9.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -98,7 +98,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src/social-base.js</h1>
+                        <h1 class="file-heading">File: src\social-base.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -346,13 +346,13 @@ Kiwi.Plugins.SocialConnect.Base.prototype.share = function( params ) {
 
 
 /**
-* A method which handles logging out a message to the console. 
+* A method which handles logging out a message. 
 * Used internally only.
 * 
 * There are three different types of methods which can be used.
-* 1 - Uses the &quot;console.log&quot; method.
-* 2 - Uses the &quot;console.warn&quot; method.
-* 3 - Uses the &quot;console.error&quot; method.
+* 1 - Uses the &#x27;Kiwi.Log.log&#x27; method.
+* 2 - Uses the &#x27;Kiwi.Log.warn&#x27; method.
+* 3 - Uses the &#x27;Kiwi.Log.error&#x27; method.
 * 
 * @method log
 * @param string {String} The string that is to be logged out.
@@ -361,28 +361,22 @@ Kiwi.Plugins.SocialConnect.Base.prototype.share = function( params ) {
 */
 Kiwi.Plugins.SocialConnect.Base.prototype.log = function( string, type ) {
 
-	if ( this.game.debug ) {
+  switch( type ) {
 
-		string = &quot;SocialConnect:&quot; + this.name + &quot; &quot; + string;
+    default:
+    case 1:
+      Kiwi.Log.log( &#x27;SocialConnect:&#x27;, string, &#x27;#&#x27; + this.name, &#x27;#socialConnect&#x27; );
+      break;
 
-		switch( type ) {
+    case 2:
+      Kiwi.Log.warn( &#x27;SocialConnect:&#x27;, string, &#x27;#&#x27; + this.name, &#x27;#socialConnect&#x27; );
+      break;
 
-			default:
-			case 1:
-				console.log( string );
-				break;
+    case 3:
+      Kiwi.Log.error( &#x27;SocialConnect:&#x27;, string, &#x27;#&#x27; + this.name, &#x27;#socialConnect&#x27; );
+      break;
 
-			case 2:
-				console.warn( string );
-				break;
-
-			case 3:
-				console.error( string );
-				break;
-
-		}
-
-	}
+  }
 
 };
 

@@ -2,12 +2,12 @@
     "project": {
         "name": "SocialConnect",
         "description": "The Kiwi.JS SocialConnect plugin makes using the many common social media solutions one-step easier.",
-        "version": "0.8.0",
+        "version": "0.9.0",
         "url": "http://kiwijs.org/"
     },
     "files": {
-        "src/social-plugins/facebook.js": {
-            "name": "src/social-plugins/facebook.js",
+        "src\\social-plugins\\facebook.js": {
+            "name": "src\\social-plugins\\facebook.js",
             "modules": {
                 "SocialConnect": 1
             },
@@ -19,8 +19,8 @@
                 "Kiwi.Plugins.SocialConnect": 1
             }
         },
-        "src/social-plugins/gamefroot.js": {
-            "name": "src/social-plugins/gamefroot.js",
+        "src\\social-plugins\\gamefroot.js": {
+            "name": "src\\social-plugins\\gamefroot.js",
             "modules": {},
             "classes": {
                 "Kiwi.Plugins.SocialConnect.Gamefroot": 1
@@ -30,8 +30,8 @@
                 "Kiwi.Plugins.SocialConnect": 1
             }
         },
-        "src/social-plugins/twitter.js": {
-            "name": "src/social-plugins/twitter.js",
+        "src\\social-plugins\\twitter.js": {
+            "name": "src\\social-plugins\\twitter.js",
             "modules": {},
             "classes": {
                 "Kiwi.Plugins.SocialConnect.Twitter": 1
@@ -41,8 +41,8 @@
                 "Kiwi.Plugins.SocialConnect": 1
             }
         },
-        "src/_core-plugin.js": {
-            "name": "src/_core-plugin.js",
+        "src\\_core-plugin.js": {
+            "name": "src\\_core-plugin.js",
             "modules": {
                 "Plugins": 1
             },
@@ -54,8 +54,8 @@
                 "Kiwi.Plugins": 1
             }
         },
-        "src/manager.js": {
-            "name": "src/manager.js",
+        "src\\manager.js": {
+            "name": "src\\manager.js",
             "modules": {},
             "classes": {
                 "Kiwi.Plugins.SocialConnect.Manager": 1
@@ -65,8 +65,8 @@
                 "Kiwi.Plugins.SocialConnect": 1
             }
         },
-        "src/social-base.js": {
-            "name": "src/social-base.js",
+        "src\\social-base.js": {
+            "name": "src\\social-base.js",
             "modules": {},
             "classes": {
                 "Kiwi.Plugins.SocialConnect.Base": 1
@@ -97,7 +97,7 @@
                 "Kiwi.Plugins": 1
             },
             "module": "Kiwi",
-            "file": "src/social-base.js",
+            "file": "src\\social-base.js",
             "line": 2,
             "description": "SocialConnect is a plugin that helps you connect to social media services.",
             "tag": "main",
@@ -120,7 +120,7 @@
             },
             "module": "Plugins",
             "namespace": "",
-            "file": "src/social-base.js",
+            "file": "src\\social-base.js",
             "line": 2,
             "description": "Contains the functionality for handling/communicating with the Facebook SDK.\n\nThis Plugin will check to see the Facebook SDK already exists when it is created,\nand a second time when the init method is called. \nIf the SDK is not found, one is loaded for you when the \"init\" method is called.",
             "extends": "Kiwi.Plugins.SocialConnect.Base",
@@ -143,7 +143,7 @@
             "namespaces": {
                 "Kiwi.Plugins": 1
             },
-            "file": "src/_core-plugin.js",
+            "file": "src\\_core-plugin.js",
             "line": 2
         }
     },
@@ -159,7 +159,7 @@
             "module": "Plugins",
             "submodule": "SocialConnect",
             "namespace": "Kiwi.Plugins.SocialConnect",
-            "file": "src/social-plugins/facebook.js",
+            "file": "src\\social-plugins\\facebook.js",
             "line": 2,
             "description": "Contains the functionality for handling/communicating with the Facebook SDK.\n\nThis Plugin will check to see the Facebook SDK already exists when it is created,\nand a second time when the init method is called. \nIf the SDK is not found, one is loaded for you when the \"init\" method is called."
         },
@@ -174,7 +174,7 @@
             "module": "Plugins",
             "submodule": "SocialConnect",
             "namespace": "Kiwi.Plugins.SocialConnect",
-            "file": "src/social-plugins/gamefroot.js",
+            "file": "src\\social-plugins\\gamefroot.js",
             "line": 2,
             "description": "Contains the functionality for creating/logging into gamefroot accounts."
         },
@@ -189,7 +189,7 @@
             "module": "Plugins",
             "submodule": "SocialConnect",
             "namespace": "Kiwi.Plugins.SocialConnect",
-            "file": "src/social-plugins/twitter.js",
+            "file": "src\\social-plugins\\twitter.js",
             "line": 2,
             "description": "Class that will soon contain the functionality for Twitter. \nThis has not been implemented just yet, but is instead a placeholder for where it will be in the future."
         },
@@ -204,7 +204,7 @@
             "module": "Kiwi",
             "submodule": "Plugins",
             "namespace": "Kiwi.Plugins",
-            "file": "src/_core-plugin.js",
+            "file": "src\\_core-plugin.js",
             "line": 2,
             "description": "SocialConnect is a plugin that helps you connect to social media services."
         },
@@ -219,7 +219,7 @@
             "module": "Plugins",
             "submodule": "SocialConnect",
             "namespace": "Kiwi.Plugins.SocialConnect",
-            "file": "src/manager.js",
+            "file": "src\\manager.js",
             "line": 2,
             "description": "Created for each game that this plugin is attached to, \nThis object manages the variety of different Social Media sites/SDKs that can be used."
         },
@@ -234,14 +234,14 @@
             "module": "Plugins",
             "submodule": "SocialConnect",
             "namespace": "Kiwi.Plugins.SocialConnect",
-            "file": "src/social-base.js",
+            "file": "src\\social-base.js",
             "line": 2,
             "description": "The Base class used to outline the core functionality that most SocialMedia sites have.\n\nThis class shouldn't be directly created, \nbut instead extended from by other classes implement social media SDKs."
         }
     },
     "classitems": [
         {
-            "file": "src/social-plugins/facebook.js",
+            "file": "src\\social-plugins\\facebook.js",
             "line": 28,
             "description": "Contains the facebook \"userID\" of a user currently logged into facebook. \nThis is set when you use the \"login/loginApproved\" methods and is used in the \"loggedIn\"\ngetter.",
             "itemtype": "property",
@@ -256,7 +256,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
+            "file": "src\\social-plugins\\facebook.js",
             "line": 40,
             "description": "The same as the raw information returned from the \"me\" method.",
             "itemtype": "property",
@@ -270,7 +270,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
+            "file": "src\\social-plugins\\facebook.js",
             "line": 49,
             "description": "Indicates if the Facebook SDK is ready to used or not. \nThis will be \"false\" if the SDK did not exist before hand and we are loading it in.",
             "itemtype": "property",
@@ -284,7 +284,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
+            "file": "src\\social-plugins\\facebook.js",
             "line": 60,
             "description": "The URL of the Facebook SDK that should be loaded in if needed.\nIn the case of CocoonJS, this is the channelUrl.",
             "itemtype": "property",
@@ -299,7 +299,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
+            "file": "src\\social-plugins\\facebook.js",
             "line": 72,
             "description": "Indicates if the Plugin is configured to be used with cocoon or not.",
             "itemtype": "property",
@@ -313,8 +313,8 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
-            "line": 96,
+            "file": "src\\social-plugins\\facebook.js",
+            "line": 99,
             "description": "The Facebook SDK Object we are using to query facebook.\nAccessing this property will allow you to do advanced queries.",
             "itemtype": "property",
             "name": "fb",
@@ -327,8 +327,8 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
-            "line": 122,
+            "file": "src\\social-plugins\\facebook.js",
+            "line": 127,
             "description": "Returns a flag indicating whether or not the SDK has already been loaded or not.\nNot applicable if targetting CocoonJS.",
             "itemtype": "method",
             "name": "_SDKLoaded",
@@ -343,8 +343,8 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
-            "line": 143,
+            "file": "src\\social-plugins\\facebook.js",
+            "line": 148,
             "description": "Loads in the Facebook SDK. Doesn't check to see if it already exists or not.",
             "itemtype": "method",
             "name": "_include",
@@ -363,8 +363,8 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
-            "line": 172,
+            "file": "src\\social-plugins\\facebook.js",
+            "line": 177,
             "description": "Indicates if the Facebook SDK is ready to used or not. \nThis will be \"false\" if the SDK did not exist before hand and we are loading it in.\nThis is READ ONLY.",
             "itemtype": "property",
             "name": "ready",
@@ -378,8 +378,8 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
-            "line": 195,
+            "file": "src\\social-plugins\\facebook.js",
+            "line": 200,
             "description": "Initialises the Facebook SDK with the details you pass. \n\nYou pass parameters through a \"parameters\" object.\nThe only required parameter is the \"appId\", which you will find on the Facebook Developers Dashboard.\n\nMore paramters can be found at \"https://developers.facebook.com/docs/javascript/reference/FB.init/v2.1\".",
             "itemtype": "method",
             "name": "init",
@@ -423,8 +423,8 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
-            "line": 256,
+            "file": "src\\social-plugins\\facebook.js",
+            "line": 261,
             "description": "Login the user with Facebook. \nThe permissions dialog will appear if the user has not accepted it before \nOR the information being requested has changed.\n\nSee the Facebook Docs for more information. \n\"https://developers.facebook.com/docs/facebook-login/login-flow-for-web/v2.2\"\n\nIf the user is successfully logged in, then the property \"userID\" will be set.\nNote: For CocoonJS this will just be -1 as we will not have the userID.\n\nThe Callback attached will have three properties:\n1 - Accessable:Boolean - If the user is logged in and accepted the terms of use.\n2 - Response: Object - The response returned by Facebook (or cocoon)\n3 - LoggedIn: Boolean - (Not visible in Cocoon) If the user is logged in or not, regardless of accepting the conditions.",
             "itemtype": "method",
             "name": "login",
@@ -463,8 +463,8 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
-            "line": 319,
+            "file": "src\\social-plugins\\facebook.js",
+            "line": 324,
             "description": "Used to quickly see if a user was logged in or not last time the \"login\" or \"loginApproved\" methods were called.\nThis is READ ONLY.",
             "itemtype": "property",
             "name": "loggedIn",
@@ -479,8 +479,8 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
-            "line": 343,
+            "file": "src\\social-plugins\\facebook.js",
+            "line": 348,
             "description": "Returns a boolean to a callback which is passed, which is used to see if the user is logged in or not.\nThe callback will be passed THREE parameters.\nOne: Boolean - If the user is logged in, and has accepted the terms of use. \"Accessible\"\nTwo: Boolean - If the user is logged in or not.\nThree: Object - Raw information passed by the Facebook \"loginApproved\" call.\n\nNote: Does NOT work with CocoonJS. Use the \"loggedIn\" and \"login\" methods instead.",
             "itemtype": "method",
             "name": "loginApproved",
@@ -516,8 +516,8 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
-            "line": 398,
+            "file": "src\\social-plugins\\facebook.js",
+            "line": 403,
             "description": "Checks to see if the user has accepted the permissions that you pass to this method.\n\nCallbacks fired from this method have the following parameters in this order.\n- PermissionsGranted:Boolean - All user has accepted all the permissions you passed.\n- PermissionsAccepted: Array - An array of strings, each one being a permission the user has accepted.\n- Response: Any - The raw response recieved from Facebook.\n\nTo Do: params.attemptToResolve - If when detected that the user doesn't have the persmissions required,\n        a login dialog with the permissions should automatically be called.",
             "itemtype": "method",
             "name": "hasPermissions",
@@ -558,8 +558,8 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
-            "line": 485,
+            "file": "src\\social-plugins\\facebook.js",
+            "line": 490,
             "description": "Logs the user out of Facebook.",
             "itemtype": "method",
             "name": "logout",
@@ -593,8 +593,8 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
-            "line": 515,
+            "file": "src\\social-plugins\\facebook.js",
+            "line": 520,
             "description": "Will attempt to get the currently logged in users information. \n\nYou can get the information recieved either by attaching a callback, whos first parameter will be facebooks response.\nOR you can get the infomation via the \"userInfo\" property (if the \"saveData\" parameter is set to true).\n\nAdvanced Functionality: If you enable \"autoLoadPicture\" if the plugin detects a picture URL has been passed,\nthen it will be loaded into Kiwi.\nThe picture will use the pictureKey's param value as the key.\nYou may need to rebuild the texture library to use it. \nThis can be turned off by setting \"autoLoadPicture\" to false.\n\nWatch Out! Be careful not to use this functionality during the preload phase of the State! Otherwise it will break the loop functionality.",
             "itemtype": "method",
             "name": "me",
@@ -659,8 +659,8 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
-            "line": 595,
+            "file": "src\\social-plugins\\facebook.js",
+            "line": 600,
             "description": "Uses the Kiwi.JS core file loader to load a Image URL into the fileStore. \nExecutes the callback/context passed with the callbackParams as the first parameter of the callback",
             "itemtype": "method",
             "name": "_loadImage",
@@ -702,8 +702,8 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
-            "line": 642,
+            "file": "src\\social-plugins\\facebook.js",
+            "line": 647,
             "description": "Loads in the current logged-in users facebook picture. \n\nNote: This may not always work in WebGL due to CORS and tainted images allowed to be used.",
             "itemtype": "method",
             "name": "myImage",
@@ -760,8 +760,8 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/facebook.js",
-            "line": 708,
+            "file": "src\\social-plugins\\facebook.js",
+            "line": 713,
             "description": "Opens up the facebook share popup window.\nDefault link is the current location of the browser (Not for CocoonJS).\nThis link can be changed via setting the \"link\" property on the param object. \n\nNote: Since this opens a \"pop-up\" window, you should make sure to call this method\ninside callbacks attached to the \"input\" manager on core Kiwi game objects.",
             "itemtype": "method",
             "name": "share",
@@ -801,7 +801,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/gamefroot.js",
+            "file": "src\\social-plugins\\gamefroot.js",
             "line": 21,
             "description": "Indicates if the api is ready to make a request to the gamefroot servers or not.",
             "itemtype": "property",
@@ -816,7 +816,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/gamefroot.js",
+            "file": "src\\social-plugins\\gamefroot.js",
             "line": 31,
             "description": "Stores the users information from the last time he logged in.",
             "itemtype": "property",
@@ -831,7 +831,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/gamefroot.js",
+            "file": "src\\social-plugins\\gamefroot.js",
             "line": 41,
             "description": "The amount of time (in milliseconds) to wait for a response before timing out.",
             "itemtype": "property",
@@ -846,9 +846,9 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/gamefroot.js",
+            "file": "src\\social-plugins\\gamefroot.js",
             "line": 51,
-            "description": "The url of the gamefroot server to use. \nSee \"Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL\" for options.",
+            "description": "The url of the gamefroot server to use. \nSee 'Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL' for options.",
             "itemtype": "property",
             "name": "serverURL",
             "type": "string",
@@ -861,7 +861,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/gamefroot.js",
+            "file": "src\\social-plugins\\gamefroot.js",
             "line": 66,
             "description": "Namespace which holds the URLs of gamefroot api servers.",
             "itemtype": "property",
@@ -877,7 +877,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/gamefroot.js",
+            "file": "src\\social-plugins\\gamefroot.js",
             "line": 76,
             "description": "Contains the url for the live version of gamefroot.",
             "itemtype": "property",
@@ -893,7 +893,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/gamefroot.js",
+            "file": "src\\social-plugins\\gamefroot.js",
             "line": 86,
             "description": "Contains the url for the debug (also known as staging) version of gamefroot.",
             "itemtype": "property",
@@ -909,7 +909,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/gamefroot.js",
+            "file": "src\\social-plugins\\gamefroot.js",
             "line": 99,
             "description": "Indicates if the API is ready to make a request or not. \nThis would only ever be \"false\" if we are midway through another API call.\nThis is READ ONLY.",
             "itemtype": "property",
@@ -924,7 +924,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/gamefroot.js",
+            "file": "src\\social-plugins\\gamefroot.js",
             "line": 122,
             "description": "Indicates if the user is logged in or not.\nMaintains its values from the login and logout methods on this class, \nso it is not an accurate representation. \nREAD ONLY.",
             "itemtype": "property",
@@ -939,7 +939,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/gamefroot.js",
+            "file": "src\\social-plugins\\gamefroot.js",
             "line": 146,
             "description": "Registers a new gamefroot account. \nA callback is required to be passed and the first parameter will indicate success.",
             "itemtype": "method",
@@ -996,7 +996,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/gamefroot.js",
+            "file": "src\\social-plugins\\gamefroot.js",
             "line": 201,
             "description": "Login using a gamefroot account. Does not include facebook login functionality. \nA callback is required to be passed and the first parameter will indicate success.",
             "itemtype": "method",
@@ -1043,7 +1043,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/gamefroot.js",
+            "file": "src\\social-plugins\\gamefroot.js",
             "line": 259,
             "description": "Login to gamefroot using facebook. \nA callback is required to be passed and the first parameter will indicate success.",
             "itemtype": "method",
@@ -1086,7 +1086,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/gamefroot.js",
+            "file": "src\\social-plugins\\gamefroot.js",
             "line": 318,
             "description": "Contains the second steps code in logging into gamefroot using facebook. \nHandles getting the users information.",
             "itemtype": "method",
@@ -1106,7 +1106,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/gamefroot.js",
+            "file": "src\\social-plugins\\gamefroot.js",
             "line": 346,
             "description": "Final step in logging into gamefroot using facebook.\nContains the code communicating to gamefroot, which then creates its account.",
             "itemtype": "method",
@@ -1131,7 +1131,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/gamefroot.js",
+            "file": "src\\social-plugins\\gamefroot.js",
             "line": 392,
             "description": "Logs a user out of gamefroot.",
             "itemtype": "method",
@@ -1164,7 +1164,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/gamefroot.js",
+            "file": "src\\social-plugins\\gamefroot.js",
             "line": 427,
             "description": "Makes a request to the gamefroot servers. \nBecause it is done using XHR requests, it is recommended that do not make multiple requests at once.",
             "itemtype": "method",
@@ -1203,8 +1203,36 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/gamefroot.js",
-            "line": 513,
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 479,
+            "description": "Function which is apart of the overriding the default XHR loader of Kiwi.Files.File \nand instead replaces it with one which supports POST requests",
+            "itemtype": "method",
+            "name": "_postXhrLoader",
+            "params": [
+                {
+                    "name": "responseType",
+                    "description": "",
+                    "type": "String",
+                    "optional": true,
+                    "optdefault": "'text'"
+                },
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Number",
+                    "optional": true
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 536,
             "description": "Executed when a API call has failed.",
             "itemtype": "method",
             "name": "_error",
@@ -1228,7 +1256,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/twitter.js",
+            "file": "src\\social-plugins\\twitter.js",
             "line": 50,
             "description": "Will contain any functionality for initialising.",
             "itemtype": "method",
@@ -1248,7 +1276,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/twitter.js",
+            "file": "src\\social-plugins\\twitter.js",
             "line": 66,
             "description": "Will contain any functionality to login a user.",
             "itemtype": "method",
@@ -1268,7 +1296,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/twitter.js",
+            "file": "src\\social-plugins\\twitter.js",
             "line": 80,
             "description": "Functionality to logout a user from twitter",
             "itemtype": "method",
@@ -1288,7 +1316,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-plugins/twitter.js",
+            "file": "src\\social-plugins\\twitter.js",
             "line": 94,
             "description": "Functionality to share a piece of information on twitter.",
             "itemtype": "method",
@@ -1308,7 +1336,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/_core-plugin.js",
+            "file": "src\\_core-plugin.js",
             "line": 13,
             "description": "The name of this plugin.",
             "itemtype": "property",
@@ -1322,7 +1350,7 @@
             "namespace": "Kiwi.Plugins"
         },
         {
-            "file": "src/_core-plugin.js",
+            "file": "src\\_core-plugin.js",
             "line": 21,
             "description": "The version of this plugin.",
             "itemtype": "property",
@@ -1336,7 +1364,7 @@
             "namespace": "Kiwi.Plugins"
         },
         {
-            "file": "src/_core-plugin.js",
+            "file": "src\\_core-plugin.js",
             "line": 29,
             "description": "The minimum version of Kiwi that the plugin requires.",
             "itemtype": "property",
@@ -1350,8 +1378,23 @@
             "namespace": "Kiwi.Plugins"
         },
         {
-            "file": "src/_core-plugin.js",
-            "line": 45,
+            "file": "src\\_core-plugin.js",
+            "line": 37,
+            "description": "Whether the device ready event has fired or not. \nUsed for Cocoon/Cordova implementation",
+            "itemtype": "property",
+            "name": "deviceReady",
+            "type": "Boolean",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "Kiwi.Plugins.SocialConnect",
+            "module": "Kiwi",
+            "submodule": "Plugins",
+            "namespace": "Kiwi.Plugins"
+        },
+        {
+            "file": "src\\_core-plugin.js",
+            "line": 60,
             "description": "Executed when the plugin has been told it is to be used with a particular game.",
             "itemtype": "method",
             "name": "create",
@@ -1370,7 +1413,7 @@
             "namespace": "Kiwi.Plugins"
         },
         {
-            "file": "src/manager.js",
+            "file": "src\\manager.js",
             "line": 17,
             "description": "The game that this plugin is attached to.",
             "itemtype": "property",
@@ -1384,7 +1427,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/manager.js",
+            "file": "src\\manager.js",
             "line": 26,
             "description": "The Gamefroot account creation plugin.",
             "itemtype": "property",
@@ -1398,7 +1441,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/manager.js",
+            "file": "src\\manager.js",
             "line": 35,
             "description": "The Facebook social plugin.",
             "itemtype": "property",
@@ -1412,7 +1455,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/manager.js",
+            "file": "src\\manager.js",
             "line": 48,
             "description": "A useful method that allows you to initialise multiple social media SDKS at the same time. \n\nTo use this method you must pass it an Object,\nwhich contains the configuration settings for each SDK you want to use.\n\nE.g. To initialise Facebook you would pass { facebook: { appId: \"1726287530930783\" } } \nNote: appId used for example purposes only.",
             "itemtype": "method",
@@ -1440,7 +1483,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-base.js",
+            "file": "src\\social-base.js",
             "line": 24,
             "description": "The game that this is a part of.",
             "itemtype": "property",
@@ -1454,7 +1497,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-base.js",
+            "file": "src\\social-base.js",
             "line": 33,
             "description": "The name of the Social Media which this class contains the functionality for.",
             "itemtype": "property",
@@ -1468,7 +1511,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-base.js",
+            "file": "src\\social-base.js",
             "line": 42,
             "description": "If the SDK has been initialised yet.",
             "itemtype": "property",
@@ -1483,7 +1526,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-base.js",
+            "file": "src\\social-base.js",
             "line": 54,
             "description": "Contains the settings regarding the functionality this plugin contains.",
             "itemtype": "property",
@@ -1497,7 +1540,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-base.js",
+            "file": "src\\social-base.js",
             "line": 62,
             "description": "If it requires initialisation or not.",
             "itemtype": "property",
@@ -1509,7 +1552,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-base.js",
+            "file": "src\\social-base.js",
             "line": 69,
             "description": "If it supports login or not.",
             "itemtype": "property",
@@ -1521,7 +1564,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-base.js",
+            "file": "src\\social-base.js",
             "line": 76,
             "description": "If it supports sharing or not.",
             "itemtype": "property",
@@ -1533,7 +1576,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-base.js",
+            "file": "src\\social-base.js",
             "line": 89,
             "description": "Used to configure the settings property based on an object literal passed.\nCurrently used in the constructor.",
             "itemtype": "method",
@@ -1553,7 +1596,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-base.js",
+            "file": "src\\social-base.js",
             "line": 114,
             "description": "If this has been initialised or not.",
             "itemtype": "property",
@@ -1568,7 +1611,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-base.js",
+            "file": "src\\social-base.js",
             "line": 134,
             "description": "Handles the initialsation of the Social Media SDK (if necessary).\n\nExtended classes should create a \"_init\" method instead of overriding this one\nwhen creating their own.",
             "itemtype": "method",
@@ -1592,7 +1635,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-base.js",
+            "file": "src\\social-base.js",
             "line": 175,
             "description": "Handles the login functionality for this Social Media SDK (if necessary).\n\nExtended classes should create a \"_login\" method instead of overriding this one\nwhen creating their own.",
             "itemtype": "method",
@@ -1616,7 +1659,7 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-base.js",
+            "file": "src\\social-base.js",
             "line": 209,
             "description": "Handles the share/post functionality for this Social Media SDK (if necessary).\n\nExtended classes should create a \"_share\" method instead of overriding this one\nwhen creating their own.",
             "itemtype": "method",
@@ -1640,9 +1683,9 @@
             "namespace": "Kiwi.Plugins.SocialConnect"
         },
         {
-            "file": "src/social-base.js",
+            "file": "src\\social-base.js",
             "line": 244,
-            "description": "A method which handles logging out a message to the console. \nUsed internally only.\n\nThere are three different types of methods which can be used.\n1 - Uses the \"console.log\" method.\n2 - Uses the \"console.warn\" method.\n3 - Uses the \"console.error\" method.",
+            "description": "A method which handles logging out a message. \nUsed internally only.\n\nThere are three different types of methods which can be used.\n1 - Uses the 'Kiwi.Log.log' method.\n2 - Uses the 'Kiwi.Log.warn' method.\n3 - Uses the 'Kiwi.Log.error' method.",
             "itemtype": "method",
             "name": "log",
             "params": [
@@ -1670,7 +1713,7 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " src/social-plugins/facebook.js:2"
+            "line": " src\\social-plugins\\facebook.js:2"
         }
     ]
 }

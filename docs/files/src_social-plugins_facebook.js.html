@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/social-plugins/facebook.js - SocialConnect</title>
+    <title>src\social-plugins\facebook.js - SocialConnect</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.8.0</em>
+            <em>API Docs for: 0.9.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -98,7 +98,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src/social-plugins/facebook.js</h1>
+                        <h1 class="file-heading">File: src\social-plugins\facebook.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -185,15 +185,18 @@ Kiwi.Plugins.SocialConnect.Facebook = function( game ) {
 	//Detect if we are targetting CocoonJS or not.
 	if ( this.game.deviceTargetOption == Kiwi.TARGET_COCOON ) {
 
+    if( !Kiwi.Plugins.SocialConnect.deviceReady ) {
+      this.log(&quot;Device not yet ready. Please make sure you wait for the documents &#x27;deviceready&#x27; event&quot;, 3);
+      return;
+    }
+
 		this._cocoon = true;
 
 		//Has the CocoonJS Plugin been added or not.
 		if ( !Cocoon || !Cocoon.Social.Facebook ) {
-
 			this.log( &quot;CocoonJS intergration requires you to include the Cocoon JavaScript library.&quot;, 3 );
 			this._ready = false;
 			return;
-
 		}
 
 
@@ -221,6 +224,8 @@ Kiwi.Plugins.SocialConnect.Facebook = function( game ) {
 };
 
 Kiwi.extend( Kiwi.Plugins.SocialConnect.Facebook, Kiwi.Plugins.SocialConnect.Base );
+
+
 
 
 /**
