@@ -194,8 +194,9 @@ Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL = {
 	* @public
 	* @readOnly
 	* @static
+	* @deprecated
 	*/
-	DEBUG: &#x27;http://staging.gamefroot.com:8081/api/&#x27;
+	DEBUG: &#x27;http://api.gamefroot.com/v1/&#x27;
 
 };
 
@@ -271,31 +272,26 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.register = function( params ) {
 		return false;
 	}
 
-	if( !params.username || !params.password || !params.email || !params.passwordrepeat ) {
+	if( !params.username || !params.password || !params.email) {
 		this.log( &#x27;not all of the needed parameters have been passed.&#x27;, 2 );
+		params.callback.call( params.context, false, &#x27;Missing required parameters&#x27;);
 		return false;
 	};
 
 	var data = {
-		&#x27;usrn&#x27;: params.username,
-		&#x27;psw&#x27;: params.password,
-		&#x27;email&#x27;: params.email,
-		&#x27;repsw&#x27;: params.passwordrepeat
+		&#x27;username&#x27;: params.username || &#x27;&#x27;,
+		&#x27;password&#x27;: params.password || &#x27;&#x27;,
+		&#x27;email&#x27;: params.email || &#x27;&#x27;
 	};
 
-	return this._apiRequest( &#x27;account/register&#x27;, data, function( type, data ) {
+	return this._apiRequest( &#x27;auth/register&#x27;, data, function( type, data ) {
 
 		//If there was an error.
 		if( type == 2 ) {
 			params.callback.call( params.context, false, data );
-
-		} else if( data.result == &quot;success&quot; ) {
-			params.callback.call( params.context, true, data );
-		
 		} else {
-			params.callback.call( params.context, false, data );
-		
-		}
+			params.callback.call( params.context, true, data );
+		} 
 
 	}, true);
 ;
@@ -324,41 +320,68 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._login = function( params ) {
 
 	if( !params.username || !params.password ) {
 		this.log( &#x27;not all of the needed parameters have been passed.&#x27;, 2 );
+		params.callback.call( params.context, false, &#x27;Missing required parameters&#x27;);
 		return false;
 	};
 
 	var data = {
-			&#x27;usrn&#x27;: params.username,
-			&#x27;psw&#x27;: params.password,
+			&#x27;username&#x27;: params.username,
+			&#x27;password&#x27;: params.password,
 			&#x27;ref&#x27;: this.game.stage.name
-	};
-	var that = this;
+		},
+		that = this;
 
-	return this._apiRequest( &#x27;account/login&#x27;, data, function( type, data ) {
+	return this._apiRequest( &#x27;auth/login&#x27;, data, function( type, data ) {
 
 		//If there was an error.
 		if( type == 2 ) {
 			params.callback.call( params.context, false, data );
-
-		} else if( data.result) {
-			if( data.result == &#x27;fail&#x27; ) {
-				params.callback.call( params.context, false, data );
-
-			} else {
-				that.userInfo = data;
-				params.callback.call( params.context, true, data);
-			}
-	 
-
 		} else {
-			params.callback.call( params.context, false, data );
-		
-		}
+			that.userInfo = data;		
+			params.callback.call( params.context, true, data );
+		} 
 
 	}, true);
 
 };
 
+
+/**
+* Makes a request to the API asking if the user is currently logged in or not. 
+* The callback passed will contain two arguments. 
+* 1 - Boolean whether the user is logged in or not
+* 2 - Response information passed from the request 
+* 
+* @method isLoggedIn
+* @param params {Object} The parameters required
+*   @param params.callback {Function} Function to be executed when complete.
+*   @param [params.context] {Any} Context the callback should be executed in.
+* @public
+* @return {Boolean} If the API call was made or not.
+*/
+Kiwi.Plugins.SocialConnect.Gamefroot.prototype.isLoggedIn = function( params ) {
+
+	if( !params.callback ) {
+		this.log( &#x27;a callback needs to be passed in-order to function correctly.&#x27;, 2 );
+		return false;
+	}
+
+	var that = this;
+
+	return this._apiRequest( &#x27;users/me&#x27;, {}, function( type, data ) {
+
+		//If there was an error.
+		if( type == 2 ) {
+			params.callback.call( params.context, false, data );
+		} else {
+			that.userInfo = data;
+			params.callback.call( params.context, true, data);
+
+		}
+
+	});
+
+};
 
 /**
 * Login to gamefroot using facebook. 
@@ -373,6 +396,9 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._login = function( params ) {
 * @return {Boolean} If the API call was made or not.
 */
 Kiwi.Plugins.SocialConnect.Gamefroot.prototype.loginWithFB = function( params ) {
+
+	this.log(&quot;Currently not working&quot;);
+	return false;
 
 	params = params || {};
 
@@ -466,26 +492,14 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._fbLoginToGF = function( resp, pa
 	};
 	var that = this;
 
-	return this._apiRequest( &#x27;account/login&#x27;, data, function( type, data ) {
+	return this._apiRequest( &#x27;auth/facebook/connect&#x27;, data, function( type, data ) {
 
 		//If there was an error.
 		if( type == 2 ) {
 			params.callback.call( params.context, false, data );
-
-		} else if( data.result) {
-			if( data.result == &#x27;fail&#x27; ) {
-				params.callback.call( params.context, false, data );
-
-			} else {
-				that.userInfo = data;
-				params.callback.call( params.context, true, data);
-
-			}
-	 
-
 		} else {
-			params.callback.call( params.context, false, data );
-		
+			that.userInfo = data;
+			params.callback.call( params.context, true, data);
 		}
 
 	}, true);
@@ -507,7 +521,7 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.logout = function( params ) {
 	params = params || {};
 
 	//Attempt to logout
-	return this._apiRequest( &#x27;account/logout&#x27;, {}, function( type, data ) {
+	return this._apiRequest( &#x27;auth/logout&#x27;, {}, function( type, data ) {
 
 		that.userInfo = null;
 
@@ -515,8 +529,8 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.logout = function( params ) {
 		if( type == 2 ) {
 			if( params.callback ) {
 				params.callback.call( params.context, false, data );
+				return;
 			}
-
 		} 
 
 		if( params.callback ) { 
@@ -534,40 +548,64 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.logout = function( params ) {
 * 
 * @method _apiRequest
 * @param url {String} The URL of the request that is being made.
-* @param rawdata {Object} The data to be sent to gf.
+* @param rawData {Object} The data to be sent to gf.
 * @param callback {Function} The callback to run when complete.
 * @param post {Boolean} If information sent should use POST. Majority of methods do anyway.
 * @private
 * @return {Boolean} If the request was made or not.
 */
-Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequest = function( url, rawdata, callback, post ) {
+Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequest = function( url, rawData, callback, post ) {
 
 	rawData = rawData || {};
 	rawData.game = this.game.stage.name;
 
 	var file =  new Kiwi.Files.DataFile( this.game, {
 		key: &#x27;gf-login-&#x27; + Date.now(), 
-		url: this._serverUrl + url,
+		url: this.serverURL + url,
 		type: Kiwi.Files.File.JSON
 	} );
 	file.parse = true;
+	file.maxLoadAttempts = 1;
 
-	var that = this;
-	file.xhrLoader = function(method, requestType, timeout) {
-		if( typeof requestType == &#x27;undefined&#x27; ) {
-			requestType = &#x27;text&#x27;;
-		}
+	var callbackExecuted = false,
+		that = this;
 
-		that._postXhrLoader.call(file, requestType, rawData);
-	};
+	if( post ) {
+		file.xhrLoader = function(method, requestType, timeout) {
+			if( typeof requestType == &#x27;undefined&#x27; ) {
+				requestType = &#x27;text&#x27;;
+			}
+
+			that._postXhrLoader.call(file, requestType, rawData);
+		};
+	}
 
 	file.onComplete.add(function() {
 
+		if( callbackExecuted ) {
+			return;
+		}
+
 		var error = false,
-			msg = &#x27;Could not communicate with the server.&#x27;;
+			msg = &#x27;Could not communicate with the server&#x27;,
+			json;
+
+		if( file._xhr.response ) {
+			try {
+				json = JSON.parse( file._xhr.response );
+				
+				if( json.data &amp;&amp; json.data.message ) {
+					msg = json.data.message;
+				}
+			} catch(e) {
+				//Response JSON malformed, or not passed
+			}
+		}
+
+		callbackExecuted = true;
 
 		if( file.success ) {
-			callback.call( this, 1, file.data );
+			callback.call( this, 1, ( file.data &amp;&amp; file.data.data ) ? file.data.data : file.data );
 		} else {
 			callback.call( this, 2, msg );
 		}
@@ -594,10 +632,10 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._postXhrLoader = function(respons
 	//Stringify the data
 		var data = &#x27;&#x27;;
 		for(var index in rawData) {
-				if( data.length &gt; 0) {
-						data += &#x27;&amp;&#x27;;
-				}
-				data += index + &#x27;=&#x27; + rawData[index];
+			if( data.length &gt; 0 ) {
+					data += &#x27;&amp;&#x27;;
+			}
+			data += index + &#x27;=&#x27; + rawData[index];
 		}
 
 		//XHR Request

@@ -903,6 +903,7 @@
             "tagname": "",
             "readonly": "",
             "static": 1,
+            "deprecated": true,
             "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
             "module": "Plugins",
             "submodule": "SocialConnect",
@@ -910,7 +911,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 99,
+            "line": 100,
             "description": "Indicates if the API is ready to make a request or not. \nThis would only ever be \"false\" if we are midway through another API call.\nThis is READ ONLY.",
             "itemtype": "property",
             "name": "ready",
@@ -925,7 +926,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 122,
+            "line": 123,
             "description": "Indicates if the user is logged in or not.\nMaintains its values from the login and logout methods on this class, \nso it is not an accurate representation. \nREAD ONLY.",
             "itemtype": "property",
             "name": "loggedIn",
@@ -940,7 +941,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 146,
+            "line": 147,
             "description": "Registers a new gamefroot account. \nA callback is required to be passed and the first parameter will indicate success.",
             "itemtype": "method",
             "name": "register",
@@ -997,7 +998,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 201,
+            "line": 197,
             "description": "Login using a gamefroot account. Does not include facebook login functionality. \nA callback is required to be passed and the first parameter will indicate success.",
             "itemtype": "method",
             "name": "login",
@@ -1044,7 +1045,44 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 259,
+            "line": 245,
+            "description": "Makes a request to the API asking if the user is currently logged in or not. \nThe callback passed will contain two arguments. \n1 - Boolean whether the user is logged in or not\n2 - Response information passed from the request",
+            "itemtype": "method",
+            "name": "isLoggedIn",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "The parameters required",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "callback",
+                            "description": "Function to be executed when complete.",
+                            "type": "Function"
+                        },
+                        {
+                            "name": "context",
+                            "description": "Context the callback should be executed in.",
+                            "type": "Any",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "If the API call was made or not.",
+                "type": "Boolean"
+            },
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 282,
             "description": "Login to gamefroot using facebook. \nA callback is required to be passed and the first parameter will indicate success.",
             "itemtype": "method",
             "name": "loginWithFB",
@@ -1087,7 +1125,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 318,
+            "line": 344,
             "description": "Contains the second steps code in logging into gamefroot using facebook. \nHandles getting the users information.",
             "itemtype": "method",
             "name": "_fbRetrieveUserData",
@@ -1107,7 +1145,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 346,
+            "line": 372,
             "description": "Final step in logging into gamefroot using facebook.\nContains the code communicating to gamefroot, which then creates its account.",
             "itemtype": "method",
             "name": "_fbLoginToGF",
@@ -1132,7 +1170,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 392,
+            "line": 406,
             "description": "Logs a user out of gamefroot.",
             "itemtype": "method",
             "name": "logout",
@@ -1165,7 +1203,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 427,
+            "line": 441,
             "description": "Makes a request to the gamefroot servers. \nBecause it is done using XHR requests, it is recommended that do not make multiple requests at once.",
             "itemtype": "method",
             "name": "_apiRequest",
@@ -1176,7 +1214,7 @@
                     "type": "String"
                 },
                 {
-                    "name": "rawdata",
+                    "name": "rawData",
                     "description": "The data to be sent to gf.",
                     "type": "Object"
                 },
@@ -1204,7 +1242,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 479,
+            "line": 517,
             "description": "Function which is apart of the overriding the default XHR loader of Kiwi.Files.File \nand instead replaces it with one which supports POST requests",
             "itemtype": "method",
             "name": "_postXhrLoader",
@@ -1232,7 +1270,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 536,
+            "line": 574,
             "description": "Executed when a API call has failed.",
             "itemtype": "method",
             "name": "_error",

@@ -1293,8 +1293,9 @@ Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL = {
 	* @public
 	* @readOnly
 	* @static
+	* @deprecated
 	*/
-	DEBUG: 'http://staging.gamefroot.com:8081/api/'
+	DEBUG: 'http://api.gamefroot.com/v1/'
 
 };
 
@@ -1370,31 +1371,26 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.register = function( params ) {
 		return false;
 	}
 
-	if( !params.username || !params.password || !params.email || !params.passwordrepeat ) {
+	if( !params.username || !params.password || !params.email) {
 		this.log( 'not all of the needed parameters have been passed.', 2 );
+		params.callback.call( params.context, false, 'Missing required parameters');
 		return false;
 	};
 
 	var data = {
-		'usrn': params.username,
-		'psw': params.password,
-		'email': params.email,
-		'repsw': params.passwordrepeat
+		'username': params.username || '',
+		'password': params.password || '',
+		'email': params.email || ''
 	};
 
-	return this._apiRequest( 'account/register', data, function( type, data ) {
+	return this._apiRequest( 'auth/register', data, function( type, data ) {
 
 		//If there was an error.
 		if( type == 2 ) {
 			params.callback.call( params.context, false, data );
-
-		} else if( data.result == "success" ) {
-			params.callback.call( params.context, true, data );
-		
 		} else {
-			params.callback.call( params.context, false, data );
-		
-		}
+			params.callback.call( params.context, true, data );
+		} 
 
 	}, true);
 ;
@@ -1423,41 +1419,68 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._login = function( params ) {
 
 	if( !params.username || !params.password ) {
 		this.log( 'not all of the needed parameters have been passed.', 2 );
+		params.callback.call( params.context, false, 'Missing required parameters');
 		return false;
 	};
 
 	var data = {
-			'usrn': params.username,
-			'psw': params.password,
+			'username': params.username,
+			'password': params.password,
 			'ref': this.game.stage.name
-	};
-	var that = this;
+		},
+		that = this;
 
-	return this._apiRequest( 'account/login', data, function( type, data ) {
+	return this._apiRequest( 'auth/login', data, function( type, data ) {
 
 		//If there was an error.
 		if( type == 2 ) {
 			params.callback.call( params.context, false, data );
-
-		} else if( data.result) {
-			if( data.result == 'fail' ) {
-				params.callback.call( params.context, false, data );
-
-			} else {
-				that.userInfo = data;
-				params.callback.call( params.context, true, data);
-			}
-	 
-
 		} else {
-			params.callback.call( params.context, false, data );
-		
-		}
+			that.userInfo = data;		
+			params.callback.call( params.context, true, data );
+		} 
 
 	}, true);
 
 };
 
+
+/**
+* Makes a request to the API asking if the user is currently logged in or not. 
+* The callback passed will contain two arguments. 
+* 1 - Boolean whether the user is logged in or not
+* 2 - Response information passed from the request 
+* 
+* @method isLoggedIn
+* @param params {Object} The parameters required
+*   @param params.callback {Function} Function to be executed when complete.
+*   @param [params.context] {Any} Context the callback should be executed in.
+* @public
+* @return {Boolean} If the API call was made or not.
+*/
+Kiwi.Plugins.SocialConnect.Gamefroot.prototype.isLoggedIn = function( params ) {
+
+	if( !params.callback ) {
+		this.log( 'a callback needs to be passed in-order to function correctly.', 2 );
+		return false;
+	}
+
+	var that = this;
+
+	return this._apiRequest( 'users/me', {}, function( type, data ) {
+
+		//If there was an error.
+		if( type == 2 ) {
+			params.callback.call( params.context, false, data );
+		} else {
+			that.userInfo = data;
+			params.callback.call( params.context, true, data);
+
+		}
+
+	});
+
+};
 
 /**
 * Login to gamefroot using facebook. 
@@ -1472,6 +1495,9 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._login = function( params ) {
 * @return {Boolean} If the API call was made or not.
 */
 Kiwi.Plugins.SocialConnect.Gamefroot.prototype.loginWithFB = function( params ) {
+
+	this.log("Currently not working");
+	return false;
 
 	params = params || {};
 
@@ -1565,26 +1591,14 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._fbLoginToGF = function( resp, pa
 	};
 	var that = this;
 
-	return this._apiRequest( 'account/login', data, function( type, data ) {
+	return this._apiRequest( 'auth/facebook/connect', data, function( type, data ) {
 
 		//If there was an error.
 		if( type == 2 ) {
 			params.callback.call( params.context, false, data );
-
-		} else if( data.result) {
-			if( data.result == 'fail' ) {
-				params.callback.call( params.context, false, data );
-
-			} else {
-				that.userInfo = data;
-				params.callback.call( params.context, true, data);
-
-			}
-	 
-
 		} else {
-			params.callback.call( params.context, false, data );
-		
+			that.userInfo = data;
+			params.callback.call( params.context, true, data);
 		}
 
 	}, true);
@@ -1606,7 +1620,7 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.logout = function( params ) {
 	params = params || {};
 
 	//Attempt to logout
-	return this._apiRequest( 'account/logout', {}, function( type, data ) {
+	return this._apiRequest( 'auth/logout', {}, function( type, data ) {
 
 		that.userInfo = null;
 
@@ -1614,8 +1628,8 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.logout = function( params ) {
 		if( type == 2 ) {
 			if( params.callback ) {
 				params.callback.call( params.context, false, data );
+				return;
 			}
-
 		} 
 
 		if( params.callback ) { 
@@ -1633,40 +1647,64 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.logout = function( params ) {
 * 
 * @method _apiRequest
 * @param url {String} The URL of the request that is being made.
-* @param rawdata {Object} The data to be sent to gf.
+* @param rawData {Object} The data to be sent to gf.
 * @param callback {Function} The callback to run when complete.
 * @param post {Boolean} If information sent should use POST. Majority of methods do anyway.
 * @private
 * @return {Boolean} If the request was made or not.
 */
-Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequest = function( url, rawdata, callback, post ) {
+Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequest = function( url, rawData, callback, post ) {
 
 	rawData = rawData || {};
 	rawData.game = this.game.stage.name;
 
 	var file =  new Kiwi.Files.DataFile( this.game, {
 		key: 'gf-login-' + Date.now(), 
-		url: this._serverUrl + url,
+		url: this.serverURL + url,
 		type: Kiwi.Files.File.JSON
 	} );
 	file.parse = true;
+	file.maxLoadAttempts = 1;
 
-	var that = this;
-	file.xhrLoader = function(method, requestType, timeout) {
-		if( typeof requestType == 'undefined' ) {
-			requestType = 'text';
-		}
+	var callbackExecuted = false,
+		that = this;
 
-		that._postXhrLoader.call(file, requestType, rawData);
-	};
+	if( post ) {
+		file.xhrLoader = function(method, requestType, timeout) {
+			if( typeof requestType == 'undefined' ) {
+				requestType = 'text';
+			}
+
+			that._postXhrLoader.call(file, requestType, rawData);
+		};
+	}
 
 	file.onComplete.add(function() {
 
+		if( callbackExecuted ) {
+			return;
+		}
+
 		var error = false,
-			msg = 'Could not communicate with the server.';
+			msg = 'Could not communicate with the server',
+			json;
+
+		if( file._xhr.response ) {
+			try {
+				json = JSON.parse( file._xhr.response );
+				
+				if( json.data && json.data.message ) {
+					msg = json.data.message;
+				}
+			} catch(e) {
+				//Response JSON malformed, or not passed
+			}
+		}
+
+		callbackExecuted = true;
 
 		if( file.success ) {
-			callback.call( this, 1, file.data );
+			callback.call( this, 1, ( file.data && file.data.data ) ? file.data.data : file.data );
 		} else {
 			callback.call( this, 2, msg );
 		}
@@ -1693,10 +1731,10 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._postXhrLoader = function(respons
 	//Stringify the data
 		var data = '';
 		for(var index in rawData) {
-				if( data.length > 0) {
-						data += '&';
-				}
-				data += index + '=' + rawData[index];
+			if( data.length > 0 ) {
+					data += '&';
+			}
+			data += index + '=' + rawData[index];
 		}
 
 		//XHR Request
