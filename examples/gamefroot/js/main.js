@@ -42,14 +42,27 @@ Gamefroot.create = function() {
 
 	}.bind(this) );
 
+	var loggedInSubmit = document.querySelector('#isloggedin');
+
+	loggedInSubmit.addEventListener('click', function() {
+
+		this.game.social.gamefroot.isLoggedIn({
+			callback: function(resp, resp2) {
+				console.log('IS LOGGED IN:', resp, resp2);
+			}, 
+			context: this
+		})
+
+	}.bind(this) );
+
 };
 
 
 //Create the Kiwi Game, and use the Social Connect plugin.
 var gameoptions = { 
 	plugins: [ "SocialConnect" ],
-	width: 400,
-	height: 400,
+	width: 0,
+	height: 0,
 	renderer: Kiwi.RENDERER_CANVAS
 };
 
