@@ -1125,7 +1125,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 344,
+            "line": 341,
             "description": "Contains the second steps code in logging into gamefroot using facebook. \nHandles getting the users information.",
             "itemtype": "method",
             "name": "_fbRetrieveUserData",
@@ -1145,7 +1145,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 372,
+            "line": 369,
             "description": "Final step in logging into gamefroot using facebook.\nContains the code communicating to gamefroot, which then creates its account.",
             "itemtype": "method",
             "name": "_fbLoginToGF",
@@ -1170,7 +1170,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 406,
+            "line": 403,
             "description": "Logs a user out of gamefroot.",
             "itemtype": "method",
             "name": "logout",
@@ -1203,7 +1203,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 441,
+            "line": 438,
             "description": "Makes a request to the gamefroot servers. \nBecause it is done using XHR requests, it is recommended that do not make multiple requests at once.",
             "itemtype": "method",
             "name": "_apiRequest",
@@ -1242,7 +1242,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 517,
+            "line": 514,
             "description": "Function which is apart of the overriding the default XHR loader of Kiwi.Files.File \nand instead replaces it with one which supports POST requests",
             "itemtype": "method",
             "name": "_postXhrLoader",
@@ -1270,7 +1270,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 574,
+            "line": 571,
             "description": "Executed when a API call has failed.",
             "itemtype": "method",
             "name": "_error",

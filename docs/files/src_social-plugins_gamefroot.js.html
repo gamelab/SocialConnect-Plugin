@@ -397,9 +397,6 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.isLoggedIn = function( params ) {
 */
 Kiwi.Plugins.SocialConnect.Gamefroot.prototype.loginWithFB = function( params ) {
 
-	this.log(&quot;Currently not working&quot;);
-	return false;
-
 	params = params || {};
 
 	if( !params.callback ) {
@@ -489,10 +486,10 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._fbLoginToGF = function( resp, pa
 			&quot;id&quot;: resp.id,
 			&quot;fullRes&quot;: JSON.stringify( resp ),
 			&#x27;ref&#x27;: this.game.stage.name
-	};
-	var that = this;
+		},
+		that = this;
 
-	return this._apiRequest( &#x27;auth/facebook/connect&#x27;, data, function( type, data ) {
+	return this._apiRequest( &#x27;auth/mobile&#x27;, data, function( type, data ) {
 
 		//If there was an error.
 		if( type == 2 ) {
