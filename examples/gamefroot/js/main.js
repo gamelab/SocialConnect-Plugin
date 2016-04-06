@@ -22,8 +22,16 @@ Gamefroot.create = function() {
 			username: user.value,
 			password: pass.value,
 			email: email.value,
-			callback: function(resp, resp2) {
-				console.log( 'REGISTER:', resp, resp2 );
+			callback: function(success, data) {
+				if( success ) {
+					alert("Account Created");
+					//Clear the values
+					user.value = '';
+					pass.value = '';
+					email.value = '';
+				} else {
+					alert("Registration Failed. " + data);
+				}
 			},
 			context: this
 		});
@@ -40,8 +48,16 @@ Gamefroot.create = function() {
 		this.game.social.gamefroot.login({
 			username: user.value,
 			password: pass.value,
-			callback: function(resp, resp2) {
-				console.log( 'LOGIN:', resp, resp2 );
+			callback: function(success, data) {
+				if( success ) {
+					alert("Logged In");
+					//Clear the values
+					user.value = '';
+					email.value = '';
+
+				} else {
+					alert("Login Failed. " + data);
+				}
 			},
 			context: this
 		});
@@ -52,8 +68,9 @@ Gamefroot.create = function() {
 	loggedInSubmit.addEventListener('click', function() {
 
 		this.game.social.gamefroot.isLoggedIn({
-			callback: function(resp, resp2) {
-				console.log( 'IS LOGGED IN:', resp, resp2 );
+			callback: function(success, data) {
+				var message = ( success ) ? "Are logged in as " + data.username : "Not logged in.";
+				alert( message );
 			}, 
 			context: this
 		});
@@ -64,8 +81,12 @@ Gamefroot.create = function() {
 	facebookLogin.addEventListener('click', function() {
 
 		this.game.social.gamefroot.loginWithFB({
-			callback: function(resp, resp2) {
-				console.log( 'FB:', resp, resp2 );
+			callback: function(success, data) {
+				if( success ) {
+					alert("Logged in with Facebook.");
+				} else {
+					alert("Facebook login unsuccessful. " + data);
+				}
 			},
 			context: this
 		})
