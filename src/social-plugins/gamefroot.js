@@ -514,6 +514,17 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequestNoToken = function( ur
 	rawData = rawData || {};
 	rawData.game = this.game.stage.name;
 
+	if( !post ) {
+		var data = '';
+		for(var index in rawData) {
+			if( data.length > 0 ) {
+					data += '&';
+			}
+			data += index + '=' + rawData[index];
+		}
+		url += '?' + data;
+	}
+
 	var file =  new Kiwi.Files.DataFile( this.game, {
 		key: 'gf-login-' + Date.now(), 
 		url: this.serverURL + url,
@@ -553,6 +564,8 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequestNoToken = function( ur
 					msg = json.data.message;
 				} else if( json.error_description ) {
 					msg = json.error_description;
+				} else if( json.message ) {
+					msg = json.message;
 				}
 			} catch(e) {
 				//Response JSON malformed, or not passed

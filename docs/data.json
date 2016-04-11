@@ -855,6 +855,7 @@
             "default": "null",
             "access": "private",
             "tagname": "",
+            "since": "0.9.0",
             "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
             "module": "Plugins",
             "submodule": "SocialConnect",
@@ -862,7 +863,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 60,
+            "line": 61,
             "description": "The time the latest token was retrieved",
             "itemtype": "property",
             "name": "_tokenTimeRecieved",
@@ -870,6 +871,7 @@
             "default": "0",
             "access": "private",
             "tagname": "",
+            "since": "0.9.0",
             "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
             "module": "Plugins",
             "submodule": "SocialConnect",
@@ -877,7 +879,23 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 72,
+            "line": 71,
+            "description": "Recieved from the gamefroot server when making a request",
+            "itemtype": "property",
+            "name": "_clientId",
+            "type": "String",
+            "default": "null",
+            "access": "private",
+            "tagname": "",
+            "since": "0.9.0",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 83,
             "description": "The url of the gamefroot server to use. \nSee 'Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL' for options.",
             "itemtype": "property",
             "name": "serverURL",
@@ -892,7 +910,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 87,
+            "line": 98,
             "description": "Namespace which holds the URLs of gamefroot api servers.",
             "itemtype": "property",
             "name": "ServerURL",
@@ -908,7 +926,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 97,
+            "line": 108,
             "description": "Contains the url for the live version of gamefroot.",
             "itemtype": "property",
             "name": "ServerURL.LIVE",
@@ -924,7 +942,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 107,
+            "line": 118,
             "description": "Contains the url for the debug (also known as staging) version of gamefroot.",
             "itemtype": "property",
             "name": "ServerURL.DEBUG",
@@ -941,7 +959,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 121,
+            "line": 132,
             "description": "Indicates if the API is ready to make a request or not. \nThis would only ever be \"false\" if we are midway through another API call.\nThis is READ ONLY.",
             "itemtype": "property",
             "name": "ready",
@@ -956,7 +974,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 144,
+            "line": 155,
             "description": "Indicates if the user is logged in or not.\nMaintains its values from the login and logout methods on this class, \nso it is not an accurate representation. \nREAD ONLY.",
             "itemtype": "property",
             "name": "loggedIn",
@@ -972,7 +990,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 167,
+            "line": 178,
             "description": "Registers a new gamefroot account. \nA callback is required to be passed and the first parameter will indicate success.",
             "itemtype": "method",
             "name": "register",
@@ -1029,7 +1047,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 217,
+            "line": 228,
             "description": "Login using a gamefroot account. Does not include facebook login functionality. \nA callback is required to be passed and the first parameter will indicate success.",
             "itemtype": "method",
             "name": "login",
@@ -1076,7 +1094,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 265,
+            "line": 276,
             "description": "Makes a request to the API asking if the user is currently logged in or not. \nThe callback passed will contain two arguments. \n1 - Boolean whether the user is logged in or not\n2 - Response information passed from the request",
             "itemtype": "method",
             "name": "isLoggedIn",
@@ -1113,7 +1131,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 302,
+            "line": 313,
             "description": "Login to gamefroot using facebook. \nA callback is required to be passed and the first parameter will indicate success.",
             "itemtype": "method",
             "name": "loginWithFB",
@@ -1156,7 +1174,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 361,
+            "line": 372,
             "description": "Contains the second steps code in logging into gamefroot using facebook. \nHandles getting the users information.",
             "itemtype": "method",
             "name": "_fbRetrieveUserData",
@@ -1176,7 +1194,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 389,
+            "line": 400,
             "description": "Final step in logging into gamefroot using facebook.\nContains the code communicating to gamefroot, which then creates its account.",
             "itemtype": "method",
             "name": "_fbLoginToGF",
@@ -1201,7 +1219,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 423,
+            "line": 434,
             "description": "Logs a user out of gamefroot.",
             "itemtype": "method",
             "name": "logout",
@@ -1234,7 +1252,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 458,
+            "line": 469,
             "description": "Makes a request to the gamefroot servers. \nFirst it makes sure that we have a access_token\nBecause it is done using XHR requests, it is recommended that do not make multiple requests at once.",
             "itemtype": "method",
             "name": "_apiRequest",
@@ -1273,7 +1291,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 490,
+            "line": 501,
             "itemtype": "method",
             "name": "_apiRequestNoToken",
             "params": [
@@ -1311,7 +1329,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 564,
+            "line": 588,
             "description": "Function which is apart of the overriding the default XHR loader of Kiwi.Files.File \nand instead replaces it with one which supports POST requests",
             "itemtype": "method",
             "name": "_postXhrLoader",
@@ -1339,7 +1357,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 621,
+            "line": 645,
             "description": "Executed when a API call has failed.",
             "itemtype": "method",
             "name": "_error",
@@ -1364,7 +1382,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 637,
+            "line": 661,
             "description": "Retrieves a token from the API if once hasn't already been retrieved or isn't valid.",
             "itemtype": "method",
             "name": "getToken",
@@ -1391,7 +1409,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 678,
+            "line": 702,
             "description": "Gets a client id from the API if it doesn't exist. Otherwise returns the used client id.",
             "itemtype": "method",
             "name": "getClientId",
@@ -1418,7 +1436,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 715,
+            "line": 739,
             "description": "Retrieves a new token from the API.\nAssumed that the client_id has been successfully generated at this point.",
             "itemtype": "method",
             "name": "_getNewToken",
@@ -1445,7 +1463,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 746,
+            "line": 770,
             "description": "Refreshes a token from the API if it should have expired by now. \nAssumed that the client_id has been successfully generated at this point.",
             "itemtype": "method",
             "name": "_refreshToken",

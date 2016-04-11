@@ -1257,6 +1257,7 @@ Kiwi.Plugins.SocialConnect.Gamefroot = function( game ) {
 	* @type Object
 	* @default null
 	* @private
+	* @since 0.9.0
 	*/
 	this._token = null;
 
@@ -1266,9 +1267,19 @@ Kiwi.Plugins.SocialConnect.Gamefroot = function( game ) {
 	* @type Number
 	* @default 0
 	* @private
+	* @since 0.9.0
 	*/
 	this._tokenTimeRecieved = 0;
 
+	/**
+	* Recieved from the gamefroot server when making a request
+	*
+	* @property _clientId
+	* @type String
+	* @default null
+	* @private
+	* @since 0.9.0
+	*/
 	this._clientId = null;
 
 
@@ -1706,6 +1717,17 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequestNoToken = function( ur
 	rawData = rawData || {};
 	rawData.game = this.game.stage.name;
 
+	if( !post ) {
+		var data = '';
+		for(var index in rawData) {
+			if( data.length > 0 ) {
+					data += '&';
+			}
+			data += index + '=' + rawData[index];
+		}
+		url += '?' + data;
+	}
+
 	var file =  new Kiwi.Files.DataFile( this.game, {
 		key: 'gf-login-' + Date.now(), 
 		url: this.serverURL + url,
@@ -1745,6 +1767,8 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequestNoToken = function( ur
 					msg = json.data.message;
 				} else if( json.error_description ) {
 					msg = json.error_description;
+				} else if( json.message ) {
+					msg = json.message;
 				}
 			} catch(e) {
 				//Response JSON malformed, or not passed
