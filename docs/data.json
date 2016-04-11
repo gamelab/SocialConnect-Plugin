@@ -848,6 +848,36 @@
         {
             "file": "src\\social-plugins\\gamefroot.js",
             "line": 51,
+            "description": "Contains the token information for communicating to the gamefroot api.",
+            "itemtype": "property",
+            "name": "_token",
+            "type": "Object",
+            "default": "null",
+            "access": "private",
+            "tagname": "",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 60,
+            "description": "The time the latest token was retrieved",
+            "itemtype": "property",
+            "name": "_tokenTimeRecieved",
+            "type": "Number",
+            "default": "0",
+            "access": "private",
+            "tagname": "",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 72,
             "description": "The url of the gamefroot server to use. \nSee 'Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL' for options.",
             "itemtype": "property",
             "name": "serverURL",
@@ -862,7 +892,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 66,
+            "line": 87,
             "description": "Namespace which holds the URLs of gamefroot api servers.",
             "itemtype": "property",
             "name": "ServerURL",
@@ -878,7 +908,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 76,
+            "line": 97,
             "description": "Contains the url for the live version of gamefroot.",
             "itemtype": "property",
             "name": "ServerURL.LIVE",
@@ -894,7 +924,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 86,
+            "line": 107,
             "description": "Contains the url for the debug (also known as staging) version of gamefroot.",
             "itemtype": "property",
             "name": "ServerURL.DEBUG",
@@ -911,7 +941,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 100,
+            "line": 121,
             "description": "Indicates if the API is ready to make a request or not. \nThis would only ever be \"false\" if we are midway through another API call.\nThis is READ ONLY.",
             "itemtype": "property",
             "name": "ready",
@@ -926,7 +956,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 123,
+            "line": 144,
             "description": "Indicates if the user is logged in or not.\nMaintains its values from the login and logout methods on this class, \nso it is not an accurate representation. \nREAD ONLY.",
             "itemtype": "property",
             "name": "loggedIn",
@@ -934,6 +964,7 @@
             "readonly": "",
             "access": "public",
             "tagname": "",
+            "since": "0.9.0",
             "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
             "module": "Plugins",
             "submodule": "SocialConnect",
@@ -941,7 +972,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 147,
+            "line": 167,
             "description": "Registers a new gamefroot account. \nA callback is required to be passed and the first parameter will indicate success.",
             "itemtype": "method",
             "name": "register",
@@ -998,7 +1029,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 197,
+            "line": 217,
             "description": "Login using a gamefroot account. Does not include facebook login functionality. \nA callback is required to be passed and the first parameter will indicate success.",
             "itemtype": "method",
             "name": "login",
@@ -1045,7 +1076,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 245,
+            "line": 265,
             "description": "Makes a request to the API asking if the user is currently logged in or not. \nThe callback passed will contain two arguments. \n1 - Boolean whether the user is logged in or not\n2 - Response information passed from the request",
             "itemtype": "method",
             "name": "isLoggedIn",
@@ -1082,7 +1113,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 282,
+            "line": 302,
             "description": "Login to gamefroot using facebook. \nA callback is required to be passed and the first parameter will indicate success.",
             "itemtype": "method",
             "name": "loginWithFB",
@@ -1125,7 +1156,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 341,
+            "line": 361,
             "description": "Contains the second steps code in logging into gamefroot using facebook. \nHandles getting the users information.",
             "itemtype": "method",
             "name": "_fbRetrieveUserData",
@@ -1145,7 +1176,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 369,
+            "line": 389,
             "description": "Final step in logging into gamefroot using facebook.\nContains the code communicating to gamefroot, which then creates its account.",
             "itemtype": "method",
             "name": "_fbLoginToGF",
@@ -1170,7 +1201,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 403,
+            "line": 423,
             "description": "Logs a user out of gamefroot.",
             "itemtype": "method",
             "name": "logout",
@@ -1203,8 +1234,8 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 438,
-            "description": "Makes a request to the gamefroot servers. \nBecause it is done using XHR requests, it is recommended that do not make multiple requests at once.",
+            "line": 458,
+            "description": "Makes a request to the gamefroot servers. \nFirst it makes sure that we have a access_token\nBecause it is done using XHR requests, it is recommended that do not make multiple requests at once.",
             "itemtype": "method",
             "name": "_apiRequest",
             "params": [
@@ -1242,7 +1273,45 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 514,
+            "line": 490,
+            "itemtype": "method",
+            "name": "_apiRequestNoToken",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "The URL of the request that is being made.",
+                    "type": "String"
+                },
+                {
+                    "name": "rawData",
+                    "description": "The data to be sent to gf.",
+                    "type": "Object"
+                },
+                {
+                    "name": "callback",
+                    "description": "The callback to run when complete.",
+                    "type": "Function"
+                },
+                {
+                    "name": "post",
+                    "description": "If information sent should use POST. Majority of methods do anyway.",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "If the request was made or not.",
+                "type": "Boolean"
+            },
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 564,
             "description": "Function which is apart of the overriding the default XHR loader of Kiwi.Files.File \nand instead replaces it with one which supports POST requests",
             "itemtype": "method",
             "name": "_postXhrLoader",
@@ -1270,7 +1339,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 571,
+            "line": 621,
             "description": "Executed when a API call has failed.",
             "itemtype": "method",
             "name": "_error",
@@ -1288,6 +1357,114 @@
             ],
             "access": "private",
             "tagname": "",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 637,
+            "description": "Retrieves a token from the API if once hasn't already been retrieved or isn't valid.",
+            "itemtype": "method",
+            "name": "getToken",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "The callback to be executed when a token is retrieved",
+                    "type": "Function"
+                },
+                {
+                    "name": "context",
+                    "description": "",
+                    "type": "Any",
+                    "optional": true
+                }
+            ],
+            "access": "public",
+            "tagname": "",
+            "since": "0.9.0",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 678,
+            "description": "Gets a client id from the API if it doesn't exist. Otherwise returns the used client id.",
+            "itemtype": "method",
+            "name": "getClientId",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "context",
+                    "description": "",
+                    "type": "Any",
+                    "optional": true
+                }
+            ],
+            "access": "public",
+            "tagname": "",
+            "since": "0.9.0",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 715,
+            "description": "Retrieves a new token from the API.\nAssumed that the client_id has been successfully generated at this point.",
+            "itemtype": "method",
+            "name": "_getNewToken",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "The callback to be executed when a token is retrieved",
+                    "type": "Function"
+                },
+                {
+                    "name": "context",
+                    "description": "",
+                    "type": "Any",
+                    "optional": true
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "since": "0.9.0",
+            "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
+            "module": "Plugins",
+            "submodule": "SocialConnect",
+            "namespace": "Kiwi.Plugins.SocialConnect"
+        },
+        {
+            "file": "src\\social-plugins\\gamefroot.js",
+            "line": 746,
+            "description": "Refreshes a token from the API if it should have expired by now. \nAssumed that the client_id has been successfully generated at this point.",
+            "itemtype": "method",
+            "name": "_refreshToken",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "The callback to be executed when a token is retrieved",
+                    "type": "Function"
+                },
+                {
+                    "name": "context",
+                    "description": "",
+                    "type": "Any",
+                    "optional": true
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "since": "0.9.0",
             "class": "Kiwi.Plugins.SocialConnect.Gamefroot",
             "module": "Plugins",
             "submodule": "SocialConnect",

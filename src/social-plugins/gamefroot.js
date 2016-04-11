@@ -49,6 +49,38 @@ Kiwi.Plugins.SocialConnect.Gamefroot = function( game ) {
 
 
 	/**
+	* Contains the token information for communicating to the gamefroot api.
+	* @property _token
+	* @type Object
+	* @default null
+	* @private
+	* @since 0.9.0
+	*/
+	this._token = null;
+
+	/**
+	* The time the latest token was retrieved
+	* @property _tokenTimeRecieved
+	* @type Number
+	* @default 0
+	* @private
+	* @since 0.9.0
+	*/
+	this._tokenTimeRecieved = 0;
+
+	/**
+	* Recieved from the gamefroot server when making a request
+	*
+	* @property _clientId
+	* @type String
+	* @default null
+	* @private
+	* @since 0.9.0
+	*/
+	this._clientId = null;
+
+
+	/**
 	* The url of the gamefroot server to use. 
 	* See 'Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL' for options. 
 	* @property serverURL
@@ -81,7 +113,7 @@ Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL = {
 	* @readOnly
 	* @static
 	*/
-	LIVE: 'http://api.gamefroot.com/v1/',
+	LIVE: 'http://localhost:3000/v1/',
 
 	/**
 	* Contains the url for the debug (also known as staging) version of gamefroot.
@@ -130,6 +162,7 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Gamefroot.prototype, "ready", 
 * @type boolean
 * @readOnly
 * @public
+* @since 0.9.0
 */
 Object.defineProperty( Kiwi.Plugins.SocialConnect.Gamefroot.prototype, "loggedIn", {
 		
@@ -142,8 +175,6 @@ Object.defineProperty( Kiwi.Plugins.SocialConnect.Gamefroot.prototype, "loggedIn
 		configurable: true
 
 });
-
-
 /**
 * Registers a new gamefroot account. 
 * A callback is required to be passed and the first parameter will indicate success.
@@ -190,7 +221,7 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.register = function( params ) {
 		} 
 
 	}, true);
-;
+
 };
 
 
@@ -437,6 +468,7 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.logout = function( params ) {
 
 /**
 * Makes a request to the gamefroot servers. 
+* First it makes sure that we have a access_token
 * Because it is done using XHR requests, it is recommended that do not make multiple requests at once.
 * 
 * @method _apiRequest
@@ -448,6 +480,36 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype.logout = function( params ) {
 * @return {Boolean} If the request was made or not.
 */
 Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequest = function( url, rawData, callback, post ) {
+
+	//Get a access token
+	return this.getToken( function(success, token) {
+
+		if( !success ) {
+			callback.call( this, 2, "Could not retrieve a token" );
+			return;
+		}
+
+		rawData = rawData || {};
+		rawData.access_token = token;
+
+		this._apiRequestNoToken( url, rawData, callback, post );
+
+	}, this);
+
+};
+
+/**
+* 
+* 
+* @method _apiRequestNoToken
+* @param url {String} The URL of the request that is being made.
+* @param rawData {Object} The data to be sent to gf.
+* @param callback {Function} The callback to run when complete.
+* @param post {Boolean} If information sent should use POST. Majority of methods do anyway.
+* @private
+* @return {Boolean} If the request was made or not.
+*/
+Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequestNoToken = function( url, rawData, callback, post ) {
 
 	rawData = rawData || {};
 	rawData.game = this.game.stage.name;
@@ -489,6 +551,8 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequest = function( url, rawD
 				
 				if( json.data && json.data.message ) {
 					msg = json.data.message;
+				} else if( json.error_description ) {
+					msg = json.error_description;
 				}
 			} catch(e) {
 				//Response JSON malformed, or not passed
@@ -506,10 +570,7 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequest = function( url, rawD
 	}, this);
 
 	this.game.loader.loadFile( file );
-
-	return true;
 };
-
 
 /**
 * Function which is apart of the overriding the default XHR loader of Kiwi.Files.File 
@@ -523,13 +584,13 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequest = function( url, rawD
 Kiwi.Plugins.SocialConnect.Gamefroot.prototype._postXhrLoader = function(responseType, rawData) {
 
 	//Stringify the data
-		var data = '';
-		for(var index in rawData) {
-			if( data.length > 0 ) {
-					data += '&';
-			}
-			data += index + '=' + rawData[index];
+	var data = '';
+	for(var index in rawData) {
+		if( data.length > 0 ) {
+				data += '&';
 		}
+		data += index + '=' + rawData[index];
+	}
 
 		//XHR Request
 	this._xhr = new XMLHttpRequest();
@@ -559,9 +620,9 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._postXhrLoader = function(respons
 	this._xhr.ontimeout = function(event) {
 				_that.hasTimedOut = true;
 	};
-		this._xhr.onloadend = function (event) {
-				_that.xhrOnLoad(event);
-		};
+	this._xhr.onloadend = function (event) {
+			_that.xhrOnLoad(event);
+	};
 
 	this._xhr.send( data );
 }
@@ -580,4 +641,147 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._error = function( errorMsg, call
 	this.log( errorMsg, 2 );
 	callback.call( this, 2, errorMsg );
 
+};
+
+
+
+/**
+* Retrieves a token from the API if once hasn't already been retrieved or isn't valid. 
+* 
+* @method getToken
+* @param callback {Function} The callback to be executed when a token is retrieved
+* @param [context] {Any}
+* @public
+* @since 0.9.0
+*/
+Kiwi.Plugins.SocialConnect.Gamefroot.prototype.getToken = function(callback,context) {
+
+	if( !callback ) {
+		this.log('Missing callback for `_getToken` method');
+		return false;
+	}
+
+	this.getClientId( function(success, clientId) {	
+
+		if( !success ) {
+			callback.call( context, false, null );
+			return;
+		}
+
+		if( !this._token || (this._token.expires_in * 1000 + this._tokenTimeRecieved) < Date.now() ) {
+			// Request a new token
+			if( !this._token ) {
+				return this._getNewToken( callback, context );
+			} else {
+				return this._refreshToken( callback, context );
+			}
+
+		} else {
+			// Return the current token
+			callback.call(context, true, this._token.access_token );
+			return true; 
+		}	
+
+	}, this);
+
+};
+
+/**
+* Gets a client id from the API if it doesn't exist. Otherwise returns the used client id.
+* 
+* @method getClientId
+* @param callback {Function}
+* @param [context] {Any}
+* @public
+* @since 0.9.0
+*/
+Kiwi.Plugins.SocialConnect.Gamefroot.prototype.getClientId = function(callback, context) {
+
+	if( this._clientId ) {
+		callback.call( context, true, this._clientId );
+		return false;
+	}
+
+	var that = this;
+	return this._apiRequestNoToken( 'client_id', {
+		'name': this.game.stage.name,
+		'urls': window.location.href
+	}, function( type, data ) {
+
+		//If there was an error.
+		if( type == 2 ) {
+			this.log("Failed to get a client id");
+			callback.call( context, false, null );
+			return;
+		}
+			
+		that._clientId = data.id;
+		callback.call( context, true, that._clientId );
+		
+	});
+
+
+};
+
+/**
+* Retrieves a new token from the API.
+* Assumed that the client_id has been successfully generated at this point.
+* 
+* @method _getNewToken
+* @param callback {Function} The callback to be executed when a token is retrieved
+* @param [context] {Any}
+* @private
+* @since 0.9.0
+*/
+Kiwi.Plugins.SocialConnect.Gamefroot.prototype._getNewToken = function(callback, context) {
+	var that = this;
+	return this._apiRequestNoToken( 'token', {
+		'client_id': this._clientId
+	}, function( type, data ) {
+
+		//If there was an error.
+		if( type == 2 ) {
+			this.log("Failed to get a valid token");
+			callback.call( context, false, null );
+			return;
+		}
+			
+		that._token = data;
+		that._tokenTimeRecieved = Date.now();
+
+		callback.call( context, true, that._token.access_token );
+		
+	});
+};
+
+/**
+* Refreshes a token from the API if it should have expired by now. 
+* Assumed that the client_id has been successfully generated at this point. 
+* 
+* @method _refreshToken
+* @param callback {Function} The callback to be executed when a token is retrieved
+* @param [context] {Any}
+* @private
+* @since 0.9.0
+*/
+Kiwi.Plugins.SocialConnect.Gamefroot.prototype._refreshToken = function(callback, context) {
+	var that = this;
+	return this._apiRequestNoToken( 'refresh_token', {
+		'client_id': this._clientId,
+		'refresh_token': this._token.refresh_token
+	}, function( type, data ) {
+
+		//If there was an error.
+		if( type == 2 ) {
+			this.log("Failed to get a valid token");
+			callback.call( context, false, null );
+			return;
+		}
+			
+		that._token = data;
+		that._tokenTimeRecieved = Date.now();
+
+		callback.call( context, true, that._token.access_token );
+		
+	});
 };
