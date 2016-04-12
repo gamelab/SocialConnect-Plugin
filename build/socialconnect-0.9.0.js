@@ -1316,7 +1316,7 @@ Kiwi.Plugins.SocialConnect.Gamefroot.ServerURL = {
 	* @readOnly
 	* @static
 	*/
-	LIVE: 'http://localhost:3000/v1/',
+	LIVE: 'http://api.gamefroot.com/v1/',
 
 	/**
 	* Contains the url for the debug (also known as staging) version of gamefroot.
@@ -1702,7 +1702,6 @@ Kiwi.Plugins.SocialConnect.Gamefroot.prototype._apiRequest = function( url, rawD
 };
 
 /**
-* 
 * 
 * @method _apiRequestNoToken
 * @param url {String} The URL of the request that is being made.

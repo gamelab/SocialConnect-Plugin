@@ -1329,7 +1329,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 588,
+            "line": 587,
             "description": "Function which is apart of the overriding the default XHR loader of Kiwi.Files.File \nand instead replaces it with one which supports POST requests",
             "itemtype": "method",
             "name": "_postXhrLoader",
@@ -1357,7 +1357,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 645,
+            "line": 644,
             "description": "Executed when a API call has failed.",
             "itemtype": "method",
             "name": "_error",
@@ -1382,7 +1382,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 661,
+            "line": 660,
             "description": "Retrieves a token from the API if once hasn't already been retrieved or isn't valid.",
             "itemtype": "method",
             "name": "getToken",
@@ -1409,7 +1409,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 702,
+            "line": 701,
             "description": "Gets a client id from the API if it doesn't exist. Otherwise returns the used client id.",
             "itemtype": "method",
             "name": "getClientId",
@@ -1436,7 +1436,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 739,
+            "line": 738,
             "description": "Retrieves a new token from the API.\nAssumed that the client_id has been successfully generated at this point.",
             "itemtype": "method",
             "name": "_getNewToken",
@@ -1463,7 +1463,7 @@
         },
         {
             "file": "src\\social-plugins\\gamefroot.js",
-            "line": 770,
+            "line": 769,
             "description": "Refreshes a token from the API if it should have expired by now. \nAssumed that the client_id has been successfully generated at this point.",
             "itemtype": "method",
             "name": "_refreshToken",
